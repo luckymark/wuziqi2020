@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 project ("五子棋AI")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (CMakeTarget "myfun.cpp" "draw.cpp" "math.cpp")
-#add_executable (CMakeTarget "myfun.cpp" "test.cpp" "math.cpp")
+add_executable (CMakeTarget "interface.cpp" "draw.cpp" "math.cpp" "getPosition.cpp")
+#add_executable (CMakeTarget "interface.cpp" "test.cpp" "math.cpp" "getPosition.cpp")
 
 # TODO: 如有需要，请添加测试并安装目标。

@@ -1,5 +1,4 @@
 #include "draw.hpp"
-#include <time.h>
 
 // 各种棋子连成线的评分
 #define FIVE 10000000  // 五子
@@ -41,9 +40,11 @@ bool isColor(int i, int j, int color);
 bool have_neighbor55(int i, int j);
 int paritition(seat A[], int low, int high);
 void quickSort(seat A[], int low, int high);
+void initStar(seat* star, int i, int j);
 
 // getPosition
 int max_min_search(int color, int alpha, int beta, int depth);
 int evaluate_score(int color);
 int evaluate_score_one(int b_i, int b_j, int color);
 void gen(seat a[], int color);
+int get_score(int i, int j, int color);
