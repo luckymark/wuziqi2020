@@ -9,15 +9,15 @@ Board::Board(QWidget *parent) : QWidget(parent)
     _button = new QPushButton(this);
     _button->show();
     memset(board,0,sizeof(board));
-    board[4][4] = board[5][4] = board[6][4] = C_BLACK;
-    board[7][4] = board[3][4] = board[1][1] = C_WHITE;
-    R1 = R = 6;
-    q1[1] = q[1] = QPoint(4,4);col[1] = col[3] = col[5] = 2;
-    q1[2] = q[2] = QPoint(7,4);
-    q1[3] = q[3] = QPoint(5,4);
-    q1[4] = q[4] = QPoint(3,4);
-    q1[5] = q[5] = QPoint(6,4);
-    q1[6] = q[6] = QPoint(1,1);
+//    board[4][4] = board[5][4] = board[6][4] = C_BLACK;
+//    board[7][4] = board[3][4] = board[1][1] = C_WHITE;
+//    R1 = R = 6;
+//    q1[1] = q[1] = QPoint(4,4);col[1] = col[3] = col[5] = 2;
+//    q1[2] = q[2] = QPoint(7,4);
+//    q1[3] = q[3] = QPoint(5,4);
+//    q1[4] = q[4] = QPoint(3,4);
+//    q1[5] = q[5] = QPoint(6,4);
+//    q1[6] = q[6] = QPoint(1,1);
 }
 
 void Board::paintEvent(QPaintEvent *)
