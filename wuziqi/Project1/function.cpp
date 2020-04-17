@@ -100,9 +100,9 @@ void playchess(void)					// Íæ¼ÒÓÎÏ·
 	}
 }
 
-bool win(int x,int y)					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
+bool win(int x,int y, int map[16][16])					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
 {
-	int a = chess[x][y];
+	int a = map[x][y];
 	if (a == 0)
 		return 0;
 	int i,j,sum = 0;					
@@ -110,7 +110,7 @@ bool win(int x,int y)					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
 	{
 		if (sum > 4)
 			break;
-		else if (chess[i][y] != a)
+		else if (map[i][y] != a)
 			sum = 0;
 		else
 			sum++;
@@ -121,7 +121,7 @@ bool win(int x,int y)					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
 	{
 		if (sum > 4)
 			break;
-		else if (chess[x][j] != a)
+		else if (map[x][j] != a)
 			sum = 0;
 		else
 			sum++;
@@ -134,7 +134,7 @@ bool win(int x,int y)					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
 			continue;
 		if (sum > 4)
 			break;
-		else if (chess[i][j] != a)
+		else if (map[i][j] != a)
 			sum = 0;
 		else
 			sum++;
@@ -147,7 +147,7 @@ bool win(int x,int y)					// ÅĞ¶ÏÊÇ·ñÓÎÏ·½áÊø
 			continue;
 		if (sum > 4)
 			break;
-		else if (chess[i][j] != a)
+		else if (map[i][j] != a)
 			sum = 0;
 		else
 			sum++;

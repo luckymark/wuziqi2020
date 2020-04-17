@@ -14,8 +14,8 @@ typedef struct current
 #define DEPTH 6				// ËÑË÷Éî¶È
 
 
-bool win(int x,int y);
-bool judge(int x, int y);
+bool win(int x,int y,int map[16][16]);
+bool judge(int x, int y,int map[16][16]);
 void putmap(void);
 void playchess(void);
 void computerchess(void);

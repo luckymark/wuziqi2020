@@ -14,7 +14,7 @@ int main()
 	putmap();
 	RECT r = { 800, 275, 1100, 325 };
 	drawtext(_T(sp"Play now!                              "), &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-	while (!win(now.x,now.y))
+	while (!win(now.x,now.y,chess))
 	{
 		if (whostart > 0)
 		{
