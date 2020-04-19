@@ -1,18 +1,10 @@
 //
-// Created by hw730 on 2020/4/9.
+// Created by hw730 on 2020/4/19.
 //
 
-#ifndef CHESSFINAL_CHESSGLOBALCONST_H
-#define CHESSFINAL_CHESSGLOBALCONST_H
-#include <QWidget>
-#include <QApplication>
-#include <iostream>
-#include<QPainter>
-#include<QMouseEvent>
-#include<QPushButton>
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#ifndef CHESSAIUPD_CHESSGLOBALCONST_H
+#define CHESSAIUPD_CHESSGLOBALCONST_H
+#include"chesslib.h"
 
 #define ll long long
 
@@ -25,9 +17,10 @@
 #define CHESS_HEIGHT (17)
 #define RES 15
 #define ROUND 10
+#define SHINING_TIME 150
 
 #define MAX_CHOICE 10
-#define depth_MAX 4
+#define depth_MAX 6
 #define STEPS 3
 //文本框大小按照打印的XY坐标而定（与正常的反过来了)
 #define TOP_X 1050
@@ -42,30 +35,31 @@
 #define C_BLACK 1
 #define C_WHITE 2
 #define C_BOUND 3
-#define WIN 1000000000
-#define LOSE -80000000000
-#define WHITE_LIVE_4 50000000
-#define BLACK_LIVE_4 -300000000
+#define WIN   3200000
+#define LOSE -64000000
+#define WHITE_LIVE_4 8000
+#define BLACK_LIVE_4 -160000
 
 #define WHITE_LIVE_3 400
 #define BLACK_LIVE_3 -8000
 
 #define WHITE_LIVE_2 20
-#define BLACK_LIVE_2 -40
+#define BLACK_LIVE_2 -400
 
 #define WHITE_LIVE_1 1
-#define BLACK_LIVE_1 -2
+#define BLACK_LIVE_1 -20
 
 //SLEEP
 #define WHITE_SLEEP_4 400
 #define BLACK_SLEEP_4 -8000
 
 #define WHITE_SLEEP_3 20
-#define BLACK_SLEEP_3 -40
+#define BLACK_SLEEP_3 -400
 
 #define WHITE_SLEEP_2 1
-#define BLACK_SLEEP_2 -2
+#define BLACK_SLEEP_2 -20
 
 
 
-#endif //CHESSFINAL_CHESSGLOBALCONST_H
+
+#endif //CHESSAIUPD_CHESSGLOBALCONST_H

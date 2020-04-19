@@ -1,8 +1,12 @@
 //
-// Created by hw730 on 2020/4/9.
+// Created by hw730 on 2020/4/19.
 //
 
 #include "board.h"
+//
+// Created by hw730 on 2020/4/9.
+//
+
 
 Board::Board(QWidget *parent) : QWidget(parent)
 {
@@ -22,6 +26,7 @@ Board::Board(QWidget *parent) : QWidget(parent)
 
 void Board::paintEvent(QPaintEvent *)
 {
+    bool flag = false;
     QPainter painter(this);
 //    painter.drawLine(QPoint(PAINT_X, PAINT_Y),QPoint(PAINT_X + CHESS_LENGTH, PAINT_Y));
 //    painter.drawLine(QPoint(PAINT_X, PAINT_Y),QPoint(PAINT_X, PAINT_Y+ CHESS_HEIGHT));
@@ -38,6 +43,12 @@ void Board::paintEvent(QPaintEvent *)
         if(col[i] == 2)
         {
             painter.setBrush(QBrush(QColor(0,0,0)));
+        }
+        else if(col[i] == 1)
+        {
+            painter.setBrush(QBrush(QColor(100,0,0)));
+            flag = true;
+            col[i] = 0;
         }
         else
         {
@@ -88,12 +99,17 @@ void Board::mousePressEvent(QMouseEvent *event)
         q1[++R1] = q[R];
         col[R1] = 2;
         board[pos_board.x()][pos_board.y()] = C_BLACK;
-        status =  evaluateBoard(board).status;
-        update();
+        Hash ^= zob[pos_board.x()][pos_board.y()][C_BLACK - 1];
+        status =  evaluateBoard(board,Hash).status;
+        repaint();
         if(status == 0)
         {
             AI(board);
-            status = evaluateBoard(board).status;
+            col[R1] = 1;
+            status = evaluateBoard(board,Hash).status;
+            repaint();
+            Sleep(SHINING_TIME);
+            repaint();
         }
     }
 }
