@@ -1,0 +1,4 @@
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang_autogen.dir
