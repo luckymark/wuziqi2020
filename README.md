@@ -6,12 +6,30 @@
 ## 核心目标
 利用所学C语言技能，实现五子棋AI算法
 
-## GUI
-是否使用图形界面随意！例如：
-- 控制台绘制假图形界面
-- [EasyX](https://easyx.cn/)
-- [SFML](https://www.sfml-dev.org/)
+## 项目说明
+
+这个项目说明用于指引后续的工作进程，并不一定全部实现
+
+- 核心算法
+
+  - 极大极小值搜索 + alpha-beta剪枝 构造的博弈树
+  - 启发式算法优化 alpha-beta剪枝
+  - 基于活三与冲四的“算杀”
+  - 迭代加深搜索 避免 “调戏玩家”
+  - Zobrist 实现缓存 以优化性能
+- 可能添加的算法
+  - 黑棋的“禁手”规则
+  - 贪心评估算法缩减结点
+  - 训练 BP 神经网络 缩减结点
+- 图形界面
+  - 用visual basic .net 制作winform GUI，调用c生成的dll
+  - 如果上述方案失败则使用命令行绘制伪图形界面
+- 如果还有余力（基本8可能）
+  - 将 visual basic GUI的 winform 方案 替换为 WPF方案
+  - 在GUI里添加 AI对战
+  - 另外实现基于 遗传算法 的五子棋AI
 
 ## 参考
 
-- [五子棋AI算法](https://blog.csdn.net/lihongxun945/category_6089493.html)
+- [本项目的wiki，包括我转载的俸爷转载的五子棋教程（逃](https://github.com/SMagic-L/wuziqi2020/wiki)
+
