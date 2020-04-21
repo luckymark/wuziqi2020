@@ -1,0 +1,4 @@
+D:/GitHub/boradtry/cmake-build-debug/CMakeFiles/boradtry.dir
+D:/GitHub/boradtry/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/GitHub/boradtry/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/GitHub/boradtry/cmake-build-debug/CMakeFiles/boradtry_autogen.dir
