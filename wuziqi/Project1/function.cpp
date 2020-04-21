@@ -170,6 +170,7 @@ void computerchess(void)		// µçÄÔÏÂÆå
 	}
 	setcolor(BLACK);
 	setfillcolor(BLACK);
+	//printf("%d %d", computerx, computery);
 	fillcircle(50 * computery, 50 * computerx, 10);
 	chess[computerx][computery] = 2;
 	now.x = computerx;
