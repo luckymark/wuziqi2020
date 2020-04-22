@@ -6,8 +6,70 @@
 
 #IncludeRegexTransform: 
 
+../AI.h
+QPoint
+-
+
+../mainwindow.h
+QtWidgets/QMainWindow
+-
+ui_MainWindow.h
+../ui_MainWindow.h
+QPushButton
+-
+QLabel
+-
+QPainter
+-
+QMouseEvent
+-
+QPoint
+-
+cmath
+-
+QMainWindow
+-
+qmessagebox.h
+-
+QMouseEvent
+-
+QDialog
+-
+AI.h
+../AI.h
+
+D:/GitHub/wuziqi2020/Mygobang/AI.cpp
+AI.h
+D:/GitHub/wuziqi2020/Mygobang/AI.h
+mainwindow.h
+D:/GitHub/wuziqi2020/Mygobang/mainwindow.h
+
 D:/GitHub/wuziqi2020/Mygobang/AI.h
 QPoint
+-
+
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/EWIEGA46WW/moc_mainwindow.cpp
+memory
+-
+mainwindow.h
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/EWIEGA46WW/mainwindow.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
+
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/mocs_compilation.cpp
+EWIEGA46WW/moc_mainwindow.cpp
+D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/EWIEGA46WW/moc_mainwindow.cpp
+
+D:/GitHub/wuziqi2020/Mygobang/main.cpp
+mainwindow.h
+D:/GitHub/wuziqi2020/Mygobang/mainwindow.h
+QtWidgets/QApplication
+-
+qlabel.h
+-
+QDesktopWidget
 -
 
 D:/GitHub/wuziqi2020/Mygobang/mainwindow.cpp
@@ -22,6 +84,8 @@ QApplication
 QMouseEvent
 -
 iostream
+-
+QDialog
 -
 
 D:/GitHub/wuziqi2020/Mygobang/mainwindow.h
@@ -43,7 +107,11 @@ cmath
 -
 QMainWindow
 -
+qmessagebox.h
+-
 QMouseEvent
+-
+QDialog
 -
 AI.h
 D:/GitHub/wuziqi2020/Mygobang/AI.h
@@ -1182,6 +1250,14 @@ D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QApplication
 qapplication.h
 D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qapplication.h
 
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QDesktopWidget
+qdesktopwidget.h
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qdesktopwidget.h
+
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QDialog
+qdialog.h
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qdialog.h
+
 D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QLabel
 qlabel.h
 D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qlabel.h
@@ -1266,6 +1342,12 @@ QtWidgets/qtwidgetsglobal.h
 QtWidgets/qwidget.h
 -
 
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qdialog.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qwidget.h
+-
+
 D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qframe.h
 QtWidgets/qtwidgetsglobal.h
 -
@@ -1302,6 +1384,12 @@ D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmenubar.h
 QtWidgets/qtwidgetsglobal.h
 -
 QtWidgets/qmenu.h
+-
+
+D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmessagebox.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtWidgets/qdialog.h
 -
 
 D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qpushbutton.h

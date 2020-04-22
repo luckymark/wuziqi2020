@@ -7,6 +7,7 @@
 #include<QApplication>
 #include <QMouseEvent>
 #include <iostream>
+#include <QDialog>
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent),
         ui(new Ui::MainWindow)
@@ -19,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->centralWidget->setMouseTracking(true);
     initChessBoard();
 }
-
 void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter painter(this);
@@ -81,26 +81,29 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
 {
-    QPainter painter(this);
-    int x = event->x();
-    int y = event->y();
-    if (event->button() == Qt::LeftButton) {
-        if (InBoard(x, y)) {
-            int px = round((double)(x - BoardMargin) / (BoardOneSize));
-            int py = round((double)(y - BoardMargin) / (BoardOneSize));
-            checkIfWin(px,py,Black);
-            Board[px][py] = Black;
-            turn++;
+    if (game.gamesatus==PLAYING)
+    {
+        QPainter painter(this);
+        int x = event->x();
+        int y = event->y();
+        if (event->button() == Qt::LeftButton) {
+            if (InBoard(x, y)) {
+                int px = round((double)(x - BoardMargin) / (BoardOneSize));
+                int py = round((double)(y - BoardMargin) / (BoardOneSize));
+                Board[px][py] = Black;
+                update();
+                checkIfWin(px,py,Black);
+            }
         }
-    }
-    update();
-    if(game.gamesatus==PLAYING) {
-        //AI下子
-        computer.calculateScore(Board);
-        computer.point = computer.findBestScore(computer.scoreTable);
-        checkIfWin(computer.point.x,computer.point.y,White);
-        Board[computer.point.x][computer.point.y] = White;
-        update();
+
+        if(game.gamesatus==PLAYING) {
+            //AI下子
+            computer.calculateScore(Board);
+            computer.point = computer.findBestScore(computer.scoreTable);
+            Board[computer.point.x][computer.point.y] = White;
+            update();
+            checkIfWin(computer.point.x,computer.point.y,White);
+        }
     }
 }
 
@@ -156,14 +159,14 @@ void MainWindow::checkIfWin(const int i, const int j, const int obj) {
             else if (Board[i][l] == Black) cntBlack++;
         }
         if (obj==White){
-            if(cntWhite==4)
+            if(cntWhite==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=White;
             }
         }
         else if (obj==Black){
-            if(cntBlack==4)
+            if(cntBlack==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=Black;
@@ -185,14 +188,14 @@ void MainWindow::checkIfWin(const int i, const int j, const int obj) {
             else if (Board[l][j]==-1) cntBlack++;
         }
         if (obj==White){
-            if(cntWhite==4)
+            if(cntWhite==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=White;
             }
         }
         else if (obj==Black){
-            if(cntBlack==4)
+            if(cntBlack==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=Black;
@@ -209,14 +212,14 @@ void MainWindow::checkIfWin(const int i, const int j, const int obj) {
             else if (Board[u][v]==Black) cntBlack++;
         }
         if (obj==White){
-            if(cntWhite==4)
+            if(cntWhite==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=White;
             }
         }
         else if (obj==Black){
-            if(cntBlack==4)
+            if(cntBlack==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=Black;
@@ -234,14 +237,14 @@ void MainWindow::checkIfWin(const int i, const int j, const int obj) {
             else if (Board[u][v]==Black) cntBlack++;
         }
         if (obj==White){
-            if(cntWhite==4)
+            if(cntWhite==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=White;
             }
         }
         else if (obj==Black){
-            if(cntBlack==4)
+            if(cntBlack==5)
             {
                 game.gamesatus=UNPLAYING;
                 game.winner=Black;
@@ -249,4 +252,30 @@ void MainWindow::checkIfWin(const int i, const int j, const int obj) {
         }
     }
 
+    if (game.winner!=Nobody)
+    {
+        game.gamesatus=UNPLAYING;
+        printWinnerInformation();
+    }
+
 }
+
+void MainWindow::printWinnerInformation() {
+//    QMessageBox msg;
+//    msg.setFixedSize(400,100);
+//    msg.setWindowTitle("Game Over!");
+   // msg.setStyleSheet("font: 14pt;background-color:rgb(0, 0, 0)");
+   //msg.setIcon(QMessageBox::Critical);
+//    dialog = new QDialog(this);
+//    dialog->setModal(false);
+//    dialog->setFixedSize(200,100);
+//    dialog.se
+
+    if(game.winner==White)
+        QMessageBox::information(NULL,"提示","You Lose");
+    if (game.winner==Black)
+        QMessageBox::information(NULL,"提示","You Win");
+    //    dialog->show();
+}
+
+

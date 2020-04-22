@@ -13,7 +13,9 @@
 #include<QPoint>
 #include<cmath>
 #include <QMainWindow>
+#include<qmessagebox.h>
 #include <QMouseEvent>
+#include <QDialog>
 #include "AI.h"
 
 #define PLAYING 1
@@ -46,9 +48,11 @@ public:
     signals:
 
 public slots:
+    void printWinnerInformation();
 
 private:
     Ui::MainWindow *ui;
+    QDialog *dialog;
     AI computer;
     GAME game;
     int turn;

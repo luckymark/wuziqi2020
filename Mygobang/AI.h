@@ -24,8 +24,8 @@ static const int TypeBBBB = 800000;
 
 static const int TypeW = 15;
 static const int TypeWW = 400;
-static const int TypeWWW = 1800;
-static const int TypeWWWW = 100000;
+static const int TypeWWW = 18000;
+static const int TypeWWWW = 1000000;
 
 struct Point{
     int x;
