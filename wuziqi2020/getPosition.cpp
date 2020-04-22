@@ -12,51 +12,51 @@ int max_min_search(int color, int alpha, int beta, int depth)
 	int score = (depth % 2 == 0) ? INT_MIN : INT_MAX;
 	int temp;
 	seat a[15 * 15];
-	gen(a, color);
-	for (int i = 0; i < 15 * 15; i++) {
-		if (isColor(a[i].i, a[i].j, EMPTY_C) && have_neighbor55(a[i].i, a[i].j)) {
-			setColor(a[i].i, a[i].j, color);
-			temp = max_min_search(1 - color, alpha, beta, depth - 1);
-			if (depth % 2 == 0) {
-				score = compare(score, temp, true);
-				alpha = compare(alpha, temp, true);
-			}
-			else {
-				score = compare(score, temp, false);
-				beta = compare(beta, temp, false);
-			}
-			setColor(a[i].i, a[i].j, EMPTY_C);
-			if (alpha >= beta) return score;
+	int count = gen(a, color);
+	for (int i = 0; i < count; i++) {
+		setColor(a[i].i, a[i].j, color);
+		temp = max_min_search(1 - color, alpha, beta, depth - 1);
+		if (depth % 2 == 0) {
+			score = bigger(score, temp);
+			alpha = bigger(alpha, temp);
 		}
+		else {
+			score = smaller(score, temp);
+			beta = smaller(beta, temp);
+		}
+		setColor(a[i].i, a[i].j, EMPTY_C);
+		if (alpha >= beta) return score;
 	}
 	return score;
 }
 
 int endSearch(int i, int j, int color)
 {
-	setColor(i, j, 1 - color);
+	
 	return 0;
 }
 // 启发式评估函数
 // 便于优先搜索分数高的，加快AB剪枝速度
-void gen(seat a[], int color)
+int gen(seat a[], int color)
 {
-	for (int i = 0; i < 15 * 15; i++) {
-		a[i].i = i / 15;
-		a[i].j = i % 15;
-	}
+	int count = 0;
 	for (int i = 0; i < 15; i++) {
 		for (int j = 0; j < 15; j++) {
 			if (isColor(i, j, EMPTY_C) && have_neighbor55(i,j)) {
+				a[count].i = i;
+				a[count].j = j;
 				setColor(i, j, color);
-				a[i * 15 + j].score = evaluate_score_one(color, i, j);
+				a[count].score = evaluate_score_one(color, i, j);
+				// 不要的话快一丢丢
 				setColor(i, j, 1 - color);
-				a[i * 15 + j].score += evaluate_score_one(color, i, j);
+				a[count].score += evaluate_score_one(color, i, j);
 				setColor(i, j, EMPTY_C);
+				count++;
 			}
 		}
 	}
-	quickSort(a, 0, 15 * 15 - 1);
+	quickSort(a, 0, count);
+	return count;
 }
 
 

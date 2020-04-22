@@ -33,19 +33,20 @@ extern int evaluate_map[3][5];// 评分表 [敌方子数][我方子数]
 // 函数声明
 
 // math
-void setColor(int i, int j, int color);
-int compare(int x, int y, bool bigger);
 bool have_neighbor55(int i, int j);
 int paritition(seat A[], int low, int high);
 void quickSort(seat A[], int low, int high);
 void initStar(seat* star, int i, int j);
 #define inBOX(i,j) ((i) >= 0 && (j) >= 0 && (i) <= 14 && (j) <= 14)
 #define isColor(i,j,color) (BOX[(i)][(j)].color_val == (color))
+#define setColor(i,j,color) (BOX[(i)][(j)].color_val = (color))
+#define bigger(x,y) (((x) > (y)) ? (x) : (y))
+#define smaller(x,y) (((x) < (y)) ? (x) : (y))
 
 // getPosition
 int max_min_search(int color, int alpha, int beta, int depth);
 int evaluate_score(int color);
 int evaluate_score_one(int b_i, int b_j, int color);
-void gen(seat a[], int color);
+int gen(seat a[], int color);
 int get_score(int i, int j, int color);
 int good_position(int i, int j, int color);
