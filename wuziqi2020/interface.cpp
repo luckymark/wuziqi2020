@@ -22,9 +22,11 @@ seat findbestseat2(int color)
 	int temp = 0;
 	for (int i = 0; i < 15; i++) {
 		for (int j = 0; j < 15; j++) {
-			if (isColor(i, j, EMPTY_C) && have_neighbor55(i, j)) {
+			if (isColor(i, j, EMPTY_C) && have_neighbor(i, j)) {
 				setColor(i, j, color);
+				set_neighbor(i, j, ADD_NEIGHBOR);
 				temp = max_min_search(1 - color, INT_MIN, INT_MAX, LAYER_LIMIT - 1);
+				set_neighbor(i, j, DES_NEIGHBOR);
 				setColor(i, j, EMPTY_C);
 				if (best[count_best].score < temp) {
 					count_best = 0;
@@ -43,6 +45,5 @@ seat findbestseat2(int color)
 	}
 	srand(time(NULL));
 	step++;// 用来加断点
-	return best[rand() % (count_best + 1)]; 
+	return best[rand() % (count_best + 1)];
 }
-

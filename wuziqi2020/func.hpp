@@ -18,7 +18,7 @@
 #define EMPTY_C -1   // 空
 
 // 最大最小值搜索层数(必须为偶数)
-#define LAYER_LIMIT 6
+#define LAYER_LIMIT 4
 // 相同分值的点位个数的最大值
 #define COUNT_BEST_MAX 10
 
@@ -27,26 +27,25 @@ extern box BOX[15][15];     // 棋盘
 extern int di[4];    // - | \ / 四个方向
 extern int dj[4];	// - | \ / 四个方向
 extern int evaluate_map[3][5];// 评分表 [敌方子数][我方子数] 
-//extern int step; // 步数（棋子数）
-//extern seat steps[225];
 
 // 函数声明
-
-// math
-bool have_neighbor55(int i, int j);
+// math.cpp
 int paritition(seat A[], int low, int high);
 void quickSort(seat A[], int low, int high);
-void initStar(seat* star, int i, int j);
 #define inBOX(i,j) ((i) >= 0 && (j) >= 0 && (i) <= 14 && (j) <= 14)
 #define isColor(i,j,color) (BOX[(i)][(j)].color_val == (color))
 #define setColor(i,j,color) (BOX[(i)][(j)].color_val = (color))
 #define bigger(x,y) (((x) > (y)) ? (x) : (y))
 #define smaller(x,y) (((x) < (y)) ? (x) : (y))
+// 更新后的neighbor函数
+#define ADD_NEIGHBOR 1
+#define DES_NEIGHBOR -1
+void set_neighbor(int i, int j, int type);
+extern int neighbor[15][15];
+#define have_neighbor(i,j) (neighbor[(i)][(j)] > 0)
 
-// getPosition
+// getPosition.cpp
 int max_min_search(int color, int alpha, int beta, int depth);
 int evaluate_score(int color);
 int evaluate_score_one(int b_i, int b_j, int color);
 int gen(seat a[], int color);
-int get_score(int i, int j, int color);
-int good_position(int i, int j, int color);

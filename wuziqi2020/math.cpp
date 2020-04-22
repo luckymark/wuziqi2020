@@ -1,18 +1,16 @@
 #include "func.hpp"
 // 优化速度函数 
 // 判断最近的 5 * 5 的格子中是否有落子 
-bool have_neighbor55(int i, int j)
+int neighbor[15][15] = { 0 };
+void set_neighbor(int i, int j, int type)
 {
-	bool pd = false;
-	for (int a = i - 2; a < i + 2 && pd == false; a++) {
-		for (int b = j - 2; b < j + 2 && pd == false; b++) {
-			if (a == i && b == j) continue;
-			if (inBOX(a, b) && !isColor(a, b, EMPTY_C)) {
-				pd = true;
+	for (int a = i - 2; a < i + 2; a++) {
+		for (int b = j - 2; b < j + 2; b++) {
+			if (inBOX(a, b)) {
+				neighbor[a][b] += type;
 			}
 		}
 	}
-	return pd;
 }
 int paritition(seat A[], int low, int high)
 {
@@ -37,17 +35,5 @@ void quickSort(seat A[], int low, int high) //快排母函数
 		int pivot = paritition(A, low, high);
 		quickSort(A, low, pivot - 1);
 		quickSort(A, pivot + 1, high);
-	}
-}
-void initStar(seat* star, int i, int j)
-{
-	int count = 0;
-	for (int a = 0; a < 4; a++) {
-		for (int b = 1; b <= 5; b++) {
-			star[count].i = i + b * di[a];
-			star[count++].j = j + b * dj[a];
-			star[count].i = i - b * di[a];
-			star[count++].j = j - b * dj[a];
-		}
 	}
 }

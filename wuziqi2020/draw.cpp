@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "draw.hpp"
+#include "func.hpp"
 
 
 
@@ -269,6 +270,7 @@ void init()
 		{
 			BOX[i][j].score = 0;// 分数
 			BOX[i][j].color_val = -1;// 值
+			neighbor[i][j] = 0;// init neighbor
 		}
 	}
 }
@@ -527,6 +529,7 @@ void game()
 						{
 							// 如果按下了
 							BOX[i][j].color_val = playercolor; // 下棋
+							set_neighbor(i, j, ADD_NEIGHBOR);
 							BOX[i][j].isnew = true;        // 新位置更新
 							oldi = -1;
 							oldj = -1;
@@ -560,6 +563,7 @@ void game()
 					drawi--;
 					drawj++;
 				}
+				set_neighbor(drawi, drawj, ADD_NEIGHBOR);
 				BOX[drawi][drawj].color_val = 1 - playercolor;
 				BOX[drawi][drawj].isnew = true;
 				new_game = false;
@@ -567,6 +571,7 @@ void game()
 			else
 			{
 				BOX[best.i][best.j].color_val = 1 - playercolor;//下在最佳位置
+				set_neighbor(best.i, best.j, ADD_NEIGHBOR);
 				BOX[best.i][best.j].isnew = true;
 			}
 			whoplay = 0;
