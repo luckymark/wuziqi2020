@@ -5,11 +5,8 @@ using namespace std;
 box BOX[15][15];
 int main()
 {
-	setColor(7, 7, 1);
-	seat a[15 * 15];
-	gen(a, 1);
-	for (int i = 0; i < 15; i++) {
-		printf("%d\n", a[i].score);
-	}
+	int pd = -1;
+	have_neighbor55(1, 2);
+	printf("%d\n", pd);
 	return 0;
 }

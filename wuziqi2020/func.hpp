@@ -18,7 +18,7 @@
 #define EMPTY_C -1   // 空
 
 // 最大最小值搜索层数(必须为偶数)
-#define LAYER_LIMIT 4
+#define LAYER_LIMIT 6
 // 相同分值的点位个数的最大值
 #define COUNT_BEST_MAX 10
 
@@ -33,14 +33,14 @@ extern int evaluate_map[3][5];// 评分表 [敌方子数][我方子数]
 // 函数声明
 
 // math
-bool inBOX(int i, int j);
 void setColor(int i, int j, int color);
 int compare(int x, int y, bool bigger);
-bool isColor(int i, int j, int color);
 bool have_neighbor55(int i, int j);
 int paritition(seat A[], int low, int high);
 void quickSort(seat A[], int low, int high);
 void initStar(seat* star, int i, int j);
+#define inBOX(i,j) ((i) >= 0 && (j) >= 0 && (i) <= 14 && (j) <= 14)
+#define isColor(i,j,color) (BOX[(i)][(j)].color_val == (color))
 
 // getPosition
 int max_min_search(int color, int alpha, int beta, int depth);
@@ -48,3 +48,4 @@ int evaluate_score(int color);
 int evaluate_score_one(int b_i, int b_j, int color);
 void gen(seat a[], int color);
 int get_score(int i, int j, int color);
+int good_position(int i, int j, int color);

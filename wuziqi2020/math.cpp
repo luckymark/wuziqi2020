@@ -3,12 +3,6 @@ void setColor(int i, int j, int color)
 {
 	BOX[i][j].color_val = color;
 }
-// 是否在棋盘中
-bool inBOX(int i, int j)
-{
-	return i >= 0 && j >= 0 && i <= 14 && j <= 14;
-}
-// 比较大小
 // type 'b' : 返回较大的数
 // type 's' : 返回较小的数
 int compare(int x, int y, bool bigger)
@@ -18,32 +12,20 @@ int compare(int x, int y, bool bigger)
 	else
 		return (x < y) ? x : y;
 }
-// 判断当前位置是否为输入的颜色
-bool isColor(int i, int j, int color)
-{
-	return BOX[i][j].color_val == color;
-}
 // 优化速度函数 
 // 判断最近的 5 * 5 的格子中是否有落子 
 // 也许需要扩大判断范围
 bool have_neighbor55(int i, int j)
 {
-	int cur_i = i;
-	int cur_j = j;
-	int pd = false;
-	i -= 2;
-	j -= 2;
-	if (i < 0) i = 0;
-	if (j < 0) j = 0;
-	for (int a = i; a < cur_i + 2 && a <= 14; a++) {
-		for (int b = j; b < cur_j + 2 && b <= 14; b++) {
-			if (BOX[a][b].color_val != -1) {
+	bool pd = false;
+	for (int a = i - 2; a < i + 2 && pd == false; a++) {
+		for (int b = j - 2; b < j + 2 && pd == false; b++) {
+			if (a == i && b == j) continue;
+			if (inBOX(a, b) && !isColor(a, b, EMPTY_C)) {
 				pd = true;
-				goto there;
 			}
 		}
 	}
-there:
 	return pd;
 }
 int paritition(seat A[], int low, int high)
