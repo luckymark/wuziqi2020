@@ -3,8 +3,10 @@
 //
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
+#include "AI.h"
 #include<QApplication>
 #include <QMouseEvent>
+#include <iostream>
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent),
         ui(new Ui::MainWindow)
@@ -15,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     //设置追踪鼠标
     setMouseTracking(true);
     ui->centralWidget->setMouseTracking(true);
-
+    initChessBoard();
 }
 
 void MainWindow::paintEvent(QPaintEvent* event)
@@ -86,10 +88,16 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
         if (InBoard(x, y)) {
             int px = round((double)(x - BoardMargin) / (BoardOneSize));
             int py = round((double)(y - BoardMargin) / (BoardOneSize));
-            Board[px][py] = WhiteOrBlack();
+            Board[px][py] = Black;
             turn++;
         }
     }
+
+    update();
+    //AI下子
+    computer.calculateScore(Board);
+    computer.point=computer.findBestScore(computer.scoreTable);
+    Board[computer.point.x][computer.point.y]=White;
     update();
 }
 
@@ -103,4 +111,25 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
         presentcoly+=1;
     }
     update();
+}
+
+void MainWindow::initChessBoard() {
+    for (int i = 0; i < BoardLength; i++)
+        for (int j = 0; j < BoardLength; j++)
+            Board[i][j] = 0;
+}
+
+Turns MainWindow::WhiteOrBlack() {
+    if (turn % 2)
+        return Black;
+    else
+        return White;
+}
+
+bool MainWindow::InBoard(int xx, int yy) {
+    if (xx > BoardMargin + (BoardMargin-1) * BoardOneSize || xx<BoardMargin ||
+        yy>BoardMargin + (BoardMargin-1) * BoardOneSize || yy < BoardMargin)
+        return false;
+    else
+        return true;
 }

@@ -14,6 +14,7 @@
 #include<cmath>
 #include <QMainWindow>
 #include <QMouseEvent>
+#include "AI.h"
 
 const int BoardMargin = 100;
 const int BoardOneSize = 40;
@@ -42,20 +43,12 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    int turn;//
+    AI computer;
+    int turn;
     int Board[BoardLength][BoardLength];
     int presentRowx,presentcoly;
-    bool InBoard(int xx, int yy){
-        if (xx > BoardMargin + (BoardMargin-1) * BoardOneSize || xx<BoardMargin ||
-            yy>BoardMargin + (BoardMargin-1) * BoardOneSize || yy < BoardMargin)
-            return false;
-        else
-            return true;
-    }
-    Turns WhiteOrBlack(){
-        if (turn % 2)
-            return Black;
-        else
-            return White;
-    }
+    //函数
+    bool InBoard(int xx, int yy);
+    Turns WhiteOrBlack();
+    void initChessBoard();
 };
