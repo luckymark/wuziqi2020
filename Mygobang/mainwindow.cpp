@@ -88,17 +88,20 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
         if (InBoard(x, y)) {
             int px = round((double)(x - BoardMargin) / (BoardOneSize));
             int py = round((double)(y - BoardMargin) / (BoardOneSize));
+            checkIfWin(px,py,Black);
             Board[px][py] = Black;
             turn++;
         }
     }
-
     update();
-    //AI下子
-    computer.calculateScore(Board);
-    computer.point=computer.findBestScore(computer.scoreTable);
-    Board[computer.point.x][computer.point.y]=White;
-    update();
+    if(game.gamesatus==PLAYING) {
+        //AI下子
+        computer.calculateScore(Board);
+        computer.point = computer.findBestScore(computer.scoreTable);
+        checkIfWin(computer.point.x,computer.point.y,White);
+        Board[computer.point.x][computer.point.y] = White;
+        update();
+    }
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
@@ -114,6 +117,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void MainWindow::initChessBoard() {
+    game.gamesatus= PLAYING;
+    game.winner = Nobody;
     for (int i = 0; i < BoardLength; i++)
         for (int j = 0; j < BoardLength; j++)
             Board[i][j] = 0;
@@ -132,4 +137,116 @@ bool MainWindow::InBoard(int xx, int yy) {
         return false;
     else
         return true;
+}
+
+void MainWindow::checkIfWin(const int i, const int j, const int obj) {
+    int cntWhite,cntBlack;
+    //横向搜
+    for (int k =j-4 ; k <=j ; ++k) { //枚举左端点
+        if (k<0)
+        {
+            k=0;
+            continue;
+        }
+        cntWhite=0,cntBlack=0;
+        //搜一个小条
+        for (int l = k; l <=k+4 ; ++l) {
+            if (l > BoardLength) break;
+            if (Board[i][l] == White) cntWhite++;
+            else if (Board[i][l] == Black) cntBlack++;
+        }
+        if (obj==White){
+            if(cntWhite==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=White;
+            }
+        }
+        else if (obj==Black){
+            if(cntBlack==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=Black;
+            }
+        }
+    }
+    //纵向搜
+    for (int k =i-4 ; k <=i ; ++k) {  //枚举上端点
+        if (k<0)
+        {
+            k=0;
+            continue;
+        }
+        //搜一个小条
+        cntWhite=0,cntBlack=0;
+        for (int l = k; l <=k+4 ; ++l) {
+            if (l>BoardLength) break;
+            if(Board[l][j]==1) cntWhite++;
+            else if (Board[l][j]==-1) cntBlack++;
+        }
+        if (obj==White){
+            if(cntWhite==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=White;
+            }
+        }
+        else if (obj==Black){
+            if(cntBlack==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=Black;
+            }
+        }
+    }
+    //主对角线搜
+    for (int p=i-4,k =j-4; k <=j ; ++k,++p) { //枚举左上端点
+        if (k<0||p<0) continue;
+        cntWhite=0,cntBlack=0;
+        for (int u = p,v=k; u <=p+4 ; u++,v++) {
+            if (u>BoardLength||v>BoardLength) break;
+            if(Board[u][v]==White) cntWhite++;
+            else if (Board[u][v]==Black) cntBlack++;
+        }
+        if (obj==White){
+            if(cntWhite==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=White;
+            }
+        }
+        else if (obj==Black){
+            if(cntBlack==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=Black;
+            }
+        }
+    }
+    //副对角线搜
+
+    for (int p=i+4,k =j-4 ; k <=j ; p--,k++) { //枚举左下端点
+        if (k<0||p>BoardLength) continue;
+        cntWhite=0,cntBlack=0;
+        for (int u=p, v=k; v<=k+4 ; u--,v++) {
+            if (v>BoardLength||u<0) continue;
+            if(Board[u][v]==White) cntWhite++;
+            else if (Board[u][v]==Black) cntBlack++;
+        }
+        if (obj==White){
+            if(cntWhite==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=White;
+            }
+        }
+        else if (obj==Black){
+            if(cntBlack==4)
+            {
+                game.gamesatus=UNPLAYING;
+                game.winner=Black;
+            }
+        }
+    }
+
 }

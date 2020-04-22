@@ -16,12 +16,18 @@
 #include <QMouseEvent>
 #include "AI.h"
 
+#define PLAYING 1
+#define UNPLAYING 0
 const int BoardMargin = 100;
 const int BoardOneSize = 40;
 const int BoardLength = 15;
 
+struct GAME{
+    int gamesatus;
+    int winner;
+};
 enum Turns {		//枚举类型，默认人是白棋，白棋在棋盘上设为1，黑棋为-1
-    White = 1, Black = -1
+    White = 1, Black = -1,Nobody = 0
 };
 
 namespace Ui {
@@ -44,6 +50,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     AI computer;
+    GAME game;
     int turn;
     int Board[BoardLength][BoardLength];
     int presentRowx,presentcoly;
@@ -51,4 +58,5 @@ private:
     bool InBoard(int xx, int yy);
     Turns WhiteOrBlack();
     void initChessBoard();
+    void checkIfWin(const int i, const int j,const int obj);
 };

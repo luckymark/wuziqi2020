@@ -35,8 +35,9 @@ class AI {
 public:
     Point point;
     void calculateScore(const int chessBoard[15][15]);
-    Point findBestScore(const int score[15][15]);
-    int judgeTypeAndGiveScore(const int cntWhite,const int cntBlack);
+    static int calculateSinglePoint(const int i , const int j,const int chessBoard[15][15]);
+    static Point findBestScore(const int score[15][15]);
+    static int judgeTypeAndGiveScore(const int cntWhite,const int cntBlack);
     int scoreTable[15][15];
     AI();
 private:
