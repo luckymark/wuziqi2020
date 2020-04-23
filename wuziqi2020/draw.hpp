@@ -31,14 +31,10 @@ public:
 	COLORREF color = WHITE; // 棋盘背景色
 };
 
-
 // 函数声明
 void draw();                  // 绘制
 void init();                  // 初始化
-seat findbestseat1(int);	  // 寻找最佳位置
 void isWIN();                 // 判断输赢
 void game();                  // 游戏主函数
 
 #endif // !__DRAW__
-
-

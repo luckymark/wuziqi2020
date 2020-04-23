@@ -10,10 +10,11 @@ int evaluate_map[3][5] = {  // 评分表 [敌方子数][我方子数]
 	{S1, S2, S3, S4, FIVE},
 	{0, 0, 0, 0, FIVE}
 };
+int neighbor[15][15] = { 0 }; // 用来判断旁边是否有子(5*5)
 int step = 0; // 用以加断点
 
 // 接口函数
-seat findbestseat2(int color)
+seat findbestseat(int color)
 {
 	seat best[COUNT_BEST_MAX];
 	int count_best = 0;
@@ -28,18 +29,17 @@ seat findbestseat2(int color)
 				temp = max_min_search(1 - color, INT_MIN, INT_MAX, LAYER_LIMIT - 1);
 				set_neighbor(i, j, DES_NEIGHBOR);
 				setColor(i, j, EMPTY_C);
-				if (best[count_best].score < temp) {
-					count_best = 0;
-					best[0].score = temp;
-					best[0].i = i;
-					best[0].j = j;
-				}
-				else if(best[count_best].score == temp && count_best != COUNT_BEST_MAX - 1) {
-					count_best++;
-					best[count_best].score = temp;
+				if (best[0].score <= temp) {
+					if (best[0].score < temp) {
+						count_best = 0;
+						best[0].score = temp;
+					}
+					else if (best[0].score == temp && count_best != COUNT_BEST_MAX - 1){
+						count_best++;
+					}
 					best[count_best].i = i;
 					best[count_best].j = j;
-				}				
+				}			
 			}
 		}
 	}

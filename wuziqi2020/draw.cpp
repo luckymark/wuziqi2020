@@ -1,16 +1,8 @@
-﻿////////////////////////////////////////////////////////
-// 程序名称：博弈五子棋
-// 编译环境：Visual C++ 2019		EasyX_20190529(beta)
-// 作　　者：陈可佳 <emil09_chen@126.com>
-// 最后修改：2019-9-30
-//
-#include <iostream>
+﻿#include <iostream>
 #include <time.h>
 #include <stdlib.h>
 #include "draw.hpp"
 #include "func.hpp"
-
-
 
 // 全局变量
 box BOX[15][15];      // 棋盘
@@ -19,7 +11,7 @@ int whoplay = 0;      // 轮到谁下棋了
 int playercolor = 0;  // 玩家颜色
 int dx[4]{ 1,0,1,1 }; // - | \ / 四个方向
 int dy[4]{ 0,1,1,-1 };
-seat findbestseat2(int); // 我的函数
+seat findbestseat(int); // interface function
 
 // main 函数
 int main()
@@ -186,9 +178,9 @@ void draw()
 	TCHAR strabc[15][3] = { _T("A"),_T("B") ,_T("C") ,_T("D"),_T("E") ,_T("F") ,_T("G"),
 							_T("H"),_T("I"),_T("J"), _T("K"),_T("L") ,_T("M") ,
 							_T("N"),_T("O") };
-	for (int i = 0, k = 0; i < 450; i += 30)
+	for (int i = 0, k = 0; i < 450; i += 30, k++)
 	{
-		for (int j = 0, g = 0; j < 450; j += 30)
+		for (int j = 0, g = 0; j < 450; j += 30, g++)
 		{
 			BOX[k][g].color = RGB(255, 205, 150);// 棋盘底色
 			// x y 坐标
@@ -243,9 +235,7 @@ void draw()
 			{
 				BOX[k][g].isnew = false; // 把上一个下棋位置的黑框清除
 			}
-			g++;
 		}
-		k++;
 	}
 	// 画坐标
 	LOGFONT nowstyle;
@@ -273,154 +263,6 @@ void init()
 			neighbor[i][j] = 0;// init neighbor
 		}
 	}
-}
-
-
-
-// 核心函数
-
-// 寻找最佳位置
-seat findbestseat1(int color)
-{
-	// 评分表
-	int Score[3][5] = {
-		{ 0, 20, 360, 5800, 92840 }, // 防守0子
-		{ 0, 0, 20, 360, 92840 },    // 防守1子
-		{ 0, 0, 0, 0, 92840 }        // 防守2子
-	};
-	seat bestseat;              // 最佳位置
-	int MAXnumber[225] = { 0 }; // 最佳分数（可能有多个）
-	int MAXx[225] = { 0 };      // 最佳 x 坐标（可能有多个）
-	int MAXy[225] = { 0 };      // 最佳 y 坐标（可能有多个）
-	int number = 0;             // 下一个最佳分数储存位置
-	int truenumber;             // 输出的最佳分数位置
-	int nowi = 0;               // 现在遍历到的y坐标
-	int nowj = 0;               // 现在遍历到的x坐标
-	int length[4];              // 四个方向的长度
-	int enemy[4];               // 四个方向的敌子
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 15; j++)
-		{
-			if (BOX[i][j].color_val == -1)
-			{
-				// 遍历每一个可能的位置
-
-				// 自己
-				BOX[i][j].color_val = color; // 尝试下在这里
-				for (int k = 0; k < 4; k++)
-				{
-					length[k] = 0;
-					enemy[k] = 0;
-					nowi = i;
-					nowj = j;
-					while (nowi <= 14 && nowj <= 14 && nowi >= 0 && nowj >= 0 && BOX[nowi][nowj].color_val == color)
-					{
-						length[k]++;
-						nowj += dx[k];
-						nowi += dy[k];
-					}
-					if (BOX[nowi][nowj].color_val == 1 - color || nowi < 0 || nowj < 0 || nowi > 14 || nowj > 14)
-					{
-						enemy[k]++;
-					}
-					nowi = i;
-					nowj = j;
-					while (nowi <= 14 && nowj <= 14 && nowi >= 0 && nowj >= 0 && BOX[nowi][nowj].color_val == color)
-					{
-						length[k]++;
-						nowj -= dx[k];
-						nowi -= dy[k];
-					}
-					if (BOX[nowi][nowj].color_val == 1 - color || nowi < 0 || nowj < 0 || nowi > 14 || nowj > 14)
-					{
-						enemy[k]++;
-					}
-					length[k] -= 2; // 判断长度
-					if (length[k] > 4)
-					{
-						length[k] = 4;
-					}
-					BOX[i][j].score += Score[enemy[k]][length[k]] * 4 + !(!length[k]) * 20;//加分系统
-					length[k] = 0;
-					enemy[k] = 0;
-				}
-				// 敌人（原理同上）
-				BOX[i][j].color_val = 1 - color;
-				for (int k = 0; k < 4; k++)
-				{
-					length[k] = 0;
-					enemy[k] = 0;
-					nowi = i;
-					nowj = j;
-					while (nowi <= 14 && nowj <= 14 && nowi >= 0 && nowj >= 0 && BOX[nowi][nowj].color_val == 1 - color)
-					{
-						length[k]++;
-						nowj += dx[k];
-						nowi += dy[k];
-					}
-					if (BOX[nowi][nowj].color_val == color || nowi < 0 || nowj < 0 || nowi > 14 || nowj > 14)
-					{
-						enemy[k]++;
-					}
-					nowi = i;
-					nowj = j;
-					while (nowi <= 14 && nowj <= 14 && nowi >= 0 && nowj >= 0 && BOX[nowi][nowj].color_val == 1 - color)
-					{
-						length[k]++;
-						nowj -= dx[k];
-						nowi -= dy[k];
-					}
-					if (BOX[nowi][nowj].color_val == color || nowi < 0 || nowj < 0 || nowi > 14 || nowj > 14)
-					{
-						enemy[k]++;
-					}
-					length[k] -= 2;
-					if (length[k] > 4)
-					{
-						length[k] = 4;
-					}
-					BOX[i][j].score += Score[enemy[k]][length[k]];
-					length[k] = 0;
-					enemy[k] = 0;
-				}
-				BOX[i][j].color_val = -1;
-			}
-			if (BOX[i][j].score == MAXnumber[0])
-			{
-				// 如果和最高分数相同
-				MAXnumber[number] = BOX[i][j].score;
-				MAXy[number] = i;
-				MAXx[number] = j;
-				number++;
-				// 新增一个分数及坐标
-			}
-			if (BOX[i][j].score > MAXnumber[0])
-			{
-				// 如果比最高分数高
-				for (int k = 0; k < number; k++)
-				{
-					MAXnumber[k] = 0;
-					MAXy[k] = 0;
-					MAXx[k] = 0;
-				}
-				number = 0;
-				MAXnumber[number] = BOX[i][j].score;
-				MAXy[number] = i;
-				MAXx[number] = j;
-				number++;
-				// 清空数组再加入
-			}
-		}
-	}
-	// 生成随机位置
-	srand(time(NULL));
-	truenumber = rand() % number;
-	bestseat.i = MAXy[truenumber];
-	bestseat.j = MAXx[truenumber];
-	bestseat.score = MAXnumber[truenumber];
-	// 返回位置
-	return bestseat;
 }
 
 // 判断输赢
@@ -471,11 +313,6 @@ void isWIN()
 						}
 					}
 				}
-				//if ((!isinit) && findbestseat1(playercolor).number == 0 && findbestseat1(1 - playercolor).number == 0)
-				//{
-				//	// 如果不是开局且双方无最佳位置
-				//	win = 2; // 平局
-				//}
 			}
 		}
 	}
@@ -552,7 +389,7 @@ void game()
 		{
 			// 电脑下棋
 			seat best;
-			best = findbestseat2(1 - playercolor); // 寻找最佳位置
+			best = findbestseat(1 - playercolor); // 寻找最佳位置
 			if (new_game)
 			{
 				// 开局情况

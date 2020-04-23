@@ -30,8 +30,8 @@ extern int evaluate_map[3][5];// 评分表 [敌方子数][我方子数]
 
 // 函数声明
 // math.cpp
-int paritition(seat A[], int low, int high);
 void quickSort(seat A[], int low, int high);
+int evaluate_score_one(int b_j, int color, int b_i);
 #define inBOX(i,j) ((i) >= 0 && (j) >= 0 && (i) <= 14 && (j) <= 14)
 #define isColor(i,j,color) (BOX[(i)][(j)].color_val == (color))
 #define setColor(i,j,color) (BOX[(i)][(j)].color_val = (color))
@@ -46,6 +46,3 @@ extern int neighbor[15][15];
 
 // getPosition.cpp
 int max_min_search(int color, int alpha, int beta, int depth);
-int evaluate_score(int color);
-int evaluate_score_one(int b_i, int b_j, int color);
-int gen(seat a[], int color);
