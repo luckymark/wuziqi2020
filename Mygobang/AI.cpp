@@ -4,6 +4,7 @@
 
 #include "AI.h"
 #include "mainwindow.h"
+#include <time.h>
 AI::AI() {
     point.x=-1;
     point.y=-1;
@@ -25,12 +26,20 @@ Point AI::findBestScore(const int score[15][15])
 {
     int bestsocre = -10000;
     Point bestpoint;
+    srand(time(NULL));//设置随机数种子
     FILE  *fp;
     fp = fopen("log.txt","w+");
+    //不知道为什么这里输出棋盘的分数 i和j是反的，有空再改一下
     for (int i = 0; i <BoardLength ; ++i) {
         for (int j = 0; j <BoardLength ; ++j) {
-            fprintf(fp,"%7d ",score[i][j]);
+            fprintf(fp,"%7d ",score[j][i]);
             if(score[i][j]>bestsocre)
+            {
+                bestpoint.x=i;
+                bestpoint.y=j;
+                bestsocre=score[i][j];
+            }
+            if(score[i][j]==bestsocre&&rand()%2)
             {
                 bestpoint.x=i;
                 bestpoint.y=j;
@@ -69,20 +78,17 @@ int AI::judgeTypeAndGiveScore(const int cntWhite,const int cntBlack) {
 int AI::calculateSinglePoint(const int i, const int j, const int chessBoard[15][15]) {
 
     int pointscore=0;
-    if (chessBoard[i][j]==0){
+    if (chessBoard[i][j]==Nobody){
         int cntWhite,cntBlack;
 
         //横向搜
         for (int k =j-4 ; k <=j ; ++k) { //枚举左端点
-            if (k<0)
-            {
-                k=0;
+            if (k<0){
                 continue;
-            }
-            cntWhite=0,cntBlack=0;
+            }else if (k+4>=BoardLength){break;}
             //搜一个小条
+            cntWhite=0,cntBlack=0;
             for (int l = k; l <=k+4 ; ++l) {
-                if (l>BoardLength) break;
                 if(chessBoard[i][l]==White) cntWhite++;
                 else if (chessBoard[i][l]==Black) cntBlack++;
             }
@@ -92,15 +98,12 @@ int AI::calculateSinglePoint(const int i, const int j, const int chessBoard[15][
         }
         //纵向搜
         for (int k =i-4 ; k <=i ; ++k) {  //枚举上端点
-            if (k<0)
-            {
-                k=0;
+            if (k<0){
                 continue;
-            }
+            }else if (k+4>=BoardLength){break;}
             //搜一个小条
             cntWhite=0,cntBlack=0;
             for (int l = k; l <=k+4 ; ++l) {
-                if (l>BoardLength) break;
                 if(chessBoard[l][j]==1) cntWhite++;
                 else if (chessBoard[l][j]==-1) cntBlack++;
             }
@@ -111,9 +114,9 @@ int AI::calculateSinglePoint(const int i, const int j, const int chessBoard[15][
         //主对角线搜
         for (int p=i-4,k =j-4; k <=j ; ++k,++p) { //枚举左上端点
             if (k<0||p<0) continue;
+            else if (k+4>=BoardLength||p+4>=BoardLength) break;
             cntWhite=0,cntBlack=0;
             for (int u = p,v=k; u <=p+4 ; u++,v++) {
-                if (u>BoardLength||v>BoardLength) break;
                 if(chessBoard[u][v]==White) cntWhite++;
                 else if (chessBoard[u][v]==Black) cntBlack++;
             }
@@ -122,10 +125,11 @@ int AI::calculateSinglePoint(const int i, const int j, const int chessBoard[15][
         //副对角线搜
 
         for (int p=i+4,k =j-4 ; k <=j ; p--,k++) { //枚举左下端点
-            if (k<0||p>BoardLength) continue;
+            if (k<0||p>=BoardLength) continue;
+            else if (k+4>=BoardLength||p-4<0) break;
             cntWhite=0,cntBlack=0;
             for (int u=p, v=k; v<=k+4 ; u--,v++) {
-                if (v>BoardLength||u<0) continue;
+
                 if(chessBoard[u][v]==White) cntWhite++;
                 else if (chessBoard[u][v]==Black) cntBlack++;
             }

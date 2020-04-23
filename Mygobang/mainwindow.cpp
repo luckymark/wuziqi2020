@@ -30,7 +30,6 @@ void MainWindow::paintEvent(QPaintEvent* event)
     this->setPalette(palette);
 
     //画棋盘
-
     for (int i = 0; i < BoardLength; i++)
     {
         painter.drawLine(BoardMargin+BoardOneSize*i, BoardMargin, BoardMargin+BoardOneSize*i, BoardMargin+(BoardLength-1)*BoardOneSize);
@@ -83,26 +82,29 @@ void MainWindow::mousePressEvent(QMouseEvent* event)
 {
     if (game.gamesatus==PLAYING)
     {
-        QPainter painter(this);
         int x = event->x();
         int y = event->y();
         if (event->button() == Qt::LeftButton) {
-            if (InBoard(x, y)) {
-                int px = round((double)(x - BoardMargin) / (BoardOneSize));
-                int py = round((double)(y - BoardMargin) / (BoardOneSize));
-                Board[px][py] = Black;
-                update();
-                checkIfWin(px,py,Black);
-            }
-        }
+            int px = (x-BoardMargin)/BoardOneSize;
+            if ((x-BoardMargin)%BoardOneSize>=BoardOneSize/2) px++;
+            int py = (y-BoardMargin)/BoardOneSize;
+            if ((y-BoardMargin)%BoardOneSize>=BoardOneSize/2) py++;
 
-        if(game.gamesatus==PLAYING) {
-            //AI下子
-            computer.calculateScore(Board);
-            computer.point = computer.findBestScore(computer.scoreTable);
-            Board[computer.point.x][computer.point.y] = White;
-            update();
-            checkIfWin(computer.point.x,computer.point.y,White);
+            if (px>=0&&py>=0&&px<=BoardLength&&py<=BoardLength) {
+                if (Board[px][py] == Nobody) {
+                    Board[px][py] = Black;
+                    update();
+                    checkIfWin(px, py, Black);
+                    //AI下子
+                    if (game.gamesatus == PLAYING) {
+                        computer.calculateScore(Board);
+                        computer.point = computer.findBestScore(computer.scoreTable);
+                        Board[computer.point.x][computer.point.y] = White;
+                        update();
+                        checkIfWin(computer.point.x, computer.point.y, White);
+                    }
+                }
+            }
         }
     }
 }
