@@ -129,17 +129,5 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\empty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\blackNow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\whiteNow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\board.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -13,7 +13,6 @@
     End Enum
 
     'out library
-
     Public Declare Function getCounter Lib "Dll_Test.dll" () As Integer
 
 
