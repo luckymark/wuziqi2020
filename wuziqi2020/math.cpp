@@ -2,6 +2,7 @@
 
 // 优化速度函数 
 // 判断最近的 5 * 5 的格子中是否有落子 
+int neighbor[15][15] = { 0 }; // 用来判断旁边是否有子(5*5)
 void set_neighbor(int i, int j, int type)
 {
 	for (int a = i - 2; a < i + 2; a++) {
