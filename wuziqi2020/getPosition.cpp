@@ -13,9 +13,8 @@ static int gen(seat a[], int color)
 				a[count].j = j;
 				setColor(i, j, color);
 				a[count].score = evaluate_score_one(i, j, color);
-				// 不要的话快一丢丢
 				setColor(i, j, 1 - color);
-				a[count].score += evaluate_score_one(i, j, color);
+				a[count].score += evaluate_score_one(i, j, 1 - color);
 				setColor(i, j, EMPTY_C);
 				count++;
 			}
