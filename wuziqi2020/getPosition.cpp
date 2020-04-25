@@ -3,7 +3,7 @@
 
 // 启发式评估函数
 // 便于优先搜索分数高的，加快AB剪枝速度
-static int gen(seat a[], int color)
+static void gen(seat a[], int color)
 {
 	int count = 0;
 	for (int i = 0; i < 15; i++) {
@@ -21,7 +21,6 @@ static int gen(seat a[], int color)
 		}
 	}
 	quickSort(a, 0, count);
-	return count;
 }
 
 // 整个棋盘评分 -- 综合黑白棋子的棋盘总分
@@ -54,8 +53,8 @@ int max_min_search(int color, int alpha, int beta, int depth)
 	int score = (depth % 2 == 0) ? INT_MIN : INT_MAX;
 	int temp;
 	seat a[15 * 15];
-	int count = gen(a, color);
-	for (int i = 0; i < count; i++) {
+	gen(a, color);
+	for (int i = 0; i < SEARCH_NUM_MAX; i++) {
 		setColor(a[i].i, a[i].j, color);
 		set_neighbor(a[i].i, a[i].j, ADD_NEIGHBOR);
 		temp = max_min_search(1 - color, alpha, beta, depth - 1);

@@ -21,6 +21,8 @@
 #define LAYER_LIMIT 4
 // 相同分值的点位个数的最大值
 #define COUNT_BEST_MAX 10
+// 每层搜索个数最大值
+#define SEARCH_NUM_MAX 10
 
 // 全局变量
 extern box BOX[15][15];     // 棋盘

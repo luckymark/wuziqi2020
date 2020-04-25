@@ -5,8 +5,8 @@
 int neighbor[15][15] = { 0 }; // 用来判断旁边是否有子(5*5)
 void set_neighbor(int i, int j, int type)
 {
-	for (int a = i - 2; a < i + 2; a++) {
-		for (int b = j - 2; b < j + 2; b++) {
+	for (int a = i - 2; a <= i + 2; a++) {
+		for (int b = j - 2; b <= j + 2; b++) {
 			if (inBOX(a, b)) {
 				neighbor[a][b] += type;
 			}
