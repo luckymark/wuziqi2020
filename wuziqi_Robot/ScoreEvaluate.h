@@ -1,2 +1,2 @@
 #pragma once
-void getFiveTuple(int score[225], int map[225]);
+void getFiveTuple(GameEngine* engine, int score[225]);

@@ -21,12 +21,24 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreEvaluate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
+    <ClCompile Include="dllmain.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="pch.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreEvaluate.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
