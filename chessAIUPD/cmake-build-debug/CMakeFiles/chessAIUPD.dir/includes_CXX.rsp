@@ -1,0 +1,1 @@
+-ID:/chessAIUPD/cmake-build-debug -ID:/chessAIUPD -ID:/chessAIUPD/cmake-build-debug/chessAIUPD_autogen/include -isystem D:/qt/5.9/mingw53_32/include -isystem D:/qt/5.9/mingw53_32/include/QtCore -isystem D:/qt/5.9/mingw53_32/./mkspecs/win32-g++ -isystem D:/qt/5.9/mingw53_32/include/QtWidgets -isystem D:/qt/5.9/mingw53_32/include/QtGui -isystem D:/qt/5.9/mingw53_32/include/QtANGLE 

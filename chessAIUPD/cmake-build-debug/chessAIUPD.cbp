@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="chessAIUPD"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\qt\;CMake Files\..\qt\5.9\;CMake Files\..\qt\5.9\mingw53_32\;CMake Files\..\qt\5.9\mingw53_32\lib\;CMake Files\..\qt\5.9\mingw53_32\lib\cmake\;CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Widgets\;CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\;CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chessAIUPD">
+				<Option output="D:/chessAIUPD/cmake-build-debug/chessAIUPD.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add directory="D:/chessAIUPD/cmake-build-debug"/>
+					<Add directory="D:/chessAIUPD"/>
+					<Add directory="D:/chessAIUPD/cmake-build-debug/chessAIUPD_autogen/include"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtCore"/>
+					<Add directory="D:/qt/5.9/mingw53_32/./mkspecs/win32-g++"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtWidgets"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtGui"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtANGLE"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/include"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/include-fixed"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/../../../../i686-w64-mingw32/include"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 chessAIUPD"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chessAIUPD/fast">
+				<Option output="D:/chessAIUPD/cmake-build-debug/chessAIUPD.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add directory="D:/chessAIUPD/cmake-build-debug"/>
+					<Add directory="D:/chessAIUPD"/>
+					<Add directory="D:/chessAIUPD/cmake-build-debug/chessAIUPD_autogen/include"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtCore"/>
+					<Add directory="D:/qt/5.9/mingw53_32/./mkspecs/win32-g++"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtWidgets"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtGui"/>
+					<Add directory="D:/qt/5.9/mingw53_32/include/QtANGLE"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/include"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/include-fixed"/>
+					<Add directory="D:/qt/Tools/mingw530_32/bin/../lib/gcc/i686-w64-mingw32/5.3.0/../../../../i686-w64-mingw32/include"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++/i686-w64-mingw32"/>
+					<Add directory="D:/qt/Tools/mingw530_32/lib/gcc/../../i686-w64-mingw32/include/c++/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 chessAIUPD/fast"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chessAIUPD_autogen">
+				<Option working_dir="D:/chessAIUPD/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 chessAIUPD_autogen"/>
+					<CompileFile command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/qt/Tools/mingw530_32/bin/mingw32-make.exe -f &quot;D:/chessAIUPD/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/chessAIUPD/alphabeta.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/alphabeta.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/analysis_kill.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/analysis_kill.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/board.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/board.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chess_button.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chess_button.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chess_init_type.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chess_init_type.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chessglobalconst.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chessglobalvariable.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chessglobalvariable.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chesslib.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/chessstruct.h">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/cmake-build-debug/chessAIUPD_autogen/mocs_compilation.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/main.cpp">
+			<Option target="chessAIUPD"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWindowsIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="D:/chessAIUPD/../qt/5.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\qt\5.9\mingw53_32\lib\cmake\Qt5Core\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,4 @@
+D:/chessAIUPD/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/chessAIUPD/cmake-build-debug/CMakeFiles/chessAIUPD.dir
+D:/chessAIUPD/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/chessAIUPD/cmake-build-debug/CMakeFiles/chessAIUPD_autogen.dir
