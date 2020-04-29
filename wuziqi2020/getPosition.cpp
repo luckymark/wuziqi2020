@@ -54,6 +54,7 @@ int max_min_search(int color, int alpha, int beta, int depth)
 	int temp;
 	seat a[15 * 15];
 	gen(a, color);
+	// ºÚ¿Æ¼¼ -- 10´Î
 	for (int i = 0; i < SEARCH_NUM_MAX; i++) {
 		setColor(a[i].i, a[i].j, color);
 		set_neighbor(a[i].i, a[i].j, ADD_NEIGHBOR);
