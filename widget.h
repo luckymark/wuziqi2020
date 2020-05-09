@@ -51,7 +51,7 @@ private:
     void restart();
     void AI();
     void DFS(int layer);
-    int xx,yy,max1,max2,max3,max4,max5,greater,v,v2;
+    int xx,yy,max1,max2,max3,max4,max5,greater,v,v2,v3,v4,vv[5],vmax[5];
     int win;
     int value(int type);//评估函数
     bool isempty(int x,int y);

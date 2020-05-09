@@ -34,48 +34,56 @@ void Widget::AI(){
 }
 
 void Widget::DFS(int layer){
-    if(layer==3){
-        v=value(flag);
-        if(v>max2) max2=v;
-        return;
+    if(layer==5){
+        if(vv[4]>vmax[4]) {
+            vmax[4]=vv[4];
+        }return;
     }
-    max2=0;
+    //max4=0;//第三个子下完后所有的第四步中最大的那个
+    vmax[layer]=-9999;
     for(int i=0;i<GRIDCOUNT;i++){
         for(int j=0;j<GRIDCOUNT;j++){
             if(isempty(i,j)){
                 Map[i][j]= layer%2? 3-flag:flag;
                 if(layer==1){
-                    v2=value(3-flag);
+                    vv[layer]=value(3-flag);
                     if(win==1){
                         xx=i;yy=j; return;
                     }
+                }else if(layer%2){
+                    vv[layer]=value((3-flag));
+                }else if(layer%2==0){
+                    vv[layer]=value(flag);
                 }
                 DFS(layer+1);
                 if(greater==1){
                     greater=0;xx=i;yy=j;
                 }
                 Map[i][j]=0;
-                //if(v2-max2<max1&&cen==2) return;
+                if(layer==4||layer==3||layer==2){
+                    if(vv[layer-1]-vmax[layer]<vmax[layer-1]){
+                        return;
+                    }
+                }
             }
         }
     }
-    /*if(cen==4){
-        if(max4<max3) max3=max4;
-    }if(cen==3){
-        if(max3>max2) max2=max3;
-    }*/
+    if(layer==4||layer==3){
+        vv[layer-1]-=vmax[layer];
+        if(vv[layer-1]>vmax[layer-1]) vmax[layer-1]=vv[layer-1];
+    }
     if(layer==2){
-        v2-=max2;//biger
-        if(v2>max1) {max1=v2;greater=1;}
-        if(v2==max1) { int temp=rand()%3;if(!temp) greater=1; }
+        vv[layer-1]-=vmax[layer];
+        if(vv[layer-1]>vmax[layer-1]) {vmax[layer-1]=vv[layer-1];greater=1;}
+        if(vv[layer-1]==vmax[layer-1]) { int temp=rand()%3;if(!temp) greater=1; }
     }
     return;
 }
 
 bool Widget::isempty(int x,int y){ //方圆5*5内是否有棋
     if(!Map[x][y]){
-        for(int i=-2;i<3;i++){
-            for(int j=-2;j<3;j++){
+        for(int i=-1;i<2;i++){
+            for(int j=-1;j<2;j++){
                 if(x+i<GRIDCOUNT&&x+i>=0&&y+j<GRIDCOUNT&&y+j>=0)
                     if(Map[x+i][y+j]) return true;
             }
