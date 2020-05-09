@@ -2,9 +2,21 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "ui_widget.h"
+#include "ai.h"
+#include "time.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <QtGlobal>
+#include <QTime>
+#include <QPainter> //画家类
+#include <QResizeEvent>
+#include <QDebug>
+#include <QPushButton>
 
 #define GRIDCOUNT 15
 #define INF 99999999
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
