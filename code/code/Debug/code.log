@@ -1,0 +1,3 @@
+﻿  code.cpp
+D:\CAO\wuziqi2020\code\code\code.cpp(36): warning C4715: “End”: 不是所有的控件路径都返回值
+  code.vcxproj -> D:\CAO\wuziqi2020\code\Debug\code.exe
