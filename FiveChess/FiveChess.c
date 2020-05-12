@@ -11,7 +11,8 @@ int place_x,place_y;
 
 void initBoard(){
     memset(boardData,0,17*17* sizeof(int));
-    turn=1;
+    turn=-1;
+    place_x=0,place_y=0;
     system("cls");
     printf("Welcome!\n");
     Sleep(1000);
@@ -70,12 +71,11 @@ void turnSwitch(){
 
 int main() {
     initBoard();
-    drawBoard();
     for(;;){
-        placeChess();
         drawBoard();
         ifWin();
         turnSwitch();
+        placeChess();
         system("cls");
     }
 }
