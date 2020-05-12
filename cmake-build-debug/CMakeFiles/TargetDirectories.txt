@@ -1,0 +1,3 @@
+C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/CMakeFiles/Cmd.dir
+C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/CMakeFiles/rebuild_cache.dir

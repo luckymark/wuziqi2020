@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="wuziqi2020"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Cmd">
+				<Option output="C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Cmd.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++/mingw32"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++/backward"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../../include"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 Cmd"/>
+					<CompileFile command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Cmd/fast">
+				<Option output="C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Cmd.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++/mingw32"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include/c++/backward"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/../../../../include"/>
+					<Add directory="D:/CodeBlocks/MinGW/bin/../lib/gcc/mingw32/4.9.2/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 Cmd/fast"/>
+					<CompileFile command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/CodeBlocks/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/Dai/wuziqi/wuziqi2020/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/game.cpp">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/game.h">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/game_algorithm.cpp">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/initWindow.cpp">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/initWindow.h">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/wuziqi.cpp">
+			<Option target="Cmd"/>
+		</Unit>
+		<Unit filename="C:/Users/Dai/wuziqi/wuziqi2020/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
