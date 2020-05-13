@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define FG_RGB FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN
-#define BG_RGB BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN
+#define FG_RGB FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE
+#define BG_RGB BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_BLUE
 
 #define PRINTLINE(L, M, R) do {\
     if (j == 0)              dprint(h, L);\
@@ -11,15 +11,20 @@
     else                     dprint(h, M);\
 } while(0)
 
-void dprint(HANDLE h, char dchar[]) {
-	CONSOLE_SCREEN_BUFFER_INFO info;
-	GetConsoleScreenBufferInfo(h, &info);
-	printf("%s", dchar);
-    COORD position = { info.dwCursorPosition.X + 2, info.dwCursorPosition.Y };
-	SetConsoleCursorPosition(h, position);
+#define GO(h, x, y) do {\
+    COORD position = { x, y };\
+    SetConsoleCursorPosition(h, position);\
+} while(0)
+
+static void dprint(HANDLE h, char dchar[]) {
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    GetConsoleScreenBufferInfo(h, &info);
+    printf("%s", dchar);
+    GO(h, info.dwCursorPosition.X + 2, info.dwCursorPosition.Y);
 }
 
-void clearscreen() {
+static void clearscreen(HANDLE h) {
+    GO(h, 0, 0);
     for (int i = 0; i < MAX_X + 2; i++) {
         for (int j = 0; j < MAX_Y * 2 + 4; j++) {
             putchar(' ');
@@ -28,9 +33,8 @@ void clearscreen() {
     }
 }
 
-void paintbox(HANDLE h) {
-    COORD position = { 0, 0 };
-    SetConsoleCursorPosition(h, position);
+static void paintbox(HANDLE h) {
+    GO(h, 0, 0);
     for (int i = 0; i < MAX_X; i++) {
         printf("\n  ");
         for (int j = 0; j < MAX_Y; j++) {
@@ -42,7 +46,8 @@ void paintbox(HANDLE h) {
 }
 
 void setboard(HANDLE h, Board *board) {
-    // initialize the board
+    SetConsoleTitle("右键属性取消快速编辑");
+    // initialize the board array
     memset((*board).a, NONE, sizeof((*board).a));
     // hide cursor
     CONSOLE_CURSOR_INFO info = {1, 0};
@@ -54,16 +59,15 @@ void setboard(HANDLE h, Board *board) {
     SetConsoleWindowInfo(h, TRUE, &rect);
     // set text & backgroud color
     SetConsoleTextAttribute(h, FOREGROUND_INTENSITY|BG_RGB);
-    // praint board
-    clearscreen();
+    // paint board
+    clearscreen(h);
     paintbox(h);
 }
 
 void putchess(HANDLE h, Board *board, int x, int y, chess c) {
     if ((*board).a[x][y] == NONE) {
         (*board).a[x][y] = c;
-        COORD position = { y * 2 + 2, x + 1 };
-        SetConsoleCursorPosition(h, position);
+        GO(h, y * 2 + 2, x + 1);
         SetConsoleTextAttribute(h, (c == BLACK ? 0 : FOREGROUND_INTENSITY|FG_RGB)|BG_RGB);
         dprint(h, "●");
     }
