@@ -1,5 +1,6 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #include <string.h>
+#include <stdio.h>
 #include "pch.h"
 #include "GameEngine.h"
 
@@ -40,7 +41,7 @@ void _stdcall Reset()
 
 void _stdcall SetColor(int color)
 {
-    engine.color = color;
+    engine.aiPlayerColor = color;
 }
 
 void _stdcall SetIsBlackBanned(int state)

@@ -24,7 +24,7 @@
     <ClInclude Include="GameEngine.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreEvaluate.h">
+    <ClInclude Include="TupleFive.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClCompile Include="GameEngine.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreEvaluate.c">
+    <ClCompile Include="TupleFive.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

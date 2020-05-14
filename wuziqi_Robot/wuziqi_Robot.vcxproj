@@ -158,11 +158,11 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ScoreEvaluate.h" />
+    <ClInclude Include="TupleFive.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.c" />
-    <ClCompile Include="ScoreEvaluate.c" />
+    <ClCompile Include="TupleFive.c" />
     <ClCompile Include="GameEngine.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
