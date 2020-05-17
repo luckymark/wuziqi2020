@@ -13,7 +13,7 @@ static int rpt2 [MAXN];         // 记录三进制下的重复2 ()3, (2)3, (22)3
 #define GET(a, x, y)     (a[0][x] / pow3[y] % 3)    // 取出棋盘上(x,y)处的值
 #define GETPART(i, j, k) (i / pow3[j] % pow3[k])    // 取i从第j位开始的k个数
 #define ISFREE(p, x, y)  (!GET((*p).b, x, y) && !GET((*p).w, x, y))
-#define PUT(n, x, c)     do { n += c * pow3[x]; } while(0)
+#define PUT(n, x, c)     do { n += c * pow3[x]; } while (0)
 #define SCORE(a, b, x, y)   (\
     score[ a[0][x       ] + 2 * b[0][x       ]] +\
     score[ a[1][y       ] + 2 * b[1][y       ]] +\
@@ -130,8 +130,8 @@ static void loadbasic(char threes[], int score) {
 }
 
 static void loaddata() {
-    loadbasic("11111"   , 1000000000); // 连五
-    loadbasic("011110"  , 10000000 ); // 活四
+    loadbasic("11111"   , 10000000); // 连五
+    loadbasic("011110"  , 1000000 ); // 活四
     loadbasic("011112"  , 100000  ); // 冲四
     loadbasic("10111"   , 100000  ); // 
     loadbasic("11011"   , 100000  ); //

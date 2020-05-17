@@ -9,14 +9,29 @@
     if (j == 0)              dprint(h, L);\
     else if (j == MAX_Y - 1) dprint(h, R);\
     else                     dprint(h, M);\
-} while(0)
+} while (0)
+
+#define CLEARCHESS(L, M, R) do {\
+    switch (tryY + 1) {\
+        case     1: dprint(h, L); break;\
+        default   : dprint(h, M); break;\
+        case MAX_Y: dprint(h, R); break;\
+    }\
+} while (0)
 
 #define GO(h, x, y) do {\
     COORD position = { x, y };\
     SetConsoleCursorPosition(h, position);\
-} while(0)
+} while (0)
 
 #define COMPARE(board, x, y, c) (0 <= x && x < MAX_X && 0 <= y && y < MAX_Y && (*board).a[x][y] == c)
+
+static int tryX, tryY;
+static const WORD colors[3] = {
+    FOREGROUND_INTENSITY|BG_RGB,
+    BG_RGB,
+    FOREGROUND_INTENSITY|FG_RGB|BG_RGB
+};
 
 static void dprint(HANDLE h, char dchar[]) {
     CONSOLE_SCREEN_BUFFER_INFO info;
@@ -55,26 +70,41 @@ void setboard(HANDLE h, Board *board) {
     rect.Top = rect.Left = 0;
     rect.Bottom = MAX_X + 1, rect.Right = MAX_Y * 2 + 3;
     SetConsoleWindowInfo(h, TRUE, &rect);                       // 调整窗口
-    SetConsoleTextAttribute(h, FOREGROUND_INTENSITY|BG_RGB);    // 设置颜色
+    SetConsoleTextAttribute(h, colors[NONE]);                   // 设置颜色
     clearscreen(h);                                             // 清除屏幕
     paintbox(h);                                                // 绘制棋盘
 }
 
 status putchess(HANDLE h, Board *board, int x, int y, chess c) {
+    if ((*board).a[tryX][tryY] == NONE) {
+        SetConsoleTextAttribute(h, colors[NONE]);
+        GO(h, tryY * 2 + 2, tryX + 1); printf("  ");
+        GO(h, tryY * 2 + 2, tryX + 1);
+        switch (tryX + 1) {
+            case     1: CLEARCHESS("┏", "┯", "┓"); break;
+            default   : CLEARCHESS("┠", "┼", "┨"); break;
+            case MAX_X: CLEARCHESS("┗", "┷", "┛"); break;
+        }
+    }
     if (COMPARE(board, x, y, NONE)) {
-        (*board).a[x][y] = c;
         GO(h, y * 2 + 2, x + 1);
-        SetConsoleTextAttribute(h, (c == BLACK ? 0 : FOREGROUND_INTENSITY|FG_RGB)|BG_RGB);
+        SetConsoleTextAttribute(h, colors[c]);
         dprint(h, "●");
-        const int dxy[4][2] = { {0,1}, {1,0}, {1,1}, {1,-1} };
-        for (int k = 0; k < 4; k++) {
-            int continued = 0;
-            for (int i = x, j = y; COMPARE(board, i, j, c); i += dxy[k][0], j += dxy[k][1])
-                continued++;
-            for (int i = x, j = y; COMPARE(board, i, j, c); i -= dxy[k][0], j -= dxy[k][1])
-                continued++;
-            if (continued > 5)
-                return GAMEOVER;
+        if (c == NONE) {
+            tryX = x, tryY = y;
+        }
+        else {
+            (*board).a[x][y] = c;
+            const int dxy[4][2] = { {0,1}, {1,0}, {1,1}, {1,-1} };
+            for (int k = 0; k < 4; k++) {
+                int continued = 0;
+                for (int i = x, j = y; COMPARE(board, i, j, c); i += dxy[k][0], j += dxy[k][1])
+                    continued++;
+                for (int i = x, j = y; COMPARE(board, i, j, c); i -= dxy[k][0], j -= dxy[k][1])
+                    continued++;
+                if (continued > 5)
+                    return GAMEOVER;
+            }
         }
         return AVAILABLE;
     }

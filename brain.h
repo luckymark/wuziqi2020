@@ -1,9 +1,9 @@
 #define POW3 14348907   // 3^15
 #define POW3_7 2187     // 3^7
 #define oo (1<<30)
-#define POINTS 50
-#define RADIUS 3
-#define DEPTH 6         // 必须是偶数
+#define POINTS 100
+#define RADIUS 4
+#define DEPTH 4         // 必须是偶数
 #define MAXN 15
 
 typedef struct {

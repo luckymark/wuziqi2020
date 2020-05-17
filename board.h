@@ -2,7 +2,7 @@
 #define MAX_X 15
 #define MAX_Y 15
 
-typedef enum { OCCUPIED, AVAILABLE ,GAMEOVER} status;
+typedef enum { OCCUPIED, AVAILABLE, GAMEOVER} status;
 typedef enum { NONE, BLACK, WHITE } chess;
 typedef struct {
     chess a[MAX_X][MAX_Y];
