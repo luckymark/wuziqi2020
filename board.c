@@ -16,6 +16,8 @@
     SetConsoleCursorPosition(h, position);\
 } while(0)
 
+#define COMPARE(board, x, y, c) (0 <= x && x < MAX_X && 0 <= y && y < MAX_Y && (*board).a[x][y] == c)
+
 static void dprint(HANDLE h, char dchar[]) {
     CONSOLE_SCREEN_BUFFER_INFO info;
     GetConsoleScreenBufferInfo(h, &info);
@@ -46,29 +48,35 @@ static void paintbox(HANDLE h) {
 }
 
 void setboard(HANDLE h, Board *board) {
-    SetConsoleTitle("右键属性取消快速编辑");
-    // initialize the board array
-    memset((*board).a, NONE, sizeof((*board).a));
-    // hide cursor
+    memset((*board).a, NONE, sizeof((*board).a));               // 棋盘清零
     CONSOLE_CURSOR_INFO info = {1, 0};
-    SetConsoleCursorInfo(h, &info);
-    // set window size
+    SetConsoleCursorInfo(h, &info);                             // 隐藏光标
     SMALL_RECT rect;
     rect.Top = rect.Left = 0;
     rect.Bottom = MAX_X + 1, rect.Right = MAX_Y * 2 + 3;
-    SetConsoleWindowInfo(h, TRUE, &rect);
-    // set text & backgroud color
-    SetConsoleTextAttribute(h, FOREGROUND_INTENSITY|BG_RGB);
-    // paint board
-    clearscreen(h);
-    paintbox(h);
+    SetConsoleWindowInfo(h, TRUE, &rect);                       // 调整窗口
+    SetConsoleTextAttribute(h, FOREGROUND_INTENSITY|BG_RGB);    // 设置颜色
+    clearscreen(h);                                             // 清除屏幕
+    paintbox(h);                                                // 绘制棋盘
 }
 
-void putchess(HANDLE h, Board *board, int x, int y, chess c) {
-    if ((*board).a[x][y] == NONE) {
+status putchess(HANDLE h, Board *board, int x, int y, chess c) {
+    if (COMPARE(board, x, y, NONE)) {
         (*board).a[x][y] = c;
         GO(h, y * 2 + 2, x + 1);
         SetConsoleTextAttribute(h, (c == BLACK ? 0 : FOREGROUND_INTENSITY|FG_RGB)|BG_RGB);
         dprint(h, "●");
+        const int dxy[4][2] = { {0,1}, {1,0}, {1,1}, {1,-1} };
+        for (int k = 0; k < 4; k++) {
+            int continued = 0;
+            for (int i = x, j = y; COMPARE(board, i, j, c); i += dxy[k][0], j += dxy[k][1])
+                continued++;
+            for (int i = x, j = y; COMPARE(board, i, j, c); i -= dxy[k][0], j -= dxy[k][1])
+                continued++;
+            if (continued > 5)
+                return GAMEOVER;
+        }
+        return AVAILABLE;
     }
+    return OCCUPIED;
 }
