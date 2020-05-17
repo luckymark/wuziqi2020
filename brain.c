@@ -73,7 +73,7 @@ MinimaxInfo minimax(Lines *lines, int depth, int scoreFin, int alpha, int beta) 
     }
     MinimaxInfo info;
     info.alpha = alpha, info.beta = beta;
-    info.x = (*lines).points[0][2], info.y = (*lines).points[0][2];
+    info.x = (*lines).points[0][1], info.y = (*lines).points[0][2];
     const int from = depth % 2 == 0 ? MIN(POINTS, (*lines).number) : 0;
     const int to   = depth % 2 == 0 ? -1 : MIN(POINTS, (*lines).number) + 1;
     const int dk   = depth % 2 == 0 ? -1 : 1;
@@ -92,7 +92,8 @@ MinimaxInfo minimax(Lines *lines, int depth, int scoreFin, int alpha, int beta) 
             scoreFin += scoreCom - scoreHum;
             // 向下搜索
             if (depth == DEPTH) {
-                info.beta = MIN(info.beta, scoreFin);
+                info.alpha = MAX(info.alpha, scoreFin);
+                info.beta  = MIN(info.beta , scoreFin);
             }
             else {
                 MinimaxInfo son_info = minimax(lines, depth + 1, scoreFin, info.alpha, info.beta);
@@ -111,7 +112,7 @@ MinimaxInfo minimax(Lines *lines, int depth, int scoreFin, int alpha, int beta) 
             }
             // 还原现场
             scoreFin -= scoreCom - scoreHum;
-            putchess_color(depth % 2 == 0 ? (*lines).b : (*lines).w, i, j,-1);
+            putchess_color(depth % 2 == 0 ? (*lines).b : (*lines).w, i, j, -1);
             if (info.alpha >= info.beta) return info;
         }
     }
@@ -130,30 +131,30 @@ static void loadbasic(char threes[], int score) {
 }
 
 static void loaddata() {
-    loadbasic("11111"   , 10000000); // 连五
-    loadbasic("011110"  , 1000000 ); // 活四
-    loadbasic("011112"  , 100000  ); // 冲四
-    loadbasic("10111"   , 100000  ); // 
-    loadbasic("11011"   , 100000  ); //
-    loadbasic("01110"   , 10000   ); // 活三
-    loadbasic("10110"   , 10000   ); //
-    loadbasic("01011"   , 1000    ); //
-    loadbasic("001112"  , 1000    ); // 眠三
-    loadbasic("010112"  , 1000    ); //
-    loadbasic("011012"  , 1000    ); //
-    loadbasic("100112"  , 1000    ); //
-    loadbasic("10101"   , 1000    ); //
-    loadbasic("2011102" , 1000    ); //
-    loadbasic("001100"  , 100     ); // 活二
-    loadbasic("01010"   , 100     ); //
-    loadbasic("010010"  , 100     ); //
-    loadbasic("000112"  , 10      ); // 眠二
-    loadbasic("001012"  , 10      ); //
-    loadbasic("010012"  , 10      ); //
-    loadbasic("10001"   , 10      ); //
-    loadbasic("00001"   , 1       ); // 活一
-    loadbasic("00010"   , 1       ); //
-    loadbasic("00100"   , 1       ); //
+    loadbasic("11111"   , 100000000); // 连五
+    loadbasic("011110"  , 10000000 ); // 活四
+    loadbasic("011112"  , 1000000  ); // 冲四
+    loadbasic("10111"   , 100000   ); // 
+    loadbasic("11011"   , 100000   ); //
+    loadbasic("01110"   , 10000    ); // 活三
+    loadbasic("10110"   , 10000    ); //
+    loadbasic("01011"   , 1000     ); //
+    loadbasic("001112"  , 1000     ); // 眠三
+    loadbasic("010112"  , 1000     ); //
+    loadbasic("011012"  , 1000     ); //
+    loadbasic("100112"  , 1000     ); //
+    loadbasic("10101"   , 1000     ); //
+    loadbasic("2011102" , 1000     ); //
+    loadbasic("001100"  , 100      ); // 活二
+    loadbasic("01010"   , 100      ); //
+    loadbasic("010010"  , 100      ); //
+    loadbasic("000112"  , 10       ); // 眠二
+    loadbasic("001012"  , 10       ); //
+    loadbasic("010012"  , 10       ); //
+    loadbasic("10001"   , 10       ); //
+    loadbasic("00001"   , 1        ); // 活一
+    loadbasic("00010"   , 1        ); //
+    loadbasic("00100"   , 1        ); //
 }
 
 void preprocess() {

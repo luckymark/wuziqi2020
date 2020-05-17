@@ -2,7 +2,7 @@
 #define POW3_7 2187     // 3^7
 #define oo (1<<30)
 #define POINTS 100
-#define RADIUS 4
+#define RADIUS 5
 #define DEPTH 4         // 必须是偶数
 #define MAXN 15
 
