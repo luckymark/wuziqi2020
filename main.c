@@ -61,7 +61,7 @@ void init() {
     SetConsoleTitle("等等！偷看棋谱中……");
     preprocess();
     ////////////////////
-    test();
+    //test();
     ////////////////////
     SetConsoleTitle("右键属性取消快速编辑");
 }
@@ -78,7 +78,7 @@ void gameover(chess winner) {
     setboard(hOUT, &board);
     init_lines(&lines);
     ////////////////////
-    test();
+    //test();
     ////////////////////
     SetConsoleTitle("黑子先手，你先来，请");
 }
