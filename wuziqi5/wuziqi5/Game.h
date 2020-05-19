@@ -29,7 +29,7 @@ void initGame(ChessBoard * board) {
 
 
 void gaming(ChessBoard * board) {
-	int human_c = ChessBoard::white, robot_c = ChessBoard::black;
+	int human_c = ChessBoard::black, robot_c = ChessBoard::white;
 
 	int now = ChessBoard::black;
 
@@ -43,9 +43,15 @@ void gaming(ChessBoard * board) {
 			c = calcPoint(m.x, m.y, now);
 			if (board->writeBoard(c)) {
 				if (judgeWin(c, board))
-					showMessage(_T("You Win"));
+					showMessage(_T("You Win!!!"));
 				now = board->changeColor(now);
-				//			c = judgePos(robot_c);
+
+				c = judgePos(robot_c, board);
+				if (board->writeBoard(c)) {
+					if (judgeWin(c, board))
+						showMessage(_T("Robot Win"));
+				}
+				now = board->changeColor(now);
 			};
 			break;
 		default:
@@ -101,19 +107,25 @@ Chess calcPoint(int x, int y, int type) {		// untested
 
 bool judgeWin(Chess c, ChessBoard * board) {
 
-	int x[8] = { 1,0,-1, 0, 1,-1, 1, -1 }, y[8] = { 0, 1, 0, -1, 1, -1, -1, 1 };
-	for (int i = 0; i < 8; i++) {
-		int nx = c.x, ny = c.y, getOne = 0;
-		for (int j = 1; j <= 4; j++) {
-			nx += x[i];
-			ny += y[i];
-			if (nx < 1 || nx > ChessBoard::UPLIM || ny < 1 || ny > ChessBoard::UPLIM)
-				break;
-			if (board->getType(nx, ny) != c.type)
-				break;
-			getOne++;
+	int x[8] = { 1,-1,0, 0, 1,-1, 1, -1 }, y[8] = { 0, 0, 1, -1, 1, -1, -1, 1 };
+	for (int i = 0; i < 8; i += 2) {
+		for (int k = -4; k <= 0; k++) {
+
+			int nx = c.x, ny = c.y, getOne = 0;
+			nx += x[i] * k; ny += y[i] * k;
+			if (!board->isIn(nx, ny)||(board->getType(nx, ny) != c.type))	continue;
+
+			for (int j = 1; j <= 4; j++) {
+				nx += x[i];
+				ny += y[i];
+				if (nx < 1 || nx > ChessBoard::UPLIM || ny < 1 || ny > ChessBoard::UPLIM)
+					break;
+				if (board->getType(nx, ny) != c.type)
+					break;
+				getOne++;
+			}
+			if (getOne == 4)	return true;
 		}
-		if (getOne == 4)	return true;
 	}
 
 	return false;
@@ -143,6 +155,11 @@ Chess judgePos(int color, ChessBoard * board) {
 				board->changeType(i, j, color);
 				int val = board->evaluate(color);
 				board->changeType(i, j, ChessBoard::blank);
+
+				if (val > nowVal) {
+					nowVal = val;
+					c.x = i, c.y = j, c.type = color;
+				}
 			}
 		}
 

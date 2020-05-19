@@ -27,6 +27,7 @@ public:
 	void changeType(int x, int y, int type);
 	int evaluate(int color);
 	int analyseNode(int x, int y);
+	bool isIn(int x, int y);
 };
 
 
