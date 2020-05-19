@@ -333,7 +333,12 @@ POINTS AI::SeekPoints(const int chessboard[15][15]) {
                     w=worth[i][j];
                     QPoint point(i,j);
                     best_points.pos[k] = point;
-
+                } else if (worth[i][j]==w){
+                    if (rand()%2)
+                    {
+                        QPoint point(i,j);
+                        best_points.pos[k] = point;
+                    }
                 }
             }
         }
@@ -377,13 +382,14 @@ int AI::abSearch(const int chessBoard[15][15],int depth,int alpha,int beta){
             copyboard[points.pos->x()][points.pos->y()] =Nobody;
             if (a>alpha)
             {
-                alpha = a;
+
                 if (depth == 0)
                 {
                     decison.pos.setX(points.pos[i].x());
                     decison.pos.setY(points.pos[i].y());
                     decison.socre = a;
                 }
+                alpha = a;
             }
             if (beta<=alpha) break;
         }
