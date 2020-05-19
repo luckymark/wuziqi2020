@@ -26,7 +26,7 @@ set(QRC_FILES)
 
 set(SOURCE_FILES main.cpp mainwindow.cpp mainwindow.h  AI.cpp AI.h)
 
-add_executable(Mygobang WIN32 ${RC_FILES}${SOURCE_FILES}${UI_FILES}${QRC_FILES})
+add_executable(Mygobang WIN32 ${RC_FILES}${SOURCE_FILES}${UI_FILES}${QRC_FILES} chessboard.cpp chessboard.h)
 
 target_link_libraries(Mygobang Qt5::Widgets)
 

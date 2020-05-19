@@ -8,6 +8,8 @@
 #include <QMouseEvent>
 #include <iostream>
 #include <QDialog>
+#define INF 0x7ffffff
+
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent),
         ui(new Ui::MainWindow)
@@ -44,11 +46,11 @@ void MainWindow::paintEvent(QPaintEvent* event)
     painter.drawRect(BoardMargin+3*BoardOneSize-5,BoardMargin+11*BoardOneSize-5,10,10);
     painter.drawRect(BoardMargin+7*BoardOneSize-5,BoardMargin+7*BoardOneSize-5,10,10);
     //画红方框
-    if (presentRowx>=0&&presentcoly>=0&&presentRowx<=BoardLength&&presentcoly<=BoardLength)
+    if (presentRowy>=0&&presentcolx>=0&&presentRowy<=BoardLength&&presentcolx<=BoardLength)
     {
         painter.setPen(QPen(Qt::red,2,Qt::SolidLine));
-        int centerx = BoardMargin+presentRowx*BoardOneSize;
-        int centery = BoardMargin+presentcoly*BoardOneSize;
+        int centerx = BoardMargin+presentRowy*BoardOneSize;
+        int centery = BoardMargin+presentcolx*BoardOneSize;
         painter.drawLine(centerx-20,centery-20,centerx-10,centery-20);
         painter.drawLine(centerx+10,centery-20,centerx+20,centery-20);
         painter.drawLine(centerx-20,centery-20,centerx-20,centery-10);
@@ -64,10 +66,10 @@ void MainWindow::paintEvent(QPaintEvent* event)
    painter.setPen(Qt::NoPen);
     for (int i = 0; i < BoardLength; i++) {
         for (int j = 0; j < BoardLength; j++) {
-            if (Board[i][j] != 0) {
-                if (Board[i][j] == Black)
+            if (board[i][j] != 0) {
+                if (board[i][j] == Black)
                     brush.setColor(Qt::black);
-                else if (Board[i][j] == White)
+                else if (board[i][j] == White)
                     brush.setColor(Qt::white);
                 brush.setStyle(Qt::SolidPattern);
                 painter.setBrush(brush);
@@ -80,43 +82,51 @@ void MainWindow::paintEvent(QPaintEvent* event)
 
 void MainWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (game.gamesatus==PLAYING)
-    {
+    if (game.gamesatus==PLAYING) {
         int x = event->x();
         int y = event->y();
         if (event->button() == Qt::LeftButton) {
-            int px = (x-BoardMargin)/BoardOneSize;
-            if ((x-BoardMargin)%BoardOneSize>=BoardOneSize/2) px++;
-            int py = (y-BoardMargin)/BoardOneSize;
-            if ((y-BoardMargin)%BoardOneSize>=BoardOneSize/2) py++;
+            int px = (x - BoardMargin) / BoardOneSize;
+            if ((x - BoardMargin) % BoardOneSize >= BoardOneSize / 2) px++;
+            int py = (y - BoardMargin) / BoardOneSize;
+            if ((y - BoardMargin) % BoardOneSize >= BoardOneSize / 2) py++;
 
-            if (px>=0&&py>=0&&px<=BoardLength&&py<=BoardLength) {
-                if (Board[px][py] == Nobody) {
-                    Board[px][py] = Black;
-                    update();
-                    checkIfWin(px, py, Black);
-                    //AI下子
-                    if (game.gamesatus == PLAYING) {
-                        computer.calculateScore(Board);
-                        computer.point = computer.findBestScore(computer.scoreTable);
-                        Board[computer.point.x][computer.point.y] = White;
-                        update();
-                        checkIfWin(computer.point.x, computer.point.y, White);
+            if (px >= 0 && py >= 0 && px <= BoardLength && py <= BoardLength &&board[px][py]==Nobody)
+            {
+                board[px][py]=Black;
+                if (computer.evaluate(board).winner == Nobody){//黑方下棋后仍未分出胜负
+                    computer.abSearch(board,0,-INF,INF);
+                    board[computer.decison.pos.x()][computer.decison.pos.y()]=White;
+                    if (computer.evaluate(board).winner==White)
+                    {
+                        game.gamesatus = UNPLAYING;
+                        game.winner = White;
+                        printWinnerInformation();
                     }
+
+                }else{//此时说明黑方已经获胜
+                    game.gamesatus=UNPLAYING;
+                    game.winner = Black;
+                    printWinnerInformation();
                 }
+
+
+
+
             }
         }
     }
+
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event) {
-    presentRowx = (event->x()-BoardMargin)/BoardOneSize;
-    presentcoly = (event->y()-BoardMargin)/BoardOneSize;
+    presentRowy= (event->x()-BoardMargin)/BoardOneSize;
+    presentcolx = (event->y()-BoardMargin)/BoardOneSize;
     if ((event->x()-BoardMargin)%BoardOneSize>=BoardOneSize/2){
-        presentRowx+=1;
+        presentRowy+=1;
     }
     if ((event->y()-BoardMargin)%BoardOneSize>=BoardOneSize/2){
-        presentcoly+=1;
+        presentcolx+=1;
     }
     update();
 }
@@ -126,152 +136,14 @@ void MainWindow::initChessBoard() {
     game.winner = Nobody;
     for (int i = 0; i < BoardLength; i++)
         for (int j = 0; j < BoardLength; j++)
-            Board[i][j] = 0;
+            board[i][j] = 0;
 }
 
-Turns MainWindow::WhiteOrBlack() {
-    if (turn % 2)
-        return Black;
-    else
-        return White;
-}
 
-bool MainWindow::InBoard(int xx, int yy) {
-    if (xx > BoardMargin + (BoardMargin-1) * BoardOneSize || xx<BoardMargin ||
-        yy>BoardMargin + (BoardMargin-1) * BoardOneSize || yy < BoardMargin)
-        return false;
-    else
-        return true;
-}
 
-void MainWindow::checkIfWin(const int i, const int j, const int obj) {
-    int cntWhite,cntBlack;
-    //横向搜
-    for (int k =j-4 ; k <=j ; ++k) { //枚举左端点
-        if (k<0)
-        {
-            k=0;
-            continue;
-        }
-        cntWhite=0,cntBlack=0;
-        //搜一个小条
-        for (int l = k; l <=k+4 ; ++l) {
-            if (l > BoardLength) break;
-            if (Board[i][l] == White) cntWhite++;
-            else if (Board[i][l] == Black) cntBlack++;
-        }
-        if (obj==White){
-            if(cntWhite==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=White;
-            }
-        }
-        else if (obj==Black){
-            if(cntBlack==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=Black;
-            }
-        }
-    }
-    //纵向搜
-    for (int k =i-4 ; k <=i ; ++k) {  //枚举上端点
-        if (k<0)
-        {
-            k=0;
-            continue;
-        }
-        //搜一个小条
-        cntWhite=0,cntBlack=0;
-        for (int l = k; l <=k+4 ; ++l) {
-            if (l>BoardLength) break;
-            if(Board[l][j]==1) cntWhite++;
-            else if (Board[l][j]==-1) cntBlack++;
-        }
-        if (obj==White){
-            if(cntWhite==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=White;
-            }
-        }
-        else if (obj==Black){
-            if(cntBlack==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=Black;
-            }
-        }
-    }
-    //主对角线搜
-    for (int p=i-4,k =j-4; k <=j ; ++k,++p) { //枚举左上端点
-        if (k<0||p<0) continue;
-        cntWhite=0,cntBlack=0;
-        for (int u = p,v=k; u <=p+4 ; u++,v++) {
-            if (u>BoardLength||v>BoardLength) break;
-            if(Board[u][v]==White) cntWhite++;
-            else if (Board[u][v]==Black) cntBlack++;
-        }
-        if (obj==White){
-            if(cntWhite==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=White;
-            }
-        }
-        else if (obj==Black){
-            if(cntBlack==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=Black;
-            }
-        }
-    }
-    //副对角线搜
 
-    for (int p=i+4,k =j-4 ; k <=j ; p--,k++) { //枚举左下端点
-        if (k<0||p>BoardLength) continue;
-        cntWhite=0,cntBlack=0;
-        for (int u=p, v=k; v<=k+4 ; u--,v++) {
-            if (v>BoardLength||u<0) continue;
-            if(Board[u][v]==White) cntWhite++;
-            else if (Board[u][v]==Black) cntBlack++;
-        }
-        if (obj==White){
-            if(cntWhite==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=White;
-            }
-        }
-        else if (obj==Black){
-            if(cntBlack==5)
-            {
-                game.gamesatus=UNPLAYING;
-                game.winner=Black;
-            }
-        }
-    }
-
-    if (game.winner!=Nobody)
-    {
-        game.gamesatus=UNPLAYING;
-        printWinnerInformation();
-    }
-
-}
 
 void MainWindow::printWinnerInformation() {
-//    QMessageBox msg;
-//    msg.setFixedSize(400,100);
-//    msg.setWindowTitle("Game Over!");
-   // msg.setStyleSheet("font: 14pt;background-color:rgb(0, 0, 0)");
-   //msg.setIcon(QMessageBox::Critical);
-//    dialog = new QDialog(this);
-//    dialog->setModal(false);
-//    dialog->setFixedSize(200,100);
-//    dialog.se
 
     if(game.winner==White)
         QMessageBox::information(NULL,"提示","You Lose");

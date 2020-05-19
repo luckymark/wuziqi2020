@@ -1,5 +1,5 @@
 //
-// Created by 彭琳峰 on 2020/4/21.
+// Created by ���շ� on 2020/4/21.
 //
 
 #pragma once
@@ -28,9 +28,7 @@ struct GAME{
     int gamesatus;
     int winner;
 };
-enum Turns {		//枚举类型，默认人是白棋，白棋在棋盘上设为1，黑棋为-1
-    White = 1, Black = -1,Nobody = 0
-};
+
 
 namespace Ui {
     class MainWindow;
@@ -55,12 +53,9 @@ private:
     QDialog *dialog;
     AI computer;
     GAME game;
-    int turn;
-    int Board[BoardLength][BoardLength];
-    int presentRowx,presentcoly;
-    //函数
-    bool InBoard(int xx, int yy);
-    Turns WhiteOrBlack();
+    int board[BoardLength][BoardLength];
+    int presentRowy,presentcolx;
+    //����
     void initChessBoard();
     void checkIfWin(const int i, const int j,const int obj);
 };
