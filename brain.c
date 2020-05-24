@@ -7,25 +7,25 @@ static int score[POW3];         // 预处理一列十五个位置放置棋子的
 static int pow3 [MAXN];         // 记录三的零到十四次方 3^0, 3^1, 3^2, 3^3, 3^4, ...
 static int rpt2 [MAXN];         // 记录三进制下的重复2 ()3, (2)3, (22)3, (222)3, ...
 
-#define ABS(x)           (x > 0 ? x :-x)
-#define MAX(x, y)        (x > y ? x : y)
-#define MIN(x, y)        (x < y ? x : y)
+#define ABS(x)           ((x) >  0  ? (x) :-(x))
+#define MAX(x, y)        ((x) > (y) ? (x) : (y))
+#define MIN(x, y)        ((x) < (y) ? (x) : (y))
 #define GET(a, x, y)     (a[0][x] / pow3[y] % 3)    // 取出棋盘上(x,y)处的值
 #define GETPART(i, j, k) (i / pow3[j] % pow3[k])    // 取i从第j位开始的k个数
 #define ISFREE(p, x, y)  (!GET((*p).b, x, y) && !GET((*p).w, x, y))
 #define PUT(n, x, c)     do { n += c * pow3[x]; } while (0)
 #define SCORE(a, b, x, y)   (\
-    score[ a[0][x       ] + 2 * b[0][x       ]] +\
-    score[ a[1][y       ] + 2 * b[1][y       ]] +\
-    score[(a[2][x+y     ] + 2 * b[2][x+y     ]) * pow3[ABS(MAXN-x-y-1)] + rpt2[ABS(MAXN-x-y-1)]] +\
-    score[(a[3][y-x+MAXN] + 2 * b[3][y-x+MAXN]) * pow3[ABS(y-x       )] + rpt2[ABS(y-x       )]]\
+    score[ a[0][x         ] + 2 * b[0][x         ]] +\
+    score[ a[1][y         ] + 2 * b[1][y         ]] +\
+    score[(a[2][x+y       ] + 2 * b[2][x+y       ]) * pow3[ABS(MAXN-x-y-1)] + rpt2[ABS(MAXN-x-y-1)]] +\
+    score[(a[3][y-x+MAXN-1] + 2 * b[3][y-x+MAXN-1]) * pow3[ABS(y-x       )] + rpt2[ABS(y-x       )]]\
 )   // a为己方数组 b为敌方数组 计算以(x,y)为中心点辐射开的四条轴线上己方棋子的分数
 
 static void putchess_color(int color[][MAXN * 2], int x, int y, int delta) {
-    PUT(color[0][x], y, delta);                                      // - 横
-    PUT(color[1][y], x, delta);                                      // | 竖
-    PUT(color[2][x + y       ], x + y < MAXN ? x : MAXN - x, delta); // / 斜杠
-    PUT(color[3][y - x + MAXN],     y > x    ? x : MAXN - x, delta); // \ 反斜杠
+    PUT(color[0][x], y, delta);                                               // - 横
+    PUT(color[1][y], x, delta);                                               // | 竖
+    PUT(color[2][x + y           ], x + y < MAXN ? x : MAXN - x - 1, delta);  // / 斜杠
+    PUT(color[3][y - x + MAXN - 1],     y > x    ? x : MAXN - x - 1, delta);  // \ 反斜杠
 }
 
 void putchess_lines(Lines *lines, int x, int y, int c) {
@@ -50,8 +50,11 @@ static void generate(Lines *lines) {
                 for (int i = MAX(0, I - RADIUS); i <= MIN(MAXN - 1, I + RADIUS); i++) {
                     for (int j = MAX(0, J - RADIUS); j <= MIN(MAXN - 1, J + RADIUS); j++) {
                         if(!visited[i][j] && ISFREE(lines, i, j)) {
+                            (*lines).points[k][0]  = SCORE((*lines).b, (*lines).w, i, j);
+                            (*lines).points[k][0] -= SCORE((*lines).w, (*lines).b, i, j);
                             putchess_color((*lines).w, i, j,  1);
-                            (*lines).points[k][0] = SCORE((*lines).w, (*lines).b, i, j);
+                            (*lines).points[k][0] += SCORE((*lines).w, (*lines).b, i, j);
+                            (*lines).points[k][0] -= SCORE((*lines).b, (*lines).w, i, j);
                             putchess_color((*lines).w, i, j, -1);
                             (*lines).points[k][1] = i;
                             (*lines).points[k][2] = j;
