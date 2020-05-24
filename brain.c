@@ -94,7 +94,7 @@ MinimaxInfo minimax(Lines *lines, int depth, int scoreFin, int alpha, int beta) 
             scoreHum += SCORE((*lines).b, (*lines).w, i, j);
             scoreFin += scoreCom - scoreHum;
             // 向下搜索
-            if (depth == DEPTH) {
+            if (depth == DEPTH || scoreCom > 1e6 || scoreHum > 1e6) { // 搜到最大深度或有一方出现活4或连5
                 info.alpha = MAX(info.alpha, scoreFin);
                 info.beta  = MIN(info.beta , scoreFin);
             }
@@ -134,30 +134,30 @@ static void loadbasic(char threes[], int score) {
 }
 
 static void loaddata() {
-    loadbasic("11111"   , 100000000); // 连五
-    loadbasic("011110"  , 10000000 ); // 活四
-    loadbasic("011112"  , 1000000  ); // 冲四
-    loadbasic("10111"   , 100000   ); // 
-    loadbasic("11011"   , 100000   ); //
-    loadbasic("01110"   , 10000    ); // 活三
-    loadbasic("10110"   , 10000    ); //
-    loadbasic("01011"   , 1000     ); //
-    loadbasic("001112"  , 1000     ); // 眠三
-    loadbasic("010112"  , 1000     ); //
-    loadbasic("011012"  , 1000     ); //
-    loadbasic("100112"  , 1000     ); //
-    loadbasic("10101"   , 1000     ); //
-    loadbasic("2011102" , 1000     ); //
-    loadbasic("001100"  , 100      ); // 活二
-    loadbasic("01010"   , 100      ); //
-    loadbasic("010010"  , 100      ); //
-    loadbasic("000112"  , 10       ); // 眠二
-    loadbasic("001012"  , 10       ); //
-    loadbasic("010012"  , 10       ); //
-    loadbasic("10001"   , 10       ); //
-    loadbasic("00001"   , 1        ); // 活一
-    loadbasic("00010"   , 1        ); //
-    loadbasic("00100"   , 1        ); //
+    loadbasic("11111"  , 1e8); // 连五
+    loadbasic("011110" , 1e7); // 活四
+    loadbasic("011112" , 1e5); // 冲四
+    loadbasic("10111"  , 1e5); //
+    loadbasic("11011"  , 1e5); //
+    loadbasic("01110"  , 1e4); // 活三
+    loadbasic("10110"  , 1e4); //
+    loadbasic("01011"  , 1e4); //
+    loadbasic("001112" , 1e3); // 眠三
+    loadbasic("010112" , 1e3); //
+    loadbasic("011012" , 1e3); //
+    loadbasic("100112" , 1e3); //
+    loadbasic("10101"  , 1e3); //
+    loadbasic("2011102", 1e3); //
+    loadbasic("001100" , 1e2); // 活二
+    loadbasic("01010"  , 1e2); //
+    loadbasic("010010" , 1e2); //
+    loadbasic("000112" , 1e1); // 眠二
+    loadbasic("001012" , 1e1); //
+    loadbasic("010012" , 1e1); //
+    loadbasic("10001"  , 1e1); //
+    loadbasic("00001"  , 1e0); // 活一
+    loadbasic("00010"  , 1e0); //
+    loadbasic("00100"  , 1e0); //
 }
 
 void preprocess() {
