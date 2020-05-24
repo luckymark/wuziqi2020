@@ -41,12 +41,11 @@ static void dprint(HANDLE h, char dchar[]) {
 }
 
 static void clearscreen(HANDLE h) {
-    GO(h, 0, 0);
     for (int i = 0; i < MAX_X + 2; i++) {
+        GO(h, 0, i);
         for (int j = 0; j < MAX_Y * 2 + 4; j++) {
             putchar(' ');
         }
-        putchar('\n');
     }
 }
 
@@ -69,9 +68,9 @@ void setboard(HANDLE h, Board *board) {
     SMALL_RECT rect;
     rect.Top = rect.Left = 0;
     rect.Bottom = MAX_X + 1, rect.Right = MAX_Y * 2 + 3;
-    SetConsoleWindowInfo(h, TRUE, &rect);                       // 调整窗口
+    SetConsoleWindowInfo(h, TRUE, &rect);                       // 缩放窗口
     SetConsoleTextAttribute(h, colors[NONE]);                   // 设置颜色
-    clearscreen(h);                                             // 清除屏幕
+    clearscreen(h);                                             // 清空屏幕
     paintbox(h);                                                // 绘制棋盘
 }
 
