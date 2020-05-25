@@ -94,7 +94,9 @@ MinimaxInfo minimax(Lines *lines, int depth, int scoreFin, int alpha, int beta) 
             scoreHum += SCORE((*lines).b, (*lines).w, i, j);
             scoreFin += scoreCom - scoreHum;
             // 向下搜索
-            if (depth == DEPTH || scoreCom > 1e6 || scoreHum > 1e6) { // 搜到最大深度或有一方出现活4或连5
+            if (depth == DEPTH || scoreHum > 1e6 /*|| scoreCom > 1e6*/) { // 搜到最大深度或有玩家出现活4或连5
+                if (scoreHum > 1e6)
+                    scoreFin = -oo;
                 info.alpha = MAX(info.alpha, scoreFin);
                 info.beta  = MIN(info.beta , scoreFin);
             }

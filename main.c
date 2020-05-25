@@ -9,6 +9,22 @@ void init();
 void gameover(chess winner);
 DWORD click(COORD *position);
 
+void test() {
+    int chesses[][3] = {
+        {4,10,WHITE},
+        {5,9,BLACK},{5,10,BLACK},{5,12,WHITE},
+        {6,6,BLACK},{6,8,BLACK},{6,10,WHITE},{6,11,BLACK},
+        {7,6,BLACK},{7,7,BLACK},{7,10,WHITE},
+        {8,6,BLACK},{8,9,WHITE},{8,10,WHITE},
+        {9,5,WHITE},{9,6,WHITE},{9,8,WHITE},{9,10,WHITE},
+        {10,7,BLACK},{10,10,BLACK}
+    };
+    for (int k = 0; k < 20; k++) {
+        putchess(hOUT, &board, chesses[k][0], chesses[k][1], chesses[k][2]);
+        putchess_lines(&lines, chesses[k][0], chesses[k][1], chesses[k][2]);
+    }
+}
+
 int main() {
     init();
     while (1) {
@@ -45,6 +61,9 @@ void init() {
     setboard(hOUT, &board);
     SetConsoleTitle("等等！偷看棋谱中……");
     preprocess();
+    ////////////////////
+    //test();
+    ////////////////////
     SetConsoleTitle("右键属性取消快速编辑");
 }
 
@@ -59,6 +78,9 @@ void gameover(chess winner) {
 
     setboard(hOUT, &board);
     init_lines(&lines);
+    ////////////////////
+    //test();
+    ////////////////////
     SetConsoleTitle("黑子先手，你先来，请");
 }
 
