@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GlobalEvaluation.h" />
     <ClInclude Include="MaxMinSearch.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TupleFive.h" />
@@ -165,7 +166,7 @@
     <ClCompile Include="dllmain.c" />
     <ClCompile Include="MaxMinSearch.c" />
     <ClCompile Include="TupleFive.c" />
-    <ClCompile Include="GameEngine.c" />
+    <ClCompile Include="GlobalEvaluation.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -43,7 +43,7 @@ int maxMinSearch(GameEngine engine, Node_MaxMinSearch node)
 	if (node.step >= MAXMIN_DEPTH)
 	{
 		int result = 0;
-		result = getMapEvaluation(engine);
+		result = getGlobalEvaluation(engine);
 		return result;
 	}
 
@@ -86,12 +86,3 @@ int maxMinSearch(GameEngine engine, Node_MaxMinSearch node)
 	return node.value;
 }
 
-TuplePriorScore convertToPriorTupleScore(TupleScore score)
-{
-	
-}
-
-int cmpTupleScore(const void* a, const void* b)
-{
-
-}

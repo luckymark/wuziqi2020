@@ -21,13 +21,16 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngine.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="TupleFive.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MaxMinSearch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalEvaluation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,13 +41,13 @@
     <ClCompile Include="pch.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="TupleFive.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MaxMinSearch.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalEvaluation.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

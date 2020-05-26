@@ -1,7 +1,7 @@
 #include "TupleFive.h"
 
 //const
-const TupleFivePoint nextStep[4] = {
+const TupleScorePoint nextStep[4] = {
 	{0,1,0},
 	{1,0,0},
 	{1,1,0},
@@ -16,7 +16,7 @@ TupleScore getScore_FiveTuple(GameEngine engine)
 	//init
 	TupleScore result;
 	memset(&result, 0, sizeof(TupleScore));
-	TupleFivePoint tmpPoint;
+	TupleScorePoint tmpPoint;
 	int tmpScore = 0;
 
 	//calculate score
@@ -24,7 +24,7 @@ TupleScore getScore_FiveTuple(GameEngine engine)
 		for(int x = 0;x < 15; x++)
 			for (int y = 0; y < 15; y++)
 			{
-				tmpPoint = (TupleFivePoint){ x,y,direction };
+				tmpPoint = (TupleScorePoint){ x,y,direction };
 				if (isOutOfTupleStartRange(tmpPoint))
 					continue;
 				tmpScore = getTmpTupleScore(engine, tmpPoint);
@@ -40,7 +40,7 @@ TupleScore getScore_FiveTuple(GameEngine engine)
 	return result;
 }
 
-int getTmpTupleScore(GameEngine engine, TupleFivePoint point)
+int getTmpTupleScore(GameEngine engine, TupleScorePoint point)
 {	
 	//init
 	int b = 0, w = 0;
@@ -70,7 +70,7 @@ int getTmpTupleScore(GameEngine engine, TupleFivePoint point)
 		return (scoreMyColor[b] > scoreEnemyColor[w] ? scoreMyColor[b] : scoreEnemyColor[w]);
 }
 
-void flushTmpTupleScore(TupleScore* score, TupleFivePoint point, int tmpScore)
+void flushTmpTupleScore(TupleScore* score, TupleScorePoint point, int tmpScore)
 {
 	for (int i = 1; i <= 5; i++)
 	{
@@ -79,7 +79,7 @@ void flushTmpTupleScore(TupleScore* score, TupleFivePoint point, int tmpScore)
 	}
 }
 
-int isOutOfTupleStartRange(TupleFivePoint point)
+int isOutOfTupleStartRange(TupleScorePoint point)
 {
 	if (point.x < 0 || point.x > 14 || point.y < 0 || point.y > 14)
 		return 1;
@@ -108,7 +108,41 @@ int isOutOfTupleStartRange(TupleFivePoint point)
 	return 0;
 }
 
-TupleFivePoint pointPlus(TupleFivePoint a, TupleFivePoint b)
+TupleScorePoint pointPlus(TupleScorePoint a, TupleScorePoint b)
 {
-	return (TupleFivePoint) { a.x + b.x, a.y + b.y, (a.direction + b.direction) % 4 };
+	return (TupleScorePoint) { a.x + b.x, a.y + b.y, (a.direction + b.direction) % 4 };
 }
+
+TuplePriorScore convertToPriorTupleScore(TupleScore score)
+{
+	//init
+	int i, j;
+	TuplePriorScore result;
+	TupleSortingNode nodeList[225];
+	memset(&nodeList, 0, sizeof(TupleSortingNode) * 225);
+
+	//create nodeList
+	for (i = 0; i < 15; i++)
+		for (j = 0; j < 15; j++)
+		{
+			nodeList[15 * i + j].index = 15 * i + j;
+			nodeList[15 * i + j].value = score.map[i][j];
+		}
+
+	//qsort
+	qsort(nodeList, 225, sizeof(TupleSortingNode), cmpTupleSortingNode);
+
+	//convert to int array
+	for (i = 0; i < 225; i++)
+		result.list[i] = nodeList[i].index;
+
+	return result;
+}
+
+int cmpTupleSortingNode(const void* a, const void* b)
+{
+	TupleSortingNode* c = (TupleSortingNode*)a;
+	TupleSortingNode* d = (TupleSortingNode*)b;
+	return d->value - c->value;
+}
+

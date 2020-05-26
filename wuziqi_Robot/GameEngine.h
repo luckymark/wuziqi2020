@@ -1,4 +1,6 @@
 #pragma once
+#include <string.h>
+#include <stdlib.h>
 enum PlayerColor
 {
     PLAYER_BLACK = 0,
@@ -24,6 +26,5 @@ typedef struct {
     int blackBanned;
 }GameEngine;
 
-//prototype
-int getMapEvaluation(GameEngine engine);
+
 
