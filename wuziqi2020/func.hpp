@@ -18,7 +18,7 @@
 #define EMPTY_C -1   // 空
 
 // 最大最小值搜索层数(必须为偶数)
-#define LAYER_LIMIT 6
+#define LAYER_LIMIT 8
 // 相同分值的点位个数的最大值
 #define COUNT_BEST_MAX 10
 // 每层搜索最大个数
