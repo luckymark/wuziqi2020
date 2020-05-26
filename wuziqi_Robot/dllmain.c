@@ -1,11 +1,13 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
+#pragma once
 #include <string.h>
 #include <stdio.h>
 #include "pch.h"
 #include "GameEngine.h"
 
 //global
-GameEngine engine;
+GameEngine globalEngine;
+int globalPlayerColor, globalBlackBanned;
 
 //prototype (also interface)
 int _stdcall GetNextMove(int map[225], int move);
@@ -29,22 +31,26 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
+//function
 int _stdcall GetNextMove(int map[225], int move)
 {
+    
     return 0;
 }
 
 void _stdcall Reset()
 {
-    memset(&engine, 0, sizeof(GameEngine));
+    memset(&globalEngine, 0, sizeof(GameEngine));
 }
 
 void _stdcall SetColor(int color)
 {
-    engine.aiPlayerColor = color;
+    globalEngine.playerColor = color;
+    globalPlayerColor = color;
 }
 
 void _stdcall SetIsBlackBanned(int state)
 {
-    engine.blackBanned = state;
+    globalEngine.blackBanned = state;
+    globalBlackBanned = state;
 }

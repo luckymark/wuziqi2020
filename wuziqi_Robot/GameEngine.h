@@ -12,11 +12,18 @@ enum ChessColor
 };
 typedef struct {
     int map[15][15];
-} Score;
+} SquareMap;
+typedef SquareMap TupleScore;
 typedef struct {
-    int map[15][15];
-    int aiPlayerColor;
+    int list[225];
+}ListMap;
+typedef ListMap TuplePriorScore;
+typedef struct {
+    SquareMap squareMap;
+    int playerColor;
     int blackBanned;
-    Score score;
 }GameEngine;
+
+//prototype
+int getMapEvaluation(GameEngine engine);
 

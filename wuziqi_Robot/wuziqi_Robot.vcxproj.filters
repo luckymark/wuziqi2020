@@ -27,6 +27,9 @@
     <ClInclude Include="TupleFive.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MaxMinSearch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.c">
@@ -39,6 +42,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="TupleFive.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxMinSearch.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

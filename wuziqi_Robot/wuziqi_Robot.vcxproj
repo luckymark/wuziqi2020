@@ -157,11 +157,13 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="MaxMinSearch.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TupleFive.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.c" />
+    <ClCompile Include="MaxMinSearch.c" />
     <ClCompile Include="TupleFive.c" />
     <ClCompile Include="GameEngine.c" />
     <ClCompile Include="pch.c">

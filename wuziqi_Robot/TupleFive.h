@@ -1,4 +1,6 @@
 #pragma once
+#include "GameEngine.h"
+
 //struct
 typedef struct {
 	int x,y,direction;
@@ -6,7 +8,7 @@ typedef struct {
 
 
 //prototype
-Score getScoreByFiveTuple(GameEngine* engine);
-int scoreSingleFiveTuple(GameEngine* engine, TupleFivePoint point);
-void addTmpScoreFiveTuple(Score* score, TupleFivePoint point, int tmpScore);
+TupleScore getScore_FiveTuple(GameEngine engine);
+int getTmpTupleScore(GameEngine engine, TupleFivePoint point);
+void flushTmpTupleScore(TupleScore* score, TupleFivePoint point, int tmpScore);
 int isOutOfTupleStartRange(TupleFivePoint point);

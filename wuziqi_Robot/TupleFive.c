@@ -1,4 +1,3 @@
-#include "GameEngine.h"
 #include "TupleFive.h"
 
 //const
@@ -9,17 +8,18 @@ const TupleFivePoint nextStep[4] = {
 	{1,-1,0}
 };
 const int scoreMyColor[5] = {0,35,800,15000,800000};
-const int scoreEnemyColor[5] = {0,15,400,1800,100000 };
+const int scoreEnemyColor[5] = {0,15,400,1800,100000};
 
 //function
-Score getScoreByFiveTuple(GameEngine* engine)
+TupleScore getScore_FiveTuple(GameEngine engine)
 {
 	//init
-	Score result;
-	memset(&result, 0, sizeof(Score));
+	TupleScore result;
+	memset(&result, 0, sizeof(TupleScore));
 	TupleFivePoint tmpPoint;
 	int tmpScore = 0;
 
+	//calculate score
 	for(int direction = 0;direction < 4;direction++)
 		for(int x = 0;x < 15; x++)
 			for (int y = 0; y < 15; y++)
@@ -27,14 +27,20 @@ Score getScoreByFiveTuple(GameEngine* engine)
 				tmpPoint = (TupleFivePoint){ x,y,direction };
 				if (isOutOfTupleStartRange(tmpPoint))
 					continue;
-				tmpScore = scoreSingleFiveTuple(engine, tmpPoint);
-				addTmpScoreFiveTuple(&result, tmpPoint, tmpScore);
+				tmpScore = getTmpTupleScore(engine, tmpPoint);
+				flushTmpTupleScore(&result, tmpPoint, tmpScore);
 			}
+
+	//mark occupied place as -1
+	for (int i = 0; i < 15; i++)
+		for (int j = 0; j < 15; j++)
+			if (CHESS_EMPTY != engine.squareMap.map[i][j])
+				result.map[i][j] = -1;
 
 	return result;
 }
 
-int scoreSingleFiveTuple(GameEngine* engine, TupleFivePoint point)
+int getTmpTupleScore(GameEngine engine, TupleFivePoint point)
 {	
 	//init
 	int b = 0, w = 0;
@@ -42,9 +48,9 @@ int scoreSingleFiveTuple(GameEngine* engine, TupleFivePoint point)
 	//get num of black and white in a tuple
 	for (int i = 1; i <= 5; i++)
 	{
-		if (CHESS_BLACK == engine->map[point.x][point.y])
+		if (CHESS_BLACK == engine.squareMap.map[point.x][point.y])
 			b++;
-		if (CHESS_WHITE == engine->map[point.x][point.y])
+		if (CHESS_WHITE == engine.squareMap.map[point.x][point.y])
 			w++;
 		point = pointPlus(point, nextStep[point.direction]);
 	}
@@ -57,14 +63,14 @@ int scoreSingleFiveTuple(GameEngine* engine, TupleFivePoint point)
 	if (0 == b + w)
 		return 7;
 
-	if (PLAYER_BLACK == engine->aiPlayerColor)
+	if (PLAYER_BLACK == engine.playerColor)
 		return (scoreMyColor[b] > scoreEnemyColor[w] ? scoreMyColor[b] : scoreEnemyColor[w]);
 
-	if (PLAYER_WHITE == engine->aiPlayerColor)
+	if (PLAYER_WHITE == engine.playerColor)
 		return (scoreMyColor[b] > scoreEnemyColor[w] ? scoreMyColor[b] : scoreEnemyColor[w]);
 }
 
-void addTmpScoreFiveTuple(Score* score, TupleFivePoint point, int tmpScore)
+void flushTmpTupleScore(TupleScore* score, TupleFivePoint point, int tmpScore)
 {
 	for (int i = 1; i <= 5; i++)
 	{
@@ -104,5 +110,5 @@ int isOutOfTupleStartRange(TupleFivePoint point)
 
 TupleFivePoint pointPlus(TupleFivePoint a, TupleFivePoint b)
 {
-	return (TupleFivePoint) { a.x + b.x, a.y + b.y, (a.direction + b.direction)%4};
+	return (TupleFivePoint) { a.x + b.x, a.y + b.y, (a.direction + b.direction) % 4 };
 }
