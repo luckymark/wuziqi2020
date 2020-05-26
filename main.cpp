@@ -3,6 +3,7 @@
 #include"chess_init_type.h"
 #include"board.h"
 #include"alphabeta.h"
+#include"chess_button.h"
 
 int main(int argc, char *argv[])
 {
@@ -13,7 +14,9 @@ int main(int argc, char *argv[])
     memset(chess_6_type,0,sizeof(chess_6_type));
     init_zobrist();
     init_Chess_6_Type();
-    w.setButton();
+//    w.setButton();
+    QPushButton _button(&w),_button1(&w);
+    setbutton(_button,_button1);
 
 //        board[4][4] = board[5][4] = board[6][4] = C_BLACK;
 //    board[2][2] = board[3][3] = board[1][1] = C_WHITE;

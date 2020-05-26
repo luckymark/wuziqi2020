@@ -10,8 +10,8 @@
 
 Board::Board(QWidget *parent) : QWidget(parent)
 {
-    _button = new QPushButton(this);
-    _button->show();
+//    _button = new QPushButton(this);
+//    _button->show();
     memset(board,0,sizeof(board));
 //    board[4][4] = board[5][4] = board[6][4] = C_BLACK;
 //    board[7][4] = board[3][4] = board[1][1] = C_WHITE;
@@ -93,7 +93,12 @@ void Board::mousePressEvent(QMouseEvent *event)
         reload();
         return;
     }
-    else if(R1 % 2 == 0 && status == 0 && pos_board.x() != 0 && pos_board.y() != 0 && board[pos_board.x()][pos_board.y()] == C_NONE)
+    else if(R1 % 2 == 0 && pos.x() <= BUTTON_W && pos.y() > BUTTON_H && pos.y() <= 2 * BUTTON_H)
+    {
+        reload_onechess();
+        return;
+    }
+    else if(R1 % 2 == 0 && status == 0 && pos_board.x() != 0 && pos_board.y() != 0 && board[pos_board.x()][pos_board.y()] == C_NONE )
     {
         q[++R] = QPoint(pos_board.x(),pos_board.y());
         q1[++R1] = q[R];
@@ -114,15 +119,31 @@ void Board::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void Board::setButton()
-{
-    _button->setText(QString("右键重新开始"));
-    _button->resize(100,100);
-}
+//void Board::setButton()
+//{
+//    _button->setText(QString("右键重新开始"));
+//    _button->resize(100,100);
+////    _button1->setText(QString("右键悔棋"));
+////    _button1->setGeometry(0,100,100,100);
+//}
 
 void Board::reload()
 {
     status = R = R1 = 0;
     memset(board,0,sizeof(board));
+//    freopen("ans.txt","w",stdout);
+//    printf("%d\n",cot);
+//    exit(0);
+    status = 0;
+    update();
+}
+void Board::reload_onechess()
+{
+    if(!R) return;
+    board[q[R].x()][q[R].y()] = C_NONE;
+    board[q[R - 1].x()][q[R - 1].y()] = C_NONE;
+    R -= 2;
+    R1 -= 2;
+    status =  evaluateBoard(board,Hash).status;
     update();
 }

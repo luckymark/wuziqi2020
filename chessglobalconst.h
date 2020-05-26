@@ -20,7 +20,7 @@
 #define SHINING_TIME 150
 
 #define MAX_CHOICE 10
-#define depth_MAX 6
+#define depth_MAX 4
 #define STEPS 3
 //文本框大小按照打印的XY坐标而定（与正常的反过来了)
 #define TOP_X 1050

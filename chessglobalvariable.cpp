@@ -17,3 +17,4 @@ ll zob[CHESS_HEIGHT][CHESS_LENGTH][2];
 std::map<ll,boardStatus > mp;
 std::map<ll,ll> vis;
 ll Hash = 0;
+int cot = 0;

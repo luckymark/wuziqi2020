@@ -22,14 +22,13 @@ public:
 //    int TURN = 0;//0 player 1 computer
     int status = 0;//0 unknown 1 player win 2 computer win
     Points AIStep;
-    QPushButton* _button;
     //board
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *);
     QPoint getChesspiece(QPoint);
     //button
-    void setButton();
     void reload();
+    void reload_onechess();
 signals:
 public slots:
 

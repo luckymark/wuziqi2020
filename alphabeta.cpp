@@ -62,19 +62,20 @@ boardStatus evaluateBoard(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)//
     ll score = 0,status = 0;
     bool flag = false;
     if(mp.count(zobrist) !=0 ) return mp[zobrist];
+    cot++;
 
 
     for(int i = 1;i <= R;i++)
     {
         int x = q[i].x(), y = q[i].y();
-        int white_live_4,white_dead_4,white_live_3;
-        int black_live_4,black_dead_4,black_live_3;
-        black_live_4 = black_dead_4 = black_live_3 = 0;
-        white_live_4 = white_dead_4 = white_live_3 = 0;
+//        int white_live_4,white_dead_4,white_live_3;
+//        int black_live_4,black_dead_4,black_live_3;
+//        black_live_4 = black_dead_4 = black_live_3 = 0;
+//        white_live_4 = white_dead_4 = white_live_3 = 0;
         for(int k = 0;k < 4;k++)
         {
-            bool white_judge_live_3 = false;
-            auto black_judge_live_3 = false;
+//            bool white_judge_live_3 = false;
+//            auto black_judge_live_3 = false;
             ll type_score = 0;
             for(int t = 0; t <= 5; t++)
             {
@@ -110,39 +111,39 @@ boardStatus evaluateBoard(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)//
                     mp[zobrist] = evaluation;
                     return evaluation;
                 }
-                if(type_score == WHITE_LIVE_3)
-                {
-                    white_judge_live_3 = true;
-                }
-                if(type_score == WHITE_LIVE_4)
-                {
-                    white_live_4 = 1;
-                }
-                if(type_score == WHITE_SLEEP_4)
-                {
-                    white_dead_4 = 1;
-                }
-                if(type_score == BLACK_LIVE_3)
-                {
-                    black_judge_live_3 = true;
-                }
-                if(type_score == WHITE_LIVE_4)
-                {
-                    black_live_4 = 1;
-                }
-                if(type_score == WHITE_SLEEP_4)
-                {
-                    black_dead_4 = 1;
-                }
+//                if(type_score == WHITE_LIVE_3)
+//                {
+//                    white_judge_live_3 = true;
+//                }
+//                if(type_score == WHITE_LIVE_4)
+//                {
+//                    white_live_4 = 1;
+//                }
+//                if(type_score == WHITE_SLEEP_4)
+//                {
+//                    white_dead_4 = 1;
+//                }
+//                if(type_score == BLACK_LIVE_3)
+//                {
+//                    black_judge_live_3 = true;
+//                }
+//                if(type_score == WHITE_LIVE_4)
+//                {
+//                    black_live_4 = 1;
+//                }
+//                if(type_score == WHITE_SLEEP_4)
+//                {
+//                    black_dead_4 = 1;
+//                }
             }
-            if(white_judge_live_3)
-            {
-                white_live_3++;
-            }
-            if(black_judge_live_3)
-            {
-                black_live_3++;
-            }
+//            if(white_judge_live_3)
+//            {
+//                white_live_3++;
+//            }
+//            if(black_judge_live_3)
+//            {
+//                black_live_3++;
+//            }
 
         }
 //        if(white_live_4 || (white_live_3 + white_dead_4 >= 2))
@@ -288,11 +289,11 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
 //            q[++R] = P.pos[i];
             q[++R] = QPoint(P.pos[i].x,P.pos[i].y);
             ll score;
-            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
-            {
-                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
-            }
-            else
+//            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
+//            {
+//                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
+//            }
+//            else
             {
                 score = alphaBetaSearch(sameBoard, depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]);
             }
@@ -308,7 +309,7 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
             }
             if(alpha >= beta) break;
         }
-        vis[zobrist] = alpha;
+//        vis[zobrist] = alpha;
         return alpha;
     }
     else
@@ -327,11 +328,11 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
 //            q[++R] = P.pos[i];
             q[++R] = QPoint(P.pos[i].x,P.pos[i].y);
             ll score;
-            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
-            {
-                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
-            }
-            else
+//            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
+//            {
+//                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
+//            }
+//            else
             {
                 score = alphaBetaSearch(sameBoard,depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_BLACK - 1]);
             }
@@ -343,7 +344,7 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
             }
             if(alpha >= beta) break;
         }
-        vis[zobrist] = beta;
+//        vis[zobrist] = beta;
         return beta;
     }
 }
@@ -371,6 +372,7 @@ bool judgeChessBoardStatus(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)
 void AI(int (&board)[CHESS_HEIGHT][CHESS_LENGTH])
 {
     alphaBetaSearch(board,depth_MAX,-INT_MAX,INT_MAX,Hash);
+    vis.clear();
     if(board[AIStep.x][AIStep.y] != C_NONE) return;
     q[++R] = QPoint(AIStep.x,AIStep.y);
     q1[++R1] = q[R];

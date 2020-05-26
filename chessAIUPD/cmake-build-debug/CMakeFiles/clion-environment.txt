@@ -1,4 +1,0 @@
-ToolSet: w64 5.0 (local)@D:\qt\Tools\mingw530_32
-Options: 
-
-Options:

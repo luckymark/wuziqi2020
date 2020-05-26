@@ -18,4 +18,5 @@ extern ll zob[CHESS_HEIGHT][CHESS_LENGTH][2];
 extern std::map<ll,boardStatus > mp;
 extern ll Hash;
 extern std::map<ll,ll> vis;
+extern  int cot;
 #endif //CHESSAIUPD_CHESSGLOBALVARIABLE_H
