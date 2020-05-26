@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/sound/chessone.wav</file>
+        <file>res/sound/lose.wav</file>
+        <file>res/sound/win.wav</file>
+        <file>res/image/1.ico</file>
+    </qresource>
+</RCC>
