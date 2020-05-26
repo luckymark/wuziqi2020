@@ -1,0 +1,6 @@
+﻿  AI.cpp
+  QtGuiApplication2.cpp
+  main.cpp
+D:\编程\A程设练习&作业\QtGuiApplication2\AI.cpp(214): warning C4715: “AI::TurnToScore”: 不是所有的控件路径都返回值
+  moc_QtGuiApplication2.cpp
+  QtGuiApplication2.vcxproj -> D:\编程\A程设练习&作业\QtGuiApplication2\x64\Debug\QtGuiApplication2.exe

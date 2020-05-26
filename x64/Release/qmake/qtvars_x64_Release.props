@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+<Qt_DEFINES_>UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;NDEBUG;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB</Qt_DEFINES_>
+<Qt_INCLUDEPATH_>C:\Users\???\AppData\Local\Temp\bgvhbwon.qvo;D:\QT\5.14.2\msvc2015_64\include;D:\QT\5.14.2\msvc2015_64\include\QtWidgets;D:\QT\5.14.2\msvc2015_64\include\QtGui;D:\QT\5.14.2\msvc2015_64\include\QtANGLE;D:\QT\5.14.2\msvc2015_64\include\QtCore;/include;D:\QT\5.14.2\msvc2015_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+<Qt_LIBS_>D:\QT\5.14.2\msvc2015_64\lib\Qt5Widgets.lib;D:\QT\5.14.2\msvc2015_64\lib\Qt5Gui.lib;D:\QT\5.14.2\msvc2015_64\lib\Qt5Core.lib;D:\QT\5.14.2\msvc2015_64\lib\qtmain.lib;shell32.lib</Qt_LIBS_>
+<Qt_LIBPATH_>C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib</Qt_LIBPATH_>
+<Qt_INCLUDEPATH_
+      >$(Qt_INCLUDEPATH_);x64\Release\moc;x64\Release\uic</Qt_INCLUDEPATH_>
+    <QtBkup_QtInstall
+      >Qt5.14.2</QtBkup_QtInstall>
+    <QtBkup_QtModules
+      >core;gui;widgets</QtBkup_QtModules>
+    <QtBkup_QtPathBinaries
+      >bin</QtBkup_QtPathBinaries>
+    <QtBkup_QtPathLibraryExecutables
+      >bin</QtBkup_QtPathLibraryExecutables>
+    <QtBkup_QtHeaderSearchPath
+      ></QtBkup_QtHeaderSearchPath>
+    <QtBkup_QtLibrarySearchPath
+      ></QtBkup_QtLibrarySearchPath>
+    <QtBkup_QtVars
+      >DEFINES=/-D(\w+)/$1/;INCLUDEPATH=INCPATH/-I(\x22[^\x22]+\x22|[^\s]+)/$1/;LIBS=/(?:\/LIBPATH:(?:\x22[^\x22]+\x22|[^\s]+))|(\x22[^\x22]+\x22|[^\s]+)/$1/;LIBPATH=LIBS/\/LIBPATH:(\x22[^\x22]+\x22|[^\s]+)/$1/</QtBkup_QtVars>
+    <QtBkup_QMakeCodeLines
+      ></QtBkup_QMakeCodeLines>
+    <QtBkup_QtBuildConfig
+      >release</QtBkup_QtBuildConfig>
+  </PropertyGroup>
+</Project>
