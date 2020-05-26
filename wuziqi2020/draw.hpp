@@ -14,6 +14,7 @@ public:
 	int i = 0;      // y 坐标
 	int j = 0;      // x 坐标
 	int score = INT_MIN;  // 分数
+	int myscore = INT_MIN;
 };
 
 // 保存棋盘的类

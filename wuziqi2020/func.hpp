@@ -48,3 +48,4 @@ extern int neighbor[15][15];
 
 // getPosition.cpp
 int max_min_search(int color, int alpha, int beta, int depth);
+int gen(seat a[], int color);

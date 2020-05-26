@@ -3,7 +3,7 @@
 
 // 启发式评估函数
 // 便于优先搜索分数高的，加快AB剪枝速度
-static void gen(seat a[], int color)
+int gen(seat a[], int color)
 {
 	int count = 0;
 	for (int i = 0; i < 15; i++) {
@@ -12,15 +12,16 @@ static void gen(seat a[], int color)
 				a[count].i = i;
 				a[count].j = j;
 				setColor(i, j, color);
-				a[count].score = evaluate_score_one(i, j, color);
+				a[count].myscore = evaluate_score_one(i, j, color);
 				setColor(i, j, 1 - color);
-				a[count].score += evaluate_score_one(i, j, 1 - color);
+				a[count].score = a[count].myscore + evaluate_score_one(i, j, 1 - color);
 				setColor(i, j, EMPTY_C);
 				count++;
 			}
 		}
 	}
 	quickSort(a, 0, count);
+	return count;
 }
 
 // 整个棋盘评分 -- 综合黑白棋子的棋盘总分
@@ -51,14 +52,16 @@ int max_min_search(int color, int alpha, int beta, int depth)
 {
 	if (depth == 0) return evaluate_score(color);
 	int score = (depth % 2 == 0) ? INT_MIN : INT_MAX;
-	int temp;
 	seat a[15 * 15];
-	gen(a, color);
+	int count = gen(a, color);
 	// 黑科技 -- 10次
 	for (int i = 0; i < SEARCH_NUM_MAX; i++) {
+		if (a[i].myscore >= FIVE) {
+			return (depth % 2 == 0) ? INT_MAX : INT_MIN;
+		}
 		setColor(a[i].i, a[i].j, color);
 		set_neighbor(a[i].i, a[i].j, ADD_NEIGHBOR);
-		temp = max_min_search(1 - color, alpha, beta, depth - 1);
+		int temp = max_min_search(1 - color, alpha, beta, depth - 1);
 		set_neighbor(a[i].i, a[i].j, DES_NEIGHBOR);
 		setColor(a[i].i, a[i].j, EMPTY_C);
 		if (depth % 2 == 0) {
