@@ -101,9 +101,9 @@ void MainWindow::paintEvent(QPaintEvent *event)                // 棋盘绘制�
             QSound::play(VCTY_SOUND);
             QString str;
             if(game->gmVc[clkRow][clkCol]==1)
-                str="white player";
+                str="Black player";
             else if(game->gmVc[clkRow][clkCol]==-1)
-                str="black player";
+                str="White player";
             QMessageBox::StandardButton btnValue=QMessageBox::information(this,"congratulations",str+" win!");
             if(btnValue==QMessageBox::Ok){
                 game->startGame(gameType);
