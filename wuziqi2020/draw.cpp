@@ -375,8 +375,10 @@ void game()
 							goto DRAW;
 						}
 						// 更新选择框
-						BOX[oldi][oldj].isnew = false;
-						BOX[oldi][oldj].draw();
+						if (oldi != -1) {
+							BOX[oldi][oldj].isnew = false;
+							BOX[oldi][oldj].draw();
+						}				
 						BOX[i][j].isnew = true;
 						BOX[i][j].draw();
 						oldi = i;
