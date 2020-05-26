@@ -31,11 +31,12 @@
         Dim tmp As MyButton
         PanelChessBoard.Height = 15 * BOARD_BLOCK_SIZE + 14 * BOARD_INNER_MARGIN + 2 * BOARD_OUTER_MARGIN
         PanelChessBoard.Width = PanelChessBoard.Height
+        PanelChessBoard.BackColor = Color.LightGray
 
         For i = 0 To 224
             tmp = New MyButton With {
                 .Text = "",
-                .BackColor = Me.BackColor,
+                .BackColor = Color.LightGray,
                 .BackgroundImage = My.Resources.chessboard.empty,
                 .Index = i,
                 .Left = BOARD_OUTER_MARGIN + (i Mod 15) * (BOARD_INNER_MARGIN + BOARD_BLOCK_SIZE),
@@ -44,7 +45,7 @@
                 .FlatStyle = FlatStyle.Flat,
                 .BackgroundImageLayout = ImageLayout.Stretch
             }
-            tmp.FlatAppearance.BorderColor = Me.BackColor
+            tmp.FlatAppearance.BorderColor = Color.LightGray
             AddHandler tmp.Click, AddressOf ChessBoard_Click
             BtnChessBoard(i) = tmp
             PanelChessBoard.Controls.Add(tmp)
@@ -92,5 +93,7 @@
         Property Index As Integer
     End Class
 
+    Private Sub GroupBox4_Enter(sender As Object, e As EventArgs) Handles GroupBox4.Enter
 
+    End Sub
 End Class
