@@ -21,5 +21,5 @@ using std::string;
 #define Number_of_layers 2
 
 int state_score(int x,int y,int color);
-
+int get_color_(int color);
 #endif //GOBANG_MAIN_H

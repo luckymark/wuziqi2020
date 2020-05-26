@@ -6,6 +6,7 @@
 #define GOBANG_STATE_H
 
 #include "Main.h"
+#include "pawn_score.h"
 
 typedef struct Dir{
     int x;
@@ -13,6 +14,6 @@ typedef struct Dir{
 }dir;
 
 bool is_in_board(int x,int y);
-dir next_point(dir p,dir d);
+dir next_point(dir p,dir d,int des);
 
 #endif //GOBANG_STATE_H

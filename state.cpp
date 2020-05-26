@@ -14,6 +14,15 @@ dir dd={-1,1};
 bool is_in_board(int x,int y){
     return !(x > 15 || y > 15 || x < 1 || y  < 1);
 }
+int get_color_(int color) {
+    int color_;
+    if(white == color){
+        color_=black;
+    }else{
+        color_=white;
+    }
+    return color_;
+}
 dir next_point(dir p,dir d,int des){
     dir p_;
     p_.x=p.x+des*d.x;
@@ -21,12 +30,14 @@ dir next_point(dir p,dir d,int des){
     return p_;
 }
 int state_score(int x,int y,int color){
-    int d;int left[5];int right[5];int w5,a4,a3,a2,a1,d4,d3,d2,d1,cnt,l;
-    w5=a4=a3=a2=a1=d4=d3=d2=d1=cnt=l=0;
-    dir Dir,point,point_;
+    int left[5]={0};int right[5]={0};int d,cnt,l,color_,score;
+    color_=get_color_(color);
+    score=cnt=0;
+    dir Dir,point,point_,le,ri;
     point.x=x;point.y=y;
-    Dir.x=Dir.y=0;
+    Dir.x=Dir.y=ri.x=ri.y=le.x=le.y=0;
     for(d=1;d<=4;d++){
+        l=1;
         switch (d){
             case 1: Dir=da;
                 break;
@@ -39,17 +50,64 @@ int state_score(int x,int y,int color){
             default:break;
         }
         point_=next_point(point,Dir,1);
-        while(is_in_board(point_.x,point_.y)&&board[point_.x][point_.y]){
+        while(is_in_board(point_.x,point_.y)&&board[point_.x][point_.y]==color){
             l++;
-            next_point(point,Dir,1);
+            ri=point_;
+            point_=next_point(point_,Dir,1);
         }
         point_=next_point(point,Dir,-1);
-        while(is_in_board(point_.x,point_.y)&&board[point_.x][point_.y]){
+        while(is_in_board(point_.x,point_.y)&&board[point_.x][point_.y]==color){
             l++;
-            next_point(point,Dir,-1);
+            le=point_;
+            point_=next_point(point_,Dir,-1);
+        }
+        for(cnt=1;cnt<=4;cnt++){
+            point_=next_point(ri,Dir,cnt);
+            if(is_in_board(point_.x,point_.y)){
+                right[cnt]=board[point_.x][point_.y];
+            }else{
+                right[cnt]=color_;
+            }
+            point_=next_point(le,Dir,-cnt);
+            if(is_in_board(point_.x,point_.y)){
+                right[cnt]=board[point_.x][point_.y];
+            }else{
+                right[cnt]=color_;
+            }
+        }
+        while(true){
+            if(win5(left,right,l,color)){
+                score+=win5(left,right,l,color);
+                break;
+            }
+            if(alive4(left,right,l,color)){
+                score+=alive4(left,right,l,color);
+                break;
+            }
+            if(dead4(left,right,l,color)){
+                score+=dead4(left,right,l,color);
+                break;
+            }
+            if(alive3(left,right,l,color)){
+                score+=alive3(left,right,l,color);
+                break;
+            }
+            if(dead3(left,right,l,color)){
+                score+=dead3(left,right,l,color);
+                break;
+            }
+            if(alive2(left,right,l,color)){
+                score+=alive2(left,right,l,color);
+                break;
+            }
+            if(dead2(left,right,l,color)){
+                score+=dead2(left,right,l,color);
+                break;
+            }
+            else break;
         }
     }
-
+    return score;
 }
 
 
