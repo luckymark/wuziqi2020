@@ -1,3 +1,11 @@
+.vs
+debug
+release
+x64
+build
+*.un~
+*.swp
+*.swp~
 # Prerequisites
 *.d
 
