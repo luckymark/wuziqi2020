@@ -93,7 +93,43 @@
         Property Index As Integer
     End Class
 
-    Private Sub GroupBox4_Enter(sender As Object, e As EventArgs) Handles GroupBox4.Enter
 
+
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        PanelChessBoard.Enabled = True
+        BtnGiveUp.Enabled = True
+        BtnStopEVE.Enabled = True
+        BtnPause.Enabled = True
+        BtnTip.Enabled = True
+    End Sub
+
+    Private Sub RdiModePVP_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModePVP.CheckedChanged
+        If RdiModePVP.Checked Then
+            GpBoxPVPSet.Enabled = True
+            GpBoxPVESet.Enabled = False
+            GpBoxEVESet.Enabled = False
+        End If
+    End Sub
+
+    Private Sub RdiModePVE_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModePVE.CheckedChanged
+        If RdiModePVE.Checked Then
+            GpBoxPVPSet.Enabled = False
+            GpBoxPVESet.Enabled = True
+            GpBoxEVESet.Enabled = False
+        End If
+    End Sub
+
+    Private Sub RdiModeEVE_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModeEVE.CheckedChanged
+        If RdiModeEVE.Checked Then
+            GpBoxPVPSet.Enabled = False
+            GpBoxPVESet.Enabled = False
+            GpBoxEVESet.Enabled = True
+        End If
+    End Sub
+
+    Private Sub BtnPVPExchangeColor_Click(sender As Object, e As EventArgs) Handles BtnPVPExchangeColor.Click
+        Dim s As String = TxtPVPBlackName.Text
+        TxtPVPBlackName.Text = TxtPVPWhiteName.Text
+        TxtPVPWhiteName.Text = s
     End Sub
 End Class
