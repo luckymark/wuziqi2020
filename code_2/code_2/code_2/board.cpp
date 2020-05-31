@@ -24,7 +24,7 @@ int dis(int x, int y, int x1, int y1)
 void input_black(int map[][MAXN])
 {
     MOUSEMSG m;
-    int x, y;
+    int x, y,x1,y1;
     setfillcolor(RGB(28, 28, 28));
     while (1)
     {
@@ -36,31 +36,33 @@ void input_black(int map[][MAXN])
                 putpixel(m.x, m.y, RED);*/
         if (m.uMsg == WM_LBUTTONDOWN)
         {
-            x = m.x / 40;
-            y = m.y / 40;
+            y = m.x / 40;
+            x = m.y / 40;
+            x1 = m.x / 40;
+            y1 = m.y / 40;
             //fillcircle(x * 40, y * 40, 15);
             if (map[x][y])  rectangle(m.x - 10, m.y - 10, m.x + 10, m.y + 10);
-            if (x > 0 && y > 0 && dis(x * 40, y * 40, m.x, m.y) && map[x][y] == 0)
+            if (x1 > 0 && y1 > 0 && dis(x1 * 40, y1 * 40, m.x, m.y) && map[x][y] == 0)
             {
-                fillcircle(x * 40, y * 40, 15);
+                fillcircle(x1 * 40, y1 * 40, 15);
                 map[x][y] = 2;
                 break;
             }
-            if (x > 0 && y + 1 < 16 && dis(x * 40, (y + 1) * 40, m.x, m.y) && map[x][y + 1] == 0)
+            if (x1 > 0 && y1 + 1 < 16 && dis(x1 * 40, (y1 + 1) * 40, m.x, m.y) && map[x+1][y] == 0)
             {
-                fillcircle(x * 40, (y + 1) * 40, 15);
-                map[x][y + 1] = 2;
+                fillcircle(x1 * 40, (y1 + 1) * 40, 15);
+                map[x+1][y] = 2;
                 break;
             }
-            if (x + 1 < 16 && y > 0 && dis((x + 1) * 40, y * 40, m.x, m.y) && map[x + 1][y] == 0)
+            if (x1 + 1 < 16 && y1 > 0 && dis((x1 + 1) * 40, y1 * 40, m.x, m.y) && map[x ][y+ 1] == 0)
             {
-                fillcircle((x + 1) * 40, y * 40, 15);
-                map[x + 1][y] = 2;
+                fillcircle((x1 + 1) * 40, y1 * 40, 15);
+                map[x][y+1] = 2;
                 break;
             }
-            if (x + 1 < 16 && y + 1 < 16 && dis((x + 1) * 40, (y + 1) * 40, m.x, m.y) && map[x + 1][y + 1] == 0)
+            if (x1 + 1 < 16 && y1 + 1 < 16 && dis((x1 + 1) * 40, (y1 + 1) * 40, m.x, m.y) && map[x + 1][y + 1] == 0)
             {
-                fillcircle((x + 1) * 40, (y + 1) * 40, 15);
+                fillcircle((x1 + 1) * 40, (y1 + 1) * 40, 15);
                 map[x + 1][y + 1] = 2;
                 break;
             }
@@ -71,7 +73,7 @@ void input_black(int map[][MAXN])
 void Print_White(int x, int y)
 {
     setfillcolor(0xFFFFFF);
-    fillcircle((x) * 40, (y) * 40, 15);
+    fillcircle((y) * 40, (x) * 40, 15);
 }
 void initboard()
 {

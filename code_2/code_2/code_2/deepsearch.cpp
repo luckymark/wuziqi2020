@@ -2,6 +2,7 @@
 #include "evalute.h"
 #include "location.h"
 #include "board.h"
+#include "finnal.h"
 
 extern struct loca
 {
@@ -16,8 +17,18 @@ extern int totLoca;
  {
      return x > y ? x : y;
  }
+ int End1(int map[][MAXN])
+ {
+     int flag = Won(map);
+     if (flag)
+     {
+         return 1;
+     }
+     return 0;
+ }
  int dfs(int layer,int map[][MAXN], int alpha, int beta)
  {
+     if (End1(map))  return calc_point(map);
      if (layer == 4)
      {
          int p = calc_point(map);
@@ -43,7 +54,7 @@ extern int totLoca;
              map[x][y] = color;
              beta = Min(beta, dfs(layer + 1, map, alpha, beta));
              map[x][y] = 0;
-             if (alpha >= beta)  return beta;
+             if (alpha >= beta)  return alpha;
          }
         return beta;
      }
@@ -53,27 +64,14 @@ extern int totLoca;
          {
              x = nowX[i];y = nowY[i];
              map[x][y] = color;
-             if (layer == 0)
+             int p = dfs(layer + 1, map, alpha, beta);
+             if (p > alpha)
              {
-                 int p = dfs(layer + 1, map, alpha, beta);
-                 if (p > alpha)
-                 {
-                     PathX = x;PathY = y;
-                     alpha = p;
-                 }
-             }
-             else
-                alpha = Max(alpha, dfs(layer + 1, map, alpha, beta));
+                  PathX = x;PathY = y;
+                  alpha = p;
+              }
              map[x][y] = 0;
-             if (alpha >= beta)
-             {
-                 if (layer == 0)
-                 {
-                     Print_White(PathX, PathY);
-                     map[PathX][PathY] = 1;
-                 }
-                 return alpha;
-             }
+             if (alpha >= beta)   return beta;
          }
          if (layer == 0)
          {

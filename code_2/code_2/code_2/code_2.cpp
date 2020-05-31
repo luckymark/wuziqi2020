@@ -42,19 +42,20 @@ extern struct data
 extern int NumLines[9][MAXN * 3];
 extern int totLines[9];
 int main()
-{
+{    
     initboard();
     Pushboard();
-    int point = 0, alpha = -5555, beta = (1 << 30);
+   int pointp = 0, alpha = -5555, beta = (1 << 30);
     while (1)
     {
         input_black(map);  //black chess(gamer) choose
+        if (map[1][1]) pointp++;
         if (End())  break;
 
 
-        alpha = -5555, beta = (1 << 30);
+        alpha = -(1<<30), beta = (1 << 30);
         dfs(0,map , alpha, beta);   //white chess (AI) choose
-        int o = calc_point(map);
+
         if (End())  break;
     }
     _getch();

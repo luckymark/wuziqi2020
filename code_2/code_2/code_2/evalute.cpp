@@ -9,7 +9,7 @@ extern struct data
 }lines[9][MAXN * 3][MAXN * 3];
 extern int NumLines[9][MAXN * 3];
 extern int totLines[9];
-int point[6] = { 0,10,100,1000,100000,10000000 };
+int point[6] = { 0,10,100,1000,100000,1e8 };
 
 int calc_point(int map[][MAXN])
 {
@@ -30,7 +30,7 @@ int calc_point(int map[][MAXN])
                 {
                     if (now > 0)
                     {
-                        if ((xs==-1 && ys==-1) || map[xs][ys]==3-now)  squ--;
+                        if (((xs==-1 && ys==-1) || map[xs][ys]==3-now))  squ--; //
                         pointp[now] += point[squ];
                         now = 0, squ = 0;
                         xs = 0, ys = 0;
@@ -50,7 +50,8 @@ int calc_point(int map[][MAXN])
                         if (map[xs][ys] == 1 ||(xs==-1 && ys==-1));
                         else
                         {
-                            squ--;
+                           // if(squ<5)
+                                squ--;
                             pointp[now] += point[squ];
                             now = 1;squ = 1;
                             if (j > 1)  xs = lines[p][i][j - 1].x, ys = lines[p][i][j - 1].y;
@@ -71,7 +72,8 @@ int calc_point(int map[][MAXN])
                         if (map[xs][ys] == 2 || (xs == -1 && ys == -1));
                         else
                         {
-                            squ--;
+                          //  if(squ<5)
+                                squ--;
                             pointp[now] += point[squ];
                             now = 2;squ = 1;
                             if (j > 1)  xs = lines[p][i][j - 1].x, ys = lines[p][i][j - 1].y;
@@ -81,7 +83,8 @@ int calc_point(int map[][MAXN])
             }
             if (now > 0 && map[xs][ys] != 3 - now)
             {
-                squ--;
+              //  if(squ<5)
+                     squ--;
                 pointp[now] += point[squ];
             }
         }
