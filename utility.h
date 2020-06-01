@@ -1,7 +1,8 @@
 #ifndef UTILITY_H
 #define UTILITY_H
+//一些常用工具的打包
 #include"def.h"
-#include"bign.h"
+#include"nbig.h"
 #include<string>
 #include<map>
 #include<unordered_map>

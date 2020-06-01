@@ -16,20 +16,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    draw.cpp \
     evaluator.cpp \
+    gobang.cpp \
     initmap.cpp \
-    main.cpp \
-    widget.cpp
+    main.cpp
 
 HEADERS += \
-    bign.h \
     def.h \
     evaluator.h \
-    utility.h \
-    widget.h
+    gobang.h \
+    nbig.h \
+    utility.h
 
 FORMS += \
-    widget.ui
+    gobang.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
