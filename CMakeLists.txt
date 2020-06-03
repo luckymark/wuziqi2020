@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.15)
 project(wuziqi2020)
 
 set(CMAKE_AUTOMOC ON)
@@ -13,6 +13,6 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(wuziqi2020 main.cpp Window.cpp Window.h Game.cpp Game.h)
+add_executable(wuziqi2020 main.cpp Window.cpp Window.h Game.cpp Game.h points.h)
 
 target_link_libraries(wuziqi2020 Qt5::Widgets)

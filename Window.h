@@ -18,7 +18,6 @@ private:
     Game game;
     int clickPosRow {-1};
     int clickPosCol {-1};
-//    void checkGame(int y, int x);
 };
 
 

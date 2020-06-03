@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QPainter>
 #include <QTimer>
 #include <QMouseEvent>
@@ -113,8 +114,21 @@ void Window::mousePressEvent(QMouseEvent *event) {
     if (game.player == PERSON) {
         if (game.chessByPerson(clickPosRow, clickPosCol)) {
             repaint();
-            game.chessByAI();
-            repaint();
+            if (game.isWin == PERSON) {
+                QMessageBox::StandardButton btnValue = QMessageBox::information(this, "Congratulations", "You win!");
+                if (btnValue == QMessageBox::Ok) {
+                    QApplication::exit(0);
+                }
+            } else {
+                game.chessByAI();
+                repaint();
+                if (game.isWin == AI) {
+                    QMessageBox::StandardButton btnValue = QMessageBox::information(this, "Sorry", "You lose :)");
+                    if (btnValue == QMessageBox::Ok) {
+                        QApplication::exit(0);
+                    }
+                }
+            }
         }
     }
 }
