@@ -32,7 +32,7 @@ jobs:
             qt_arch_install: msvc2017_64
 
     env:
-      targetName: wuziqi.exe
+      targetName: wuziqi2020.exe
     # 步骤
     steps:
       - name: cacheQt
