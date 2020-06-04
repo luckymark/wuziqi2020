@@ -6,8 +6,10 @@
 #include "game.h"
 
 void InitWindow(){
+    setinitmode(0);
     initgraph(600, 485);//打开一个长640像素，宽480像素的窗口
     setfont(18,0,"宋体");
+    setcaption("wuziqi");
     setbkcolor(WHITE);
     setcolor(BLACK);
     PIMAGE qipan;
@@ -18,37 +20,49 @@ void InitWindow(){
 
 int PutItems(const int x, const int y, const int Is_B_OR_W, const int Ai_Or_Player){
     int chessValue = -1;
-    int Judge_x = Accurate_Coord(x,1);
-    int Judge_y = Accurate_Coord(y,-1);
     int Temp_x,Temp_y;
-    if (Ai_Or_Player == 1) {
+    int Judge_x, Judge_y;
+    int tx, ty;
+    if (Ai_Or_Player ==1) {
+        Judge_x = Accurate_Coord(x, 1);
+        Judge_y = Accurate_Coord(y, -1);
         Temp_x = START_X + DXY * Judge_x;
         Temp_y = START_Y + DXY * Judge_y;
-    } else{
+        tx = Judge_x;
+        ty = Judge_y;
+    }else{
         Temp_x = START_X + DXY * x;
         Temp_y = START_Y + DXY * y;
+        tx = x;
+        ty = y;
     }
-    if (x > RIGHT_BODER||Judge_Is_Empty(Judge_x, Judge_y))
+
+    if (x > RIGHT_BODER||Judge_Is_Empty(tx, ty))
     {
         return chessValue;
     }
+
     if (Is_B_OR_W == 1){
         setfillcolor(BLACK);
     } else if(Is_B_OR_W == 0){
         setfillcolor(WHITE);
     }
+
     fillellipse(Temp_x, Temp_y, 15, 15);
+
     if (Ai_Or_Player == 1) {
-        Qipan_Array[Judge_x][Judge_y] = PLAYER_CHESS;
+        Qipan_Array[Judge_y][Judge_x] = PLAYER_CHESS;
         CurrentChess[ChessNums].coord.X= Judge_x;
         CurrentChess[ChessNums].coord.Y = Judge_y;
         CurrentChess[ChessNums].type = -1;
+        outtextxy(478,20,"no");
         ChessNums++;
     } else if (Ai_Or_Player == 0){
-        Qipan_Array[x][y] = AI_CHESS;
+        Qipan_Array[y][x] = AI_CHESS;
         CurrentChess[ChessNums].coord.X= x;
         CurrentChess[ChessNums].coord.Y= y;
         CurrentChess[ChessNums].type = 1;
+        outtextxy(478,20,"yes");
         ChessNums++;
     }
     return 1;
@@ -90,7 +104,7 @@ int Judge_Is_Empty(const int x, const int y)
     if(x == -1||y == -1)
     {
         return 1;
-    } else if(Qipan_Array[x][y] != 0)
+    } else if(Qipan_Array[y][x] != 0)
     {
         return 1;
     }

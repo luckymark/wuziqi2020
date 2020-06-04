@@ -24,7 +24,9 @@ int Game_Body()
         /*开始游戏*/
 
         Player_Play();
+        Sleep(200);
         AI_Play();
+        Sleep(200);
     }
     return Who_Is_Win;
 }
@@ -38,9 +40,6 @@ int Player_Play()
         {
             msg = getmouse();
         }
-        char str[32];
-        sprintf(str,"%4d %4d",msg.x,msg.y);
-        outtextxy(478,0,str);
         if(msg.is_left())
         {
             int Value = PutItems(msg.x,msg.y,1,1);
@@ -49,11 +48,11 @@ int Player_Play()
                 break;
             }
         }
-       /* else if(msg.is_right())
-        {
-            PutItems(msg.x,msg.y,0,1);
-            break;
-        }*/
+//        else if(msg.is_right())
+//        {
+//            PutItems(msg.x,msg.y,0,0);
+//            break;
+//        }
     }
 }
 
@@ -73,12 +72,13 @@ void AI_Play(){
             temp_b = b + CurrentChess[ChessNums-1].coord.Y;
         }while((a == 0&&b == 0)|| temp_a > 14||temp_a < 0||temp_b > 14 || temp_b < 0);
         PutItems(temp_a, temp_b, 0, 0);
+    } else {
+        Search_Tree(4);
+        int x = Delocation.coord.X;
+        int y = Delocation.coord.Y;
+        PutItems(x, y, 0, 0);
     }
 
-    /*1.搜索可以下的位置（有效位置）*/
-    /*2.创建决策树（极大极小值搜索）*/
-    /*3.局势评估函数，隶属上面的搜索*/
-    /*4.alpha-beta剪枝*/
     return;
 }
 
