@@ -77,16 +77,6 @@ Namespace My.Resources
         '''<summary>
         '''  查找 System.Drawing.Bitmap 类型的本地化资源。
         '''</summary>
-        Friend Shared ReadOnly Property blackNow() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("blackNow", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
         Friend Shared ReadOnly Property board() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("board", resourceCulture)
@@ -110,16 +100,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property white() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("white", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  查找 System.Drawing.Bitmap 类型的本地化资源。
-        '''</summary>
-        Friend Shared ReadOnly Property whiteNow() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("whiteNow", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

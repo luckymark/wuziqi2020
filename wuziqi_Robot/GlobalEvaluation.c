@@ -1,4 +1,5 @@
 #include "GlobalEvaluation.h"
+#include "GEInt15Data_Black.h"
 
 int getGlobalEvaluation(GameEngine engine)
 {
@@ -99,6 +100,16 @@ int getObliqueGE_B(GameEngine engine)
 
 int getOneLine_GE_Score(int line[15], int playerColor)
 {
+	int i,j = 1,index = 0,result;
 	
+	for (i = 14; i >=0; i--)
+	{
+		index += line[i] * j;
+		j *= 3;
+	}
 
+	result = GEInt15_Data_Black[index];
+	if (PLAYER_WHITE == playerColor)
+		result = -result;
+	return result;
 }

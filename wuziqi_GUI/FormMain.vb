@@ -7,6 +7,10 @@
     Private Property Last_i As Integer = -1
     Private Property MoveCounter As Integer = 1
     Private currentBoard(224) As Integer
+    Private imgChessBlack As Bitmap = My.Resources.chessboard.black
+    Private imgChessWhite As Bitmap = My.Resources.chessboard.white
+    Private imgChessEmpty As Bitmap = My.Resources.chessboard.empty
+
     Enum ChessColor
         White = 1
         Black = 2
@@ -37,7 +41,7 @@
             tmp = New MyButton With {
                 .Text = "",
                 .BackColor = Color.LightGray,
-                .BackgroundImage = My.Resources.chessboard.empty,
+                .BackgroundImage = imgChessEmpty,
                 .Index = i,
                 .Left = BOARD_OUTER_MARGIN + (i Mod 15) * (BOARD_INNER_MARGIN + BOARD_BLOCK_SIZE),
                 .Top = BOARD_OUTER_MARGIN + (i \ 15) * (BOARD_INNER_MARGIN + BOARD_BLOCK_SIZE),
@@ -72,12 +76,12 @@
         If Opt = ChessColor.Black Then
             'black chess 
             BtnChessBoard(i).ForeColor = Color.White
-            BtnChessBoard(i).BackgroundImage = My.Resources.chessboard.black
+            BtnChessBoard(i).BackgroundImage = imgChessBlack
             Opt = ChessColor.White
         Else
             'white chess
             BtnChessBoard(i).ForeColor = Color.Black
-            BtnChessBoard(i).BackgroundImage = My.Resources.chessboard.white
+            BtnChessBoard(i).BackgroundImage = imgChessWhite
             Opt = ChessColor.Black
         End If
         BtnChessBoard(i).Text = MoveCounter.ToString()
@@ -96,11 +100,23 @@
 
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        'init UI
         PanelChessBoard.Enabled = True
-        BtnGiveUp.Enabled = True
-        BtnStopEVE.Enabled = True
-        BtnPause.Enabled = True
-        BtnTip.Enabled = True
+        If RdiModePVP.Checked Or RdiModePVE.Checked Then
+            BtnGiveUp.Enabled = True
+            BtnUndo.Enabled = True
+            BtnTip.Enabled = True
+        End If
+        If RdiModeEVE.Checked Then
+            BtnStopEVE.Enabled = True
+            BtnPause.Enabled = True
+        End If
+        BtnStart.Enabled = False
+        GroupGlobalSetting.Enabled = False
+
+        'set robot
+
+
     End Sub
 
     Private Sub RdiModePVP_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModePVP.CheckedChanged
@@ -131,5 +147,53 @@
         Dim s As String = TxtPVPBlackName.Text
         TxtPVPBlackName.Text = TxtPVPWhiteName.Text
         TxtPVPWhiteName.Text = s
+    End Sub
+
+    Private Sub BtnGiveUp_Click(sender As Object, e As EventArgs) Handles BtnGiveUp.Click
+        ClearBoard()
+        PanelChessBoard.Enabled = False
+        GroupGlobalSetting.Enabled = True
+
+        BtnStart.Enabled = True
+        BtnGiveUp.Enabled = False
+        BtnTip.Enabled = False
+        BtnUndo.Enabled = False
+
+    End Sub
+
+    Private Sub BtnPause_Click(sender As Object, e As EventArgs) Handles BtnPause.Click
+        If BtnPause.Text = "暂停" Then
+
+
+            BtnPause.Text = "继续"
+        Else
+
+
+
+            BtnPause.Text = "暂停"
+        End If
+    End Sub
+
+    Private Sub BtnStopEVE_Click(sender As Object, e As EventArgs) Handles BtnStopEVE.Click
+        ClearBoard()
+        PanelChessBoard.Enabled = False
+        GroupGlobalSetting.Enabled = True
+
+        BtnStart.Enabled = True
+        BtnPause.Enabled = False
+        BtnStopEVE.Enabled = False
+
+
+    End Sub
+
+    Sub ClearBoard()
+        For Each s In BtnChessBoard
+            s.BackgroundImage = imgChessEmpty
+            s.Text = ""
+            s.FlatAppearance.BorderColor = Color.LightGray
+        Next
+        Opt = ChessColor.Black
+        Last_i = -1
+        MoveCounter = 1
     End Sub
 End Class

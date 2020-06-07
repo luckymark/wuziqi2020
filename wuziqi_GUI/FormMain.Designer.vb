@@ -29,7 +29,7 @@ Partial Class FormMain
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BtnStopEVE = New System.Windows.Forms.Button()
         Me.BtnPause = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupGlobalSetting = New System.Windows.Forms.GroupBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.RdiModeEVE = New System.Windows.Forms.RadioButton()
@@ -68,7 +68,7 @@ Partial Class FormMain
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtPVPBlackName = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupGlobalSetting.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GpBoxEVESet.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -152,16 +152,16 @@ Partial Class FormMain
         Me.BtnPause.Text = "暂停"
         Me.BtnPause.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'GroupGlobalSetting
         '
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.Panel3)
-        Me.GroupBox2.Location = New System.Drawing.Point(1066, 565)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(225, 159)
-        Me.GroupBox2.TabIndex = 3
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "全局设置"
+        Me.GroupGlobalSetting.Controls.Add(Me.CheckBox1)
+        Me.GroupGlobalSetting.Controls.Add(Me.Panel3)
+        Me.GroupGlobalSetting.Location = New System.Drawing.Point(1066, 565)
+        Me.GroupGlobalSetting.Name = "GroupGlobalSetting"
+        Me.GroupGlobalSetting.Size = New System.Drawing.Size(225, 159)
+        Me.GroupGlobalSetting.TabIndex = 3
+        Me.GroupGlobalSetting.TabStop = False
+        Me.GroupGlobalSetting.Text = "全局设置"
         '
         'CheckBox1
         '
@@ -547,7 +547,7 @@ Partial Class FormMain
         Me.Controls.Add(Me.GpBoxPVESet)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GpBoxEVESet)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupGlobalSetting)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.PanelChessBoard)
         Me.MaximizeBox = False
@@ -555,8 +555,8 @@ Partial Class FormMain
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "五子棋"
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupGlobalSetting.ResumeLayout(False)
+        Me.GroupGlobalSetting.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.GpBoxEVESet.ResumeLayout(False)
@@ -581,7 +581,7 @@ Partial Class FormMain
     Friend WithEvents BtnGiveUp As Button
     Friend WithEvents BtnTip As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupGlobalSetting As GroupBox
     Friend WithEvents RdiModeEVE As RadioButton
     Friend WithEvents RdiModePVE As RadioButton
     Friend WithEvents RdiModePVP As RadioButton

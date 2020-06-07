@@ -27,11 +27,6 @@ wuziqi_GUI
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
 </member>
-<member name="P:wuziqi_GUI.My.Resources.chessboard.blackNow">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
 <member name="P:wuziqi_GUI.My.Resources.chessboard.board">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
@@ -43,11 +38,6 @@ wuziqi_GUI
 </summary>
 </member>
 <member name="P:wuziqi_GUI.My.Resources.chessboard.white">
-<summary>
-  查找 System.Drawing.Bitmap 类型的本地化资源。
-</summary>
-</member>
-<member name="P:wuziqi_GUI.My.Resources.chessboard.whiteNow">
 <summary>
   查找 System.Drawing.Bitmap 类型的本地化资源。
 </summary>
