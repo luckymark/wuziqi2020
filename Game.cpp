@@ -140,18 +140,10 @@ void Game::gen_steps(Step *step, int deep) {
                         map[row][col] = BLACK;
                     }
                     newStep->point = evaluate();
-                    if (deep == maxDeep || steps < firstSteps || newStep->point > step->point + 100) {
-                        step->nextSteps[step->nextLength] = newStep;
-                        step->nextLength++;
-                        gen_steps(newStep, deep - 1);
-                        map[row][col] = SPACE;
-                    } else {
-                        delete newStep;
-                        step->nextLength--;
-                        delete step;
-                        map[row][col] = SPACE;
-                        return;
-                    }
+                    step->nextSteps[step->nextLength] = newStep;
+                    step->nextLength++;
+                    gen_steps(newStep, deep - 1);
+                    map[row][col] = SPACE;
                 }
             }
         }
