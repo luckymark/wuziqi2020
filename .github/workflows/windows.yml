@@ -73,7 +73,7 @@ jobs:
           # 拷贝exe
           Copy-Item bin\${env:targetName}.exe ${env:archiveName}\
           # 拷贝依赖
-          windeployqt --qmldir . ${env:archiveName}\${env:targetName}
+          windeployqt --qmldir . ${env:archiveName}\${env:targetName}.exe
       # 打包上传
       - name: upload artifact
         uses: actions/upload-artifact@master
