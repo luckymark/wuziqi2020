@@ -49,5 +49,5 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${targetName}
-          path: ${targetName}.dmg
+          name: ${{ matrix.targetName }}
+          path: ${{ matrix.targetName }}.dmg

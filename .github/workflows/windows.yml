@@ -26,7 +26,7 @@ jobs:
             msvc_arch: x86
             qt_arch_install: msvc2017
     env:
-      targetName: ${{ matrix.targetName }}.exe
+      targetName: ${{ matrix.targetName }}
     # 步骤
     steps:
       - name: cacheQt
