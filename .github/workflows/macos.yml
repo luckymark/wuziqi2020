@@ -42,7 +42,6 @@ jobs:
           make
       # deploy 依赖
       - name: deploy
-        if: startsWith(github.event.ref, 'refs/tags/')
         run: |
           # 拷贝依赖
           macdeployqt bin/${targetName}.app -qmldir=. -verbose=1 -dmg
