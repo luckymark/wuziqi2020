@@ -7,6 +7,10 @@ void Evaluator::initMap()
 {
     memBlack.clear();
     memWhite.clear();
+    memBlack.rehash(32768);
+    memWhite.rehash(32768);
+    //实验测得的bucket的最大数目，减少rehash的时长
+
     mapBlack.clear();
     mapWhite.clear();
     initWeight();
