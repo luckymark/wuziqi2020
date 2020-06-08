@@ -54,6 +54,11 @@ void GoBang::respond()
     //利用AI获得坐标
     chess[bestI][bestJ] = C_WHITE;
     //下子
+    currentI = bestI;
+    currentJ = bestJ;
+    //更新上一次下子位置
+    ++counter;
+    //更新总子数目
 	int ret = evaluator->check(C_WHITE);
     //判断棋局状态
     if (ret != S_WAIT){
@@ -61,11 +66,6 @@ void GoBang::respond()
         gameOver(ret);
         return;
     }
-    currentI = bestI;
-    currentJ = bestJ;
-    //更新上一次下子位置
-	++counter;
-    //更新总子数目
     evaluator->setNeeds(bestI, bestJ);
     //扩大搜索范围
 //    qDebug() <<(clock() - beg)<< "ms";
