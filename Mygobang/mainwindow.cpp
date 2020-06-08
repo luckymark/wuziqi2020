@@ -139,10 +139,6 @@ void MainWindow::initChessBoard() {
             board[i][j] = 0;
 }
 
-
-
-
-
 void MainWindow::printWinnerInformation() {
 
     if(game.winner==White)

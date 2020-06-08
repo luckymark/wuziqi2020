@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/GitHub/wuziqi2020/Mygobang/AI.cpp" "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir/AI.cpp.obj"
   "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/mocs_compilation.cpp" "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir/Mygobang_autogen/mocs_compilation.cpp.obj"
+  "D:/GitHub/wuziqi2020/Mygobang/chessboard.cpp" "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir/chessboard.cpp.obj"
   "D:/GitHub/wuziqi2020/Mygobang/main.cpp" "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir/main.cpp.obj"
   "D:/GitHub/wuziqi2020/Mygobang/mainwindow.cpp" "D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/CMakeFiles/Mygobang.dir/mainwindow.cpp.obj"
   )

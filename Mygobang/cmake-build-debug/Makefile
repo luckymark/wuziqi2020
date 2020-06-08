@@ -189,6 +189,33 @@ Mygobang_autogen/mocs_compilation.cpp.s:
 	$(MAKE) -f CMakeFiles\Mygobang.dir\build.make CMakeFiles/Mygobang.dir/Mygobang_autogen/mocs_compilation.cpp.s
 .PHONY : Mygobang_autogen/mocs_compilation.cpp.s
 
+chessboard.obj: chessboard.cpp.obj
+
+.PHONY : chessboard.obj
+
+# target to build an object file
+chessboard.cpp.obj:
+	$(MAKE) -f CMakeFiles\Mygobang.dir\build.make CMakeFiles/Mygobang.dir/chessboard.cpp.obj
+.PHONY : chessboard.cpp.obj
+
+chessboard.i: chessboard.cpp.i
+
+.PHONY : chessboard.i
+
+# target to preprocess a source file
+chessboard.cpp.i:
+	$(MAKE) -f CMakeFiles\Mygobang.dir\build.make CMakeFiles/Mygobang.dir/chessboard.cpp.i
+.PHONY : chessboard.cpp.i
+
+chessboard.s: chessboard.cpp.s
+
+.PHONY : chessboard.s
+
+# target to generate assembly for a file
+chessboard.cpp.s:
+	$(MAKE) -f CMakeFiles\Mygobang.dir\build.make CMakeFiles/Mygobang.dir/chessboard.cpp.s
+.PHONY : chessboard.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -259,6 +286,9 @@ help:
 	@echo ... Mygobang_autogen/mocs_compilation.obj
 	@echo ... Mygobang_autogen/mocs_compilation.i
 	@echo ... Mygobang_autogen/mocs_compilation.s
+	@echo ... chessboard.obj
+	@echo ... chessboard.i
+	@echo ... chessboard.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

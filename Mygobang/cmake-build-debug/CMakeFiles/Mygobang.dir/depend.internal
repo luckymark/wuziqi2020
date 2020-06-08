@@ -4,148 +4,30 @@
 CMakeFiles/Mygobang.dir/AI.cpp.obj
  D:/GitHub/wuziqi2020/Mygobang/AI.cpp
  D:/GitHub/wuziqi2020/Mygobang/AI.h
- D:/GitHub/wuziqi2020/Mygobang/mainwindow.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/QPoint
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/QVariant
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qalgorithms.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qarraydata.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qatomic.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qatomic_bootstrap.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qatomic_cxx11.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qatomic_msvc.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qbasicatomic.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qbytearray.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qbytearraylist.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qchar.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcompilerdetection.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qconfig-bootstrapped.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qconfig.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcontainerfwd.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcontainertools_impl.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcontiguouscache.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcoreapplication.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qcoreevent.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qdatastream.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qdebug.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qeventloop.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qfile.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qfiledevice.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qflags.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qgenericatomic.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qglobal.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qglobalstatic.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qhash.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qhashfunctions.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qiodevice.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qiterator.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qline.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qlist.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qlocale.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qlogging.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qmap.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qmargins.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qmetatype.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qmutex.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qnamespace.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qnumeric.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qobject.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qobject_impl.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qobjectdefs.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qobjectdefs_impl.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qpair.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qpoint.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qprocessordetection.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qrect.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qrefcount.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qregexp.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qscopedpointer.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qset.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qshareddata.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qsharedpointer.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qsharedpointer_impl.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qsize.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstring.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringalgorithms.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringbuilder.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringlist.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringliteral.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringmatcher.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qstringview.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qsysinfo.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qsystemdetection.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qtcore-config.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qtextstream.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qtypeinfo.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qurl.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qurlquery.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qvariant.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qvarlengtharray.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qvector.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtCore/qversiontagging.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/QMouseEvent
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/QPainter
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qbrush.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qcolor.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qcursor.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qevent.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qfont.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qfontinfo.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qfontmetrics.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qguiapplication.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qicon.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qimage.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qinputmethod.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qkeysequence.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qmatrix.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpaintdevice.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpainter.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpainterpath.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpalette.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpen.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpixelformat.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpixmap.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qpolygon.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qregion.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qrgb.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qrgba64.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qtextoption.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qtgui-config.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qtguiglobal.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qtouchdevice.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qtransform.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qvector2d.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qwindowdefs.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtGui/qwindowdefs_win.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QApplication
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QDialog
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QLabel
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QMainWindow
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QMenuBar
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QPushButton
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QStatusBar
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QToolBar
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/QWidget
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qabstractbutton.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qaction.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qactiongroup.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qapplication.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qdesktopwidget.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qdialog.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qframe.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qlabel.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmainwindow.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmenu.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmenubar.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qmessagebox.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qpushbutton.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qsizepolicy.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qstatusbar.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qtabwidget.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qtoolbar.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qtwidgets-config.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qtwidgetsglobal.h
- D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qwidget.h
- Mygobang_autogen/include/ui_MainWindow.h
 CMakeFiles/Mygobang.dir/Mygobang_autogen/mocs_compilation.cpp.obj
  ../AI.h
  ../mainwindow.h
@@ -292,6 +174,9 @@ CMakeFiles/Mygobang.dir/Mygobang_autogen/mocs_compilation.cpp.obj
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qtwidgetsglobal.h
  D:/Qt/Qt5.14.1/5.14.1/mingw73_32/include/QtWidgets/qwidget.h
  Mygobang_autogen/include/ui_MainWindow.h
+CMakeFiles/Mygobang.dir/chessboard.cpp.obj
+ D:/GitHub/wuziqi2020/Mygobang/chessboard.cpp
+ D:/GitHub/wuziqi2020/Mygobang/chessboard.h
 CMakeFiles/Mygobang.dir/main.cpp.obj
  D:/GitHub/wuziqi2020/Mygobang/AI.h
  D:/GitHub/wuziqi2020/Mygobang/main.cpp

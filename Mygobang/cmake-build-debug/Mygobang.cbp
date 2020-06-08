@@ -120,6 +120,12 @@
 		<Unit filename="D:/GitHub/wuziqi2020/Mygobang/AI.h">
 			<Option target="Mygobang"/>
 		</Unit>
+		<Unit filename="D:/GitHub/wuziqi2020/Mygobang/chessboard.cpp">
+			<Option target="Mygobang"/>
+		</Unit>
+		<Unit filename="D:/GitHub/wuziqi2020/Mygobang/chessboard.h">
+			<Option target="Mygobang"/>
+		</Unit>
 		<Unit filename="D:/GitHub/wuziqi2020/Mygobang/cmake-build-debug/Mygobang_autogen/mocs_compilation.cpp">
 			<Option target="Mygobang"/>
 		</Unit>
