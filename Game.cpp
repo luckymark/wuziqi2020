@@ -197,7 +197,7 @@ void Game::search(int deep) {
         int row = points[i][0];
         int col = points[i][1];
         map[row][col] = WHITE;
-        int v = maxmin(deep - 1, best);
+        int v = maxmin(deep - 1, INT_MAX, INT_MIN);
         map[row][col] = SPACE;
         if (v == best) {
             best_points[best_length][0] = row;
@@ -219,30 +219,38 @@ void Game::search(int deep) {
     map[row][col] = WHITE;
 }
 
-int Game::maxmin(int deep, int ab) {
+int Game::maxmin(int deep, int alpha, int beta) {
     int v = evaluate();
     Player win = checkWin();
-    if (deep <= 0 || win == AI) {
+    if (deep <= 0 || win != NONE) {
         return v;
     }
     int best = INT_MIN;
     int points[255][2];
     int length = gen_points(points);
+    int ab = 0;
 
     for (int i = 0; i < length; i++) {
         int row = points[i][0];
         int col = points[i][1];
         if (deep % 2 == 0) {
             map[row][col] = WHITE;
+            int v = maxmin(deep - 1, alpha, best > beta ? best : beta);
+            if (v > alpha) {
+                ab = 1;
+            }
         } else {
             map[row][col] = BLACK;
+            int v = maxmin(deep - 1, best < alpha ? best : alpha, beta);
+            if (v < beta) {
+                ab = 1;
+            }
         }
-        int v = maxmin(deep - 1, best > ab ? best : ab);
         map[row][col] = SPACE;
         if (v > best) {
             best = v;
         }
-        if (v <= ab) {
+        if (ab == 1) {
             break;
         }
     }

@@ -34,7 +34,7 @@ private:
     Player checkWin();
     Player switchWin(int row, int col);
     void search(int deep);
-    int maxmin(int deep, int ab);
+    int maxmin(int deep, int alpha, int beta);
     int gen_points(int points[255][2]);
 };
 
