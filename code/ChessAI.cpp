@@ -1,5 +1,6 @@
 #include "ChessAI.h"
 #include <cstdlib>
+#include <conio.h>
 enum {
 	OTHER,
 	WIN,
@@ -39,8 +40,6 @@ const long long VALUE[] = {
 	1,
 	-3
 };//估分表
-
-//0表空，1表自己，2表敌方（棋形表）
 
 
 void ChessAI::init_typescore()
@@ -234,6 +233,21 @@ void ChessAI::init_typescore()
 	}
 }
 
+bool ChessAI::AI_set_chess(Checkerboard& board)
+{
+	Point p;
+	p = get_best(board);
+	board.set_chess(p.x, p.y, WHITECHESS);
+	board.print_chess();
+	if (board.judge(p.x, p.y, WHITECHESS))
+	{
+		board.print_win();
+		_getch();
+		return true;
+	}
+	return false;
+}
+
 EVALUATION ChessAI::get_score(Checkerboard& board)
 {
 	int stat[4][17];//四个方向上的棋型
@@ -242,20 +256,20 @@ EVALUATION ChessAI::get_score(Checkerboard& board)
 	int STAT[17];//存某个方向的棋型
 	memset(STAT, 0, sizeof(STAT));
 
+	int i, j, type;//稍微加点速度移到外面来。
 	int Board[17][17];	//用来加入边界
-	for (int i = 0;i < 17;i++) {
+	memset(Board, 0, sizeof(Board));
+	for (i = 0;i < 17;i++) {
 		Board[i][0] = 3;
 		Board[i][16] = 3;
 		Board[0][i] = 3;
 		Board[16][i] = 3;
 	}
-	for (int i = 1; i < 16;i++) {
-		for (int j = 1; j < 16; j++)
-		{
-			Board[i][j] = board.board[i][j];
+	for (i = 1; i < 16;i++) {
+		for (j = 1; j < 16; j++) {
+			Board[i][j] = board.board[i-1][j-1];
 		}	
 	}
-	int i,j,type;//稍微加点速度移到外面来。
 	//判断横向棋型
 	for (i = 1;i <= 15;++i) {
 		for (j = 0;j < 12;++j) {
@@ -286,13 +300,11 @@ EVALUATION ChessAI::get_score(Checkerboard& board)
 	}
 	EVALUATION eval;
 
-	for (i = 1; i <= 16; i++)
-	{
+	for (i = 1; i <= 16; i++) {
 		int count = stat[0][i] + stat[1][i] + stat[2][i] + stat[3][i];
 		eval.score += count * VALUE[i];
 
-		switch (i)
-		{
+		switch (i) {
 		case WIN:
 			eval.STAT[WIN] = count;
 			break;
@@ -322,6 +334,31 @@ EVALUATION ChessAI::get_score(Checkerboard& board)
 	}
 
 	return eval;
+}
+
+Point ChessAI::get_best(Checkerboard board) {
+	Point maxp(0,0,INT64_MIN);
+	EVALUATION temp;
+	for (int i = 0; i < 15; i++) {
+		for (int j = 0; j < 15; j++) {
+			if (!board.board[i][j]) {
+				board.board[i][j] = WHITECHESS;
+				temp = get_score(board);
+
+				//TODO:测试用，记得删去
+				char s[25];
+				sprintf_s(s, "%lld", temp.score);
+				outtextxy(40 * (j + 1), 40 * (i + 1), s);
+
+				Point p(i, j, temp.score);
+				if (temp.score > maxp.val) {
+					maxp = p;
+				}
+				board.board[i][j] = NOTHING;
+			}
+		}
+	}
+	return maxp;
 }
 
 

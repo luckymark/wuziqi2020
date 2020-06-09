@@ -106,7 +106,9 @@ void Checkerboard::print_chess()
 
 void Checkerboard::print_win()
 {
-	outtextxy(320, 200, "WIN!!!!!");
+	settextcolor(BLACK);
+	outtextxy(320, 200, "游戏结束！");
+	outtextxy(310, 220, "按任意键退出");
 }
 
 int Checkerboard::count(const int* x) {
