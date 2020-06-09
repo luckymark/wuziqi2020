@@ -11,15 +11,17 @@ DWORD click(COORD *position);
 
 void test() {
     int chesses[][3] = {
-        {4,10,WHITE},
-        {5,9,BLACK},{5,10,BLACK},{5,12,WHITE},
-        {6,6,BLACK},{6,8,BLACK},{6,10,WHITE},{6,11,BLACK},
-        {7,6,BLACK},{7,7,BLACK},{7,10,WHITE},
-        {8,6,BLACK},{8,9,WHITE},{8,10,WHITE},
-        {9,5,WHITE},{9,6,WHITE},{9,8,WHITE},{9,10,WHITE},
-        {10,7,BLACK},{10,10,BLACK}
+        //{5,5,1},
+        {6,3,1},{6,6,1},{6,7,1},
+        {7,4,2},{7,6,2},//{7,7,1},
+        {8,4,1},{8,5,2},{8,6,1},{8,7,1},{8,8,1},
+        {9,4,2},{9,5,1},{9,6,2},{9,7,2},//{9,9,1},
+        {10,3,1},{10,4,2},{10,6,1},{10,7,2},//{10,10,2},
+        {11,2,2},{11,7,2},{11,8,1},
+        {12,3,2},
+        //{13,4,2}
     };
-    for (int k = 0; k < 20; k++) {
+    for (int k = 0; k < 22; k++) {
         putchess(hOUT, &board, chesses[k][0], chesses[k][1], chesses[k][2]);
         putchess_lines(&lines, chesses[k][0], chesses[k][1], chesses[k][2]);
     }

@@ -1,4 +1,5 @@
 #include "board.h"
+#include <time.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -32,6 +33,10 @@ static const WORD colors[3] = {
     BG_RGB,
     FOREGROUND_INTENSITY|FG_RGB|BG_RGB
 };
+
+static void dprint(HANDLE h, char dchar[]);
+static void clearscreen(HANDLE h);
+static void paintbox(HANDLE h);
 
 static void dprint(HANDLE h, char dchar[]) {
     CONSOLE_SCREEN_BUFFER_INFO info;
@@ -72,6 +77,13 @@ void setboard(HANDLE h, Board *board) {
     SetConsoleTextAttribute(h, colors[NONE]);                   // 设置颜色
     clearscreen(h);                                             // 清空屏幕
     paintbox(h);                                                // 绘制棋盘
+    if (LOG) {
+        struct tm* tblock;
+        time_t timer = time(NULL);
+        tblock = localtime(&timer);
+        FILE *fp = fopen(FILENAME, "a");
+        fprintf(fp, "\n\n%s", asctime(tblock));
+    }
 }
 
 status putchess(HANDLE h, Board *board, int x, int y, chess c) {
@@ -93,6 +105,10 @@ status putchess(HANDLE h, Board *board, int x, int y, chess c) {
             tryX = x, tryY = y;
         }
         else {
+            if (LOG) {
+                FILE *fp = fopen(FILENAME, "a");
+                fprintf(fp, "{%d,%d,%d},", x, y, c);
+            }
             (*board).a[x][y] = c;
             const int dxy[4][2] = { {0,1}, {1,0}, {1,1}, {1,-1} };
             for (int k = 0; k < 4; k++) {

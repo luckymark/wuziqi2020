@@ -11,13 +11,16 @@ typedef struct {
     int w[4][MAXN * 2];
     int points[MAXN * MAXN][3];
     int number;
+    int b3, b4;
+    int w3, w4;
 } Lines;
 
 typedef struct {
-    int x, y, alpha, beta;
+    int x, y;
+    long long alpha, beta;
 } MinimaxInfo;
 
 void preprocess();
 void init_lines(Lines *lines);
 void putchess_lines(Lines *lines, int x, int y, int c);
-MinimaxInfo minimax(Lines *lines, int depth, int score, int alpha, int beta);
+MinimaxInfo minimax(Lines *lines, int depth, long long score, long long alpha, long long beta);
