@@ -33,3 +33,6 @@
 
 .idea/
 cmake-build-debug/
+build/
+bin/
+*.user

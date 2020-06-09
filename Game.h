@@ -2,8 +2,7 @@
 #define WUZIQI2020_GAME_H
 
 const int kBoardSizeNum = 15;
-const int maxDeep = 2;
-const int firstSteps = 15;
+const int Deep = 2;
 
 enum Player {
     NONE,
@@ -17,13 +16,6 @@ enum Chess {
     WHITE // AI
 };
 
-typedef struct step {
-    int row, col;
-    int point;
-    int nextLength;
-    struct step *nextSteps[225];
-} Step;
-
 class Game {
 public:
     Chess map[kBoardSizeNum][kBoardSizeNum]{SPACE};
@@ -35,15 +27,15 @@ public:
 
 private:
     int steps{0};
-    Step rootStep{};
 
     bool available(int row, int col);
     static int calc(int same, int dead, Chess chess);
     int evaluate();
-    void gen_steps(Step *step, int deep);
-    void destroy_steps(Step *step, int deep);
-    void checkWin(int row, int col);
-    void switchWin(int row, int col);
+    Player checkWin();
+    Player switchWin(int row, int col);
+    void search(int deep);
+    int maxmin(int deep, int ab);
+    int gen_points(int points[255][2]);
 };
 
 

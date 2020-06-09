@@ -6,8 +6,8 @@ const int points[] = {
         10, // 1. live one or dead two
         100, // 2. live two or dead three
         1000, // 3. live three or dead four
-        1000000, // 4. live four or dead five
-        1000000 // 5. live five
+        10000, // 4. live four or dead five
+        100000 // 5. live five
 };
 
 #endif //WUZIQI2020_POINTS_H

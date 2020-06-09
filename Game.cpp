@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <limits.h>
 #include "Game.h"
 #include "points.h"
 
@@ -6,7 +8,7 @@ bool Game::chessByPerson(int clickPosRow, int clickPosCol) {
         clickPosCol >= 0 && clickPosCol <= kBoardSizeNum &&
         map[clickPosRow][clickPosCol] == SPACE) {
         map[clickPosRow][clickPosCol] = BLACK;
-        checkWin(clickPosRow, clickPosCol);
+        isWin = checkWin();
         steps++;
         player = AI;
         return true;
@@ -15,16 +17,8 @@ bool Game::chessByPerson(int clickPosRow, int clickPosCol) {
 }
 
 void Game::chessByAI() {
-    gen_steps(&rootStep, maxDeep);
-    Step *nextStep = rootStep.nextSteps[0];
-    for (int i = 1; i < rootStep.nextLength; i++) {
-        if (rootStep.nextSteps[i]->point > nextStep->point) {
-            nextStep = rootStep.nextSteps[i];
-        }
-    }
-    map[nextStep->row][nextStep->col] = WHITE;
-    checkWin(nextStep->row, nextStep->col);
-    destroy_steps(&rootStep, maxDeep);
+    search(Deep);
+    isWin = checkWin();
     steps++;
     player = PERSON;
 }
@@ -37,9 +31,6 @@ int Game::calc(int same, int dead, Chess chess) {
                 point = points[same-dead];
                 break;
             case BLACK:
-                if (same - dead == 3) {
-                    same++;
-                }
                 point = -(points[same-dead]);
                 break;
             default:
@@ -125,42 +116,6 @@ int Game::evaluate() {
     return all_points;
 }
 
-void Game::gen_steps(Step *step, int deep) {
-    if (deep != 0) {
-        step->nextLength = 0;
-        for (int row = 0; row < kBoardSizeNum; row++) {
-            for (int col = 0; col < kBoardSizeNum; col++) {
-                if (available(row, col)) {
-                    Step *newStep = new Step;
-                    newStep->row = row;
-                    newStep->col = col;
-                    if (deep % 2 == 0) {
-                        map[row][col] = WHITE;
-                    } else {
-                        map[row][col] = BLACK;
-                    }
-                    newStep->point = evaluate();
-                    step->nextSteps[step->nextLength] = newStep;
-                    step->nextLength++;
-                    gen_steps(newStep, deep - 1);
-                    map[row][col] = SPACE;
-                }
-            }
-        }
-    }
-}
-
-void Game::destroy_steps(Step *step, int deep) {
-    if (deep != 0) {
-        for (int i = 0; i < step->nextLength; i++) {
-            destroy_steps(step->nextSteps[i], deep - 1);
-            if (deep != maxDeep) {
-                delete step;
-            }
-        }
-    }
-}
-
 bool Game::available(int row, int col) {
     if (map[row][col] == SPACE) {
         for (int row0 = row - 2 < 0 ? 0 : row - 2; row0 < (row + 2 > kBoardSizeNum - 1 ? kBoardSizeNum - 1 : row + 2); row0++) {
@@ -174,58 +129,137 @@ bool Game::available(int row, int col) {
     return false;
 }
 
-void Game::checkWin(int row, int col) {
-    for (int i = 0; i < 5; i++) {
-        // Vertical
-        if (row - i > 0 && row - i + 4 < kBoardSizeNum &&
-            map[row - i][col] == map[row - i + 1][col] &&
-            map[row - i][col] == map[row - i + 2][col] &&
-            map[row - i][col] == map[row - i + 3][col] &&
-            map[row - i][col] == map[row - i + 4][col]) {
-            switchWin(row, col);
-            return;
+Player Game::checkWin() {
+    for (int row = 0; row < kBoardSizeNum; row++) {
+        for (int col = 0; col < kBoardSizeNum; col++) {
+            if (map[row][col] != SPACE) {
+                // Vertical
+                if (row > 0 && row + 4 < kBoardSizeNum &&
+                    map[row][col] == map[row + 1][col] &&
+                    map[row][col] == map[row + 2][col] &&
+                    map[row][col] == map[row + 3][col] &&
+                    map[row][col] == map[row + 4][col]) {
+                    return switchWin(row, col);
+                }
+                // Horizontal
+                if (col > 0 && col + 4 < kBoardSizeNum &&
+                    map[row][col] == map[row][col + 1] &&
+                    map[row][col] == map[row][col + 2] &&
+                    map[row][col] == map[row][col + 3] &&
+                    map[row][col] == map[row][col + 4]) {
+                    return switchWin(row, col);
+                }
+                // Lower right
+                if (row > 0 && row + 4 < kBoardSizeNum &&
+                    col > 0 && col + 4 < kBoardSizeNum &&
+                    map[row][col] == map[row + 1][col + 1] &&
+                    map[row][col] == map[row + 2][col + 2] &&
+                    map[row][col] == map[row + 3][col + 3] &&
+                    map[row][col] == map[row + 4][col + 4]) {
+                    return switchWin(row, col);
+                }
+                // Higher right
+                if (row - 4 > 0 && row < kBoardSizeNum &&
+                    col > 0 && col + 4 < kBoardSizeNum &&
+                    map[row][col] == map[row - 1][col + 1] &&
+                    map[row][col] == map[row - 2][col + 2] &&
+                    map[row][col] == map[row - 3][col + 3] &&
+                    map[row][col] == map[row - 4][col + 4]) {
+                    return switchWin(row, col);
+                }
+            }
         }
-        // Horizontal
-        if (col - i > 0 && col - i + 4 < kBoardSizeNum &&
-            map[row][col - i] == map[row][col - i + 1] &&
-            map[row][col - i] == map[row][col - i + 2] &&
-            map[row][col - i] == map[row][col - i + 3] &&
-            map[row][col - i] == map[row][col - i + 4]) {
-            switchWin(row, col);
-            return;
-        }
-        // Lower right
-        if (row - i > 0 && row - i + 4 < kBoardSizeNum &&
-            col - i > 0 && col - i + 4 < kBoardSizeNum &&
-            map[row - i][col - i] == map[row - i + 1][col - i + 1] &&
-            map[row - i][col - i] == map[row - i + 2][col - i + 2] &&
-            map[row - i][col - i] == map[row - i + 3][col - i + 3] &&
-            map[row - i][col - i] == map[row - i + 4][col - i + 4]) {
-            switchWin(row, col);
-            return;
-        }
-        // Higher right
-        if (row + i - 4 > 0 && row + i < kBoardSizeNum &&
-            col - i > 0 && col - i + 4 < kBoardSizeNum &&
-            map[row + i][col - i] == map[row + i - 1][col - i + 1] &&
-            map[row + i][col - i] == map[row + i - 2][col - i + 2] &&
-            map[row + i][col - i] == map[row + i - 3][col - i + 3] &&
-            map[row + i][col - i] == map[row + i - 4][col - i + 4]) {
-            switchWin(row, col);
-            return;
-        }
+    }
+
+    return NONE;
+}
+
+Player Game::switchWin(int row, int col) {
+    switch (map[row][col]) {
+        case WHITE:
+            return AI;
+        case BLACK:
+            return PERSON;
+        default:
+            return NONE;
+            break;
     }
 }
 
-void Game::switchWin(int row, int col) {
-    switch (map[row][col]) {
-        case WHITE:
-            isWin = AI;
-            break;
-        case BLACK:
-            isWin = PERSON;
-            break;
-        default:
-            break;
+void Game::search(int deep) {
+    int best = INT_MIN;
+    int points[255][2];
+    int length = gen_points(points);
+    int best_points[255][2];
+    int best_length = 0;
+
+    for (int i = 0; i < length; i++) {
+        int row = points[i][0];
+        int col = points[i][1];
+        map[row][col] = WHITE;
+        int v = maxmin(deep - 1, best);
+        map[row][col] = SPACE;
+        if (v == best) {
+            best_points[best_length][0] = row;
+            best_points[best_length][1] = col;
+            best_length++;
+        }
+        if (v > best) {
+            best = v;
+            best_length = 0;
+            best_points[best_length][0] = row;
+            best_points[best_length][1] = col;
+            best_length++;
+        }
     }
+
+    int point = rand() % best_length;
+    int row = best_points[point][0];
+    int col = best_points[point][1];
+    map[row][col] = WHITE;
+}
+
+int Game::maxmin(int deep, int ab) {
+    int v = evaluate();
+    Player win = checkWin();
+    if (deep <= 0 || win == AI) {
+        return v;
+    }
+    int best = INT_MIN;
+    int points[255][2];
+    int length = gen_points(points);
+
+    for (int i = 0; i < length; i++) {
+        int row = points[i][0];
+        int col = points[i][1];
+        if (deep % 2 == 0) {
+            map[row][col] = WHITE;
+        } else {
+            map[row][col] = BLACK;
+        }
+        int v = maxmin(deep - 1, best > ab ? best : ab);
+        map[row][col] = SPACE;
+        if (v > best) {
+            best = v;
+        }
+        if (v <= ab) {
+            break;
+        }
+    }
+
+    return best;
+}
+
+int Game::gen_points(int points[255][2]) {
+    int length = 0;
+    for (int row = 0; row < kBoardSizeNum; row++) {
+        for (int col = 0; col < kBoardSizeNum; col++) {
+            if (available(row, col)) {
+                points[length][0] = row;
+                points[length][1] = col;
+                length++;
+            }
+        }
+    }
+    return length;
 }
