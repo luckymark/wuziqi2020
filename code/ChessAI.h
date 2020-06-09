@@ -1,13 +1,29 @@
 #pragma once
 #include "Player.h"
+#include <string>
+
+enum RESULT {
+	DRAW,
+	B_WIN,
+	W_WIN
+};
+
+struct EVALUATION {
+	long long score;
+	RESULT result;
+	int STAT[8];//用来储存某些棋型，看能不能杀棋
+
+	EVALUATION() : score(0){
+		memset(STAT, 0, sizeof(STAT));
+	}
+};
+
 class ChessAI : public Player
 {
 private:
-	long long score_self,score_other;
-	int want_set_x, want_set_y;	//在递归出最优解时应该下的位置
-	int* guess_line(int x, int y, int front);
+	void init_typescore();//初始化棋型
 public:
-	void get_score(Checkerboard& board,int x,int y);//获得在x，y下棋后的棋盘对score的改变
+	EVALUATION get_score(Checkerboard& board);
 
 };
 

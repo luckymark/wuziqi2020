@@ -39,7 +39,7 @@ bool Checkerboard::judge(int x, int y, int c) {
 	for (int i = 0; i < 4; ++i) {
 		int* line = get_line(x, y, i);
 		int cnt = count(line);
-		free(line);
+		delete line;
 		line = nullptr;
 		if (cnt >= 5) {
 			return true;
@@ -48,10 +48,11 @@ bool Checkerboard::judge(int x, int y, int c) {
 	return false;
 }
 
+// π”√∫Û«ÎdeleteµÙ
 int* Checkerboard::get_line(int x, int y, int front) {
-	int* line = (int*)malloc(sizeof(int) * 9);
+	int* line = new int[9];
 	if (line == nullptr) {
-		return nullptr;
+		exit(-1);
 	}
 	memset(line, -1, sizeof(int) * 9);
 	int dx = FRONT[front][0], dy = FRONT[front][1];

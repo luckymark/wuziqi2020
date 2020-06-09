@@ -11,9 +11,8 @@
 #include <easyx.h>
 
 class Checkerboard {
-private:
-	int board[15][15];
 public:
+	int board[15][15];
 	Checkerboard();
 	~Checkerboard() = default;
 

@@ -26,6 +26,7 @@ bool Player::set_chess(Checkerboard& board, int x, int y)
 	return board.set_chess(x, y, color);
 }
 
+//Ê¹ÓÃºóÇëdeleteµô
 int* Player::get_line(Checkerboard& board, int x, int y, int front)
 {
 	int* line;
