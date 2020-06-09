@@ -1,3 +1,0 @@
-C:/Users/Qliphort Genius/wuziqi2020/FiveChess/cmake-build-debug/CMakeFiles/FiveChess.dir
-C:/Users/Qliphort Genius/wuziqi2020/FiveChess/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Qliphort Genius/wuziqi2020/FiveChess/cmake-build-debug/CMakeFiles/rebuild_cache.dir
