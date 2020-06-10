@@ -6,12 +6,18 @@
 #include "game.h"
 
 void InitWindow(){
+    int i;
     setinitmode(0);
     initgraph(600, 485);//打开一个长640像素，宽480像素的窗口
     setfont(18,0,"宋体");
     setcaption("wuziqi");
     setbkcolor(WHITE);
     setcolor(BLACK);
+    for (i = 0; i < 15; i++)
+    {
+        line(START_X + DXY * i, START_Y, START_X + DXY * i, START_Y + 14 * DXY);
+        line(START_X, START_Y+ DXY * i, START_X + 14 * DXY, START_Y + DXY * i);
+    }
     PIMAGE qipan;
     qipan = newimage();
     getimage(qipan, "qipan.jpg");
@@ -55,14 +61,12 @@ int PutItems(const int x, const int y, const int Is_B_OR_W, const int Ai_Or_Play
         CurrentChess[ChessNums].coord.X= Judge_x;
         CurrentChess[ChessNums].coord.Y = Judge_y;
         CurrentChess[ChessNums].type = -1;
-        outtextxy(478,20,"no");
         ChessNums++;
     } else if (Ai_Or_Player == 0){
         Qipan_Array[y][x] = AI_CHESS;
         CurrentChess[ChessNums].coord.X= x;
         CurrentChess[ChessNums].coord.Y= y;
         CurrentChess[ChessNums].type = 1;
-        outtextxy(478,20,"yes");
         ChessNums++;
     }
     return 1;

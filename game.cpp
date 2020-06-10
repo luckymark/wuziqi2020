@@ -2,11 +2,10 @@
 // Created by pointkab on 2020/4/24.
 //
 
-#include <cstdio>
 #include "game.h"
 #include <ctime>
 
-
+extern int alpha0, beta0;
 
 int Qipan_Array[QIPAN_SIZE][QIPAN_SIZE] = {0};
 
@@ -24,11 +23,40 @@ int Game_Body()
         /*开始游戏*/
 
         Player_Play();
-        Sleep(200);
+        Sleep(50);
+        if ((Who_Is_Win = EvaluateAllChess(1)) != 0)
+        {
+            JudgeWin(Who_Is_Win);
+            int temp = Restart();
+            if (temp)
+            {
+                continue;
+            }
+            break;
+        }
+        if (ChessNums >= 225)
+        {
+            JudgeWin(Who_Is_Win);
+            int temp = Restart();
+            if (temp)
+            {
+                continue;
+            }
+            break;
+        }
         AI_Play();
-        Sleep(200);
+        if ((Who_Is_Win = EvaluateAllChess(1)) != 0)
+        {
+            JudgeWin(Who_Is_Win);
+            int temp = Restart();
+            if (temp)
+            {
+                continue;
+            }
+            break;
+        }
+        Sleep(50);
     }
-    return Who_Is_Win;
 }
 
 int Player_Play()
@@ -48,16 +76,10 @@ int Player_Play()
                 break;
             }
         }
-//        else if(msg.is_right())
-//        {
-//            PutItems(msg.x,msg.y,0,0);
-//            break;
-//        }
     }
 }
 
 void AI_Play(){
-    /*待修改，电脑下的第一步*/
     if(ChessNums == 1)
     {
         srand((unsigned)time(NULL));
@@ -73,7 +95,7 @@ void AI_Play(){
         }while((a == 0&&b == 0)|| temp_a > 14||temp_a < 0||temp_b > 14 || temp_b < 0);
         PutItems(temp_a, temp_b, 0, 0);
     } else {
-        Search_Tree(4);
+        Search_Tree(4, alpha0, beta0);
         int x = Delocation.coord.X;
         int y = Delocation.coord.Y;
         PutItems(x, y, 0, 0);
@@ -82,3 +104,36 @@ void AI_Play(){
     return;
 }
 
+int Restart(){
+    int Is_continue;
+    outtextxy(478, 40, "press any key");
+    outtextxy(478, 60, "to continue");
+    if (getch())
+    {
+        InitWindow();
+        ChessNums = 0;
+        memset(Qipan_Array,0,15*15*sizeof(int));
+        Is_continue = 1;
+    } else {
+        Is_continue = 0;
+    }
+    return Is_continue;
+}
+
+void JudgeWin(int result){
+    if (result == -1)
+    {
+        //ai is win
+        outtextxy(478, 20, "You lose!");
+    }
+    if (result == 0)
+    {
+        //draw
+        outtextxy(478, 20, "Draw!");
+    }
+    if (result == 1)
+    {
+        //player is win
+        outtextxy(478, 20, "You win!");
+    }
+}

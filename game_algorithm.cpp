@@ -2,12 +2,11 @@
 // Created by pointkab on 2020/4/28.
 //
 #include "game.h"
-#include <ctime>
 #include <memory.h>
-#define FIVE 100000
-#define LIVE_FOUR 10000
-#define CHONG_FOUR 2000
-#define LIVE_THREE 8000
+#define FIVE 1000000
+#define LIVE_FOUR 90000
+#define CHONG_FOUR 3000
+#define LIVE_THREE 5000
 #define MIAN_THREE 1500
 #define LIVE_TWO 1000
 #define MIAN_TWO 100
@@ -17,21 +16,51 @@ struct ChessScore Delocation;
 
 int Qipan_status[QIPAN_SIZE][QIPAN_SIZE];
 
-int Search_Tree(int depth){
+int alpha0 = -10000000, beta0 = 10000000;
+
+int AI_sha = 0, PL_sha = 0;
+
+int Search_Tree(int depth, int alpha, int beta){
     int i,index = 0;
-    struct ChessScore scores[100];
-    int n =  GetValueChess(scores, depth);
-    if (n > 10) n = 10;
+    struct ChessScore scores[150];
+    int n =  GetValueChess(scores, depth, alpha, beta);
+    if (depth == 1)
+    {
+        return scores[0].score;
+    }
     for (i = 0; i < n; i++)
     {
+        if (AI_sha == 1 && depth == DEPTH)
+        {
+            AI_sha = 0;
+            break;
+        }
+        if (PL_sha == 1 && depth == DEPTH -1)
+        {
+            PL_sha = 0;
+            break;
+        }
         VirtualPut(scores, i);
         index++;
-        if (depth == 1)
+        scores[i].score = Search_Tree(depth - 1, alpha, beta);
+        if (scores[i].score > alpha && depth%2 == 0)
+        {
+            alpha = scores[i].score;
+        }
+        if (alpha >= beta && depth%2 == 0)
         {
             DeleChess(scores, i);
-            continue;
+            break;
         }
-        scores[i].score = Search_Tree(depth - 1);
+        if (scores[i].score < beta && depth%2 != 0)
+        {
+            beta = scores[i].score;
+        }
+        if (alpha <= beta && depth%2 != 0)
+        {
+            DeleChess(scores, i);
+            break;
+        }
         DeleChess(scores, i);
     }
     Sort(scores, index, depth);
@@ -43,10 +72,24 @@ int Search_Tree(int depth){
     return scores[0].score;
 }
 
-int GetValueChess(ChessScore scores[], int depth){
-    int i, j, k, temp1, temp2;
+int GetValueChess(ChessScore scores[], int depth, int alpha, int beta){
+    int i, j, k, temp1, temp2, ctrlN;
     int count = 0;//有效棋子的个数
     int chessType;//棋子的类型
+    AI_sha = 0;
+    PL_sha = 0;
+    if (depth > 2 && ChessNums < 30)
+    {
+        ctrlN = 2;
+    }
+    else if (depth > 2 && ChessNums >= 30)
+    {
+        ctrlN = 1;
+    }
+    else if (depth <= 2)
+    {
+        ctrlN = 2;
+    }
     memset(Qipan_status, 0, 15*15* sizeof(int));
     if (depth%2 == 0){
         //电脑的棋子
@@ -103,7 +146,7 @@ int GetValueChess(ChessScore scores[], int depth){
                     temp2 = -1;
                     break;
             }
-            for (j = 0; j < 2; j++) {
+            for (j = 0; j < ctrlN; j++) {
                 if (Chessy - temp1*(j + 1) < 0 || Chessx - temp2*(j + 1) < 0 || Chessx - temp2*(j + 1) > 14 || Chessy - temp1*(j + 1) > 14)
                 { break;}
                 if (Qipan_status[Chessy - temp1 * (j + 1)][Chessx - temp2 * (j + 1)] != 0)//位置已经遍历
@@ -113,14 +156,37 @@ int GetValueChess(ChessScore scores[], int depth){
                     scores[count].coord.X = Chessx - temp2*(j + 1);
                     scores[count].coord.Y = Chessy - temp1*(j + 1);
                     Qipan_Array[Chessy - temp1*(j + 1)][Chessx - temp2*(j + 1)] = chessType;
-                    scores[count].score = EvaluateAllChess();
+                    scores[count].score = EvaluateAllChess(0);
                     Qipan_Array[Chessy - temp1*(j + 1)][Chessx - temp2*(j + 1)] = 0;
                     Qipan_status[Chessy - temp1 * (j + 1)][Chessx - temp2 * (j + 1)] = 1;
                     count++;
+                    if (alpha > scores[count - 1].score && depth == 1)
+                    {
+                        break;
+                    }
+                    if (depth == DEPTH && AI_sha == -1)
+                    {
+                        break;
+                    }
+                    if (depth == DEPTH -1 && PL_sha == 1)
+                    {
+                        break;
+                    }
                 }
             }
+            if (alpha > scores[count - 1].score && depth == 1)
+            {
+                break;
+            }
+            if (depth == DEPTH && AI_sha == -1)
+            {
+                break;
+            }
+            if (depth == DEPTH -1 && PL_sha == 1)
+            {
+                break;
+            }
         }
-
     }
     Sort(scores, count, depth);
     return count;
@@ -167,10 +233,10 @@ void Sort(ChessScore* scores, int count, int depth){
     }
 }
 
-int EvaluateAllChess(){
+int EvaluateAllChess(int judge){
     //暴力匹配、ac算法暂时不会
     //思路：每行，每列，每斜列 对棋型进行匹配
-    int i, j, score = 0;
+    int i, j, r = 0, score = 0;
     int matchChess[15][15][4];
     //初始化棋子匹配状态
     memset(matchChess,0,15*15*4*sizeof(int));
@@ -179,14 +245,23 @@ int EvaluateAllChess(){
         {
             if (Qipan_Array[i][j] != 0)//有棋子
             {
-                score += -Matchline(i,j,matchChess);
+                if (judge == 1)
+                {
+                   r =  Matchline(i,j,matchChess,judge);
+                   if (r != 0)
+                   {
+                       return r;
+                   }
+                } else {
+                    score += -Matchline(i, j, matchChess, judge);
+                }
             }
         }
     }
     return score;
 }
 
-int Matchline(int y, int x, int matchChess[15][15][4]){
+int Matchline(int y, int x, int matchChess[15][15][4],int judge){
     int lenth = 1,i,j,k;
     int Iswin = 0;
     int direction;//方向
@@ -343,6 +418,13 @@ int Matchline(int y, int x, int matchChess[15][15][4]){
             switch (lenth) {
                 case 5:
                     Iswin = type * 1;//Ai是-1，玩家是1
+                    if (Iswin == -1)
+                    {
+                        AI_sha = 1;
+                    } else if (Iswin == 1)
+                    {
+                        PL_sha = 1;
+                    }
                     score = score + FIVE * type;
                     break;
                 case 4://4颗棋子
@@ -521,6 +603,10 @@ int Matchline(int y, int x, int matchChess[15][15][4]){
                     }
                     break;
             }
+    }
+    if (judge == 1)
+    {
+        return Iswin;
     }
     return score;
 }

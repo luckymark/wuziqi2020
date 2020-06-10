@@ -22,13 +22,6 @@ struct ChessScore{
     int score;
 };
 
-struct ChessCheck{
-    int level;
-    int vertical;
-    int left_ver;
-    int right_ver;
-};
-
 extern struct ChessScore Delocation;
 
 extern int ChessNums;
@@ -43,24 +36,22 @@ int Player_Play();//玩家下棋
 
 void AI_Play();//电脑下棋
 
-int Search_Tree(int depth);
+int Search_Tree(int depth, int alpha, int beta);
 
-int GetValueChess(ChessScore*scores, int depth);
+int GetValueChess(ChessScore*scores, int depth, int alpha, int beta);
 
-int EvaluateAllChess();
-
-int minMax(ChessScore*scores, int depth, int index);
+int EvaluateAllChess(int judge);
 
 void VirtualPut(ChessScore * scores, int i);
 
 void DeleChess(ChessScore * scores, int k);
 
-int EvaluateOneChess(int x, int y, int type);
-
-int Compare(int Mychess, int enemy);
-
 void Sort(ChessScore* scores, int count, int depth);
 
-int Matchline(int y, int x, int matchChess[15][15][4]);
+int Matchline(int y, int x, int matchChess[15][15][4],int judge);
+
+int Restart();
+
+void JudgeWin(int result);
 
 #endif //WUZIQI2020_GAME_H
