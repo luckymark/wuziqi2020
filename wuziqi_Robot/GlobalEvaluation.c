@@ -1,5 +1,6 @@
 #include "GlobalEvaluation.h"
 #include "GEInt15Data_Black.h"
+#include "pch.h"
 
 int getGlobalEvaluation(GameEngine engine)
 {

@@ -1,4 +1,6 @@
 #include "MaxMinSearch.h"
+#include "pch.h"
+
 #define MAXMIN_DEPTH 6
 #define PRIOR_COUNT 10
 #define INF 99999999
@@ -8,7 +10,7 @@
 int getBestMove_MaxMinSearch(GameEngine engine)
 {
 	//init
-	TuplePriorScore priorScore = convertToPriorTupleScore(getScore_FiveTuple(engine));
+	TuplePriorScore priorScore = convertToPriorTupleScore(getScoreFiveTuple(engine));
 	Node_MaxMinSearch startNode = {.alpha = -INF,.beta = INF,.step = 0,.value = 0};
 	int i,x,y,result = priorScore.list[0],maxEvaluation = 0,tmpEvaluation;
 
@@ -48,7 +50,7 @@ int maxMinSearch(GameEngine engine, Node_MaxMinSearch node)
 	}
 
 	//init
-	TupleScore tmpScore = getScore_FiveTuple(engine);
+	TupleScore tmpScore = getScoreFiveTuple(engine);
 	TuplePriorScore tmpPrScore = convertToPriorTupleScore(tmpScore);
 	int i,x,y,result;
 	Node_MaxMinSearch nextNode;

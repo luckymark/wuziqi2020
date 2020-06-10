@@ -14,7 +14,7 @@ typedef struct {
 
 
 //prototype
-TupleScore getScore_FiveTuple(GameEngine engine);
+TupleScore getScoreFiveTuple(GameEngine engine);
 int getTmpTupleScore(GameEngine engine, TupleScorePoint point);
 void flushTmpTupleScore(TupleScore* score, TupleScorePoint point, int tmpScore);
 int isOutOfTupleStartRange(TupleScorePoint point);

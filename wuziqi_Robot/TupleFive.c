@@ -1,4 +1,7 @@
 #include "TupleFive.h"
+#include "pch.h"
+
+
 
 //const
 const TupleScorePoint nextStep[4] = {
@@ -11,7 +14,7 @@ const int scoreMyColor[5] = {0,35,800,15000,800000};
 const int scoreEnemyColor[5] = {0,15,400,1800,100000};
 
 //function
-TupleScore getScore_FiveTuple(GameEngine engine)
+TupleScore getScoreFiveTuple(GameEngine engine)
 {
 	//init
 	TupleScore result;
