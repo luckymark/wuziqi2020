@@ -1,132 +1,152 @@
+//#pragma comment(lib,"User32.lib")
 #ifndef MIN_MAX_H
 #define MIN_MAX_H
-#include <mainwindow.h>
-#include <score_count.h>
 
-int MainWindow::evaluate_minmax(){      //ËøôÊòØËØÑ‰º∞ÂáΩÊï∞
-    int scoreAI=0;
-    int scoreplayer=0;
-    for(int i=0;i<SIZE;i++){    //Ê®™Êéí
+#include "score_count.h"
+#include <vector>
+//#pragma comment(lib,"ws2_32.lib")
+extern int chess_board[25][25];
+int max_search(int depths, int alpa);
+int min_search(int depths, int beta);
+void AImax_search(int& xxx, int& yyy, int depths);
+int evaluate_minmax();
+int evaluate_minmax() {      //’‚ «∆¿π¿∫Ø ˝
+    const int SIZES = 15;
+    int scoreAI = 0;
+    int scoreplayer = 0;
+    for (int i = 0; i < SIZES; i++) {    //∫·≈≈
         std::vector <int> v;
-        for(int j=0;j<SIZE;j++)
-            v.push_back(a[i][j]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        for (int j = 0; j < SIZES; j++)
+            v.push_back(chess_board[i][j]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    for(int j=0;j<SIZE;j++){    //Á´ñÊéí
+    for (int j = 0; j < SIZES; j++) {    // ˙≈≈
         std::vector <int> v;
-        for(int i=0;i<SIZE;i++)
-            v.push_back(a[i][j]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        for (int i = 0; i < SIZES; i++)
+            v.push_back(chess_board[i][j]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    for(int i=0;i<SIZE;i++){    //‰∏äÂçäÊ≠£ÊñúÁ∫ø
-        int x,y;
+    for (int i = 0; i < SIZES; i++) {    //…œ∞Î’˝–±œﬂ
+        int ddx, ddy;
         std::vector <int> v;
-        for(x=i,y=0;x<SIZE&&y<SIZE;++x,++y)
-            v.push_back(a[y][x]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        for (ddx = i, ddy = 0; ddx < SIZES && ddy < SIZES; ++ddx, ++ddy)
+            v.push_back(chess_board[ddy][ddx]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    for(int j=1;j<SIZE;j++){    //‰∏ãÂçäÊ≠£ÊñúÁ∫ø
-        int x,y;
+    for (int j = 1; j < SIZES; j++) {    //œ¬∞Î’˝–±œﬂ
+        int ddx, ddy;
         std::vector <int> v;
-        for(x=0,y=j;y<SIZE&&x<SIZE;x++,y++)
-            v.push_back(a[y][x]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        for (ddx = 0, ddy = j; ddy < SIZES && ddx < SIZES; ddx++, ddy++)
+            v.push_back(chess_board[ddy][ddx]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    for(int i=0;i<SIZE;i++){      //‰∏äÂçäÂèçÊñúÁ∫ø
+    for (int i = 0; i < SIZES; i++) {      //…œ∞Î∑¥–±œﬂ
         std::vector <int> v;
-        int x,y;
-        for(y=i,x=0;y>=0&&x<SIZE;y--,x++)
-            v.push_back(a[y][x]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        int ddx, ddy;
+        for (ddy = i, ddx = 0; ddy >= 0 && ddx < SIZES; ddy--, ddx++)
+            v.push_back(chess_board[ddy][ddx]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    for(int j=1;j<SIZE;j++){
+    for (int j = 1; j < SIZES; j++) {
         std::vector <int> v;
-        int x,y;
-        for(y=j,x=SIZE-1;y<16&&x>=0;y++,x--)
-            v.push_back(a[x][y]);
-        scoreplayer+=count_score(n,1);
-        scoreAI+=count_score(n,2);
+        int ddx, ddy;
+        for (ddy = j, ddx = SIZES - 1; ddy < 16 && ddx >= 0; ddy++, ddx--)
+            v.push_back(chess_board[ddx][ddy]);
+        scoreplayer += count_score(v, 1);
+        scoreAI += count_score(v, 2);
         v.clear();
     }
-    return scorecomputer-scorehumber;
-}
-int MainWindow::min_search(int depths,int beta){
-    int res=evaluate_minmax();
-    if(depth<=0){
+    return scoreAI - scoreplayer;
+} 
+//, int beta        ≤ªº”¥Û∏≈≈‹1min£®54.96s)£¨º”¡À¥Û∏≈40s◊Û”“(41.98s)
+int min_search(int depths,int beta) {    
+    if (depths <= 0) {
+        int res = evaluate_minmax();
         return res;
     }
-    std::vector < std::pair<int,int> > vv;
-    genarator_point(vv);
-    int Length=vv.size();
-    int best=INT_MAX;
-    for(int i=0;i<Length;i++){
-        int t1=vv[i].first;
-        int t2=vv[i].second;
-        a[t1][t2]=1;
-        int temps=max_search(depths-1,best < alpha ? best : alpha);
-        if(temps<best)  best=temps;
-        if(temps<beta)  break;  //Ââ™Êûù
-        a[t1][t2]=0;
+    std::vector < std::pair<std::pair<int, int>,int> > vv;
+    genarator_point(vv, 1);
+    int Length = vv.size();
+    int best = INT_MAX;
+    for (int i = 0; i < Length; i++) {
+        int t1 = vv[i].first.first;
+        int t2 = vv[i].first.second;
+        chess_board[t1][t2] = 1;
+        int temps = max_search(depths - 1, best < beta ? best : beta);
+        chess_board[t1][t2] = 0;
+        if (temps < best)  best = temps;
+        if (temps < beta)  break;
+//        int temps = max_search(depths - 1, best < alpha ? best : alpha);
+//        if (temps < best)  best = temps;
+ //       if (temps < beta)  break;  //ºÙ÷¶
     }
+
     return best;
 }
-int MainWindow::max_search(int depths,int alpha){
-    int res=evaluate_minmax();
-    if(depth<=0){
+//, int alpha
+int max_search(int depths,int alpa) {
+    if (depths <= 0) {
+        int res = evaluate_minmax();
         return res;
     }
-    std::vector < std::pair<int,int> > vv;
-    genarator_point(vv);
-    int Length=vv.size();
-    int best=INT_MIN;
-    for(int i=0;i<Length;i++){
-        int t1=vv[i].first;
-        int t2=vv[i].second;
-        a[t1][t2]=1;
-        int temps=min_search(depths-1,best > beta ? best : beta);
-        if(temps>best)  best=temps;
-        if(temps>alpha) break;//Ââ™Êûù
-        a[t1][t2]=0;
+    std::vector < std::pair<std::pair<int, int>,int> > vv;
+    genarator_point(vv, 2);
+    int Length = vv.size();
+    int best = INT_MIN;
+    for (int i = 0; i < Length; i++) {
+        int t1 = vv[i].first.first;
+        int t2 = vv[i].first.second;
+        chess_board[t1][t2] = 1;
+        int temps = min_search(depths - 1, best > alpa ? best : alpa);
+        chess_board[t1][t2] = 0;
+        if (temps > best)  best = temps;
+        if (temps > alpa)  break;
+//        int temps = min_search(depths - 1, best > beta ? best : beta);
+//        if (temps > best)  best = temps;
+//        if (temps > alpha) break;//ºÙ÷¶
     }
+    
     return best;
 }
 
-void MainWindow::AImax_search(int &xxx, int &yyy, int depths){
-    std::vector <std::pair <int,int> >  vv;
-    genarator_point(vv);
-    int best=INT_MIN;
-    int Length=vv.size();
-    std::vector <std::pair <int,int> > vv2;
-    for(int i=0;i<Length;i++){
-        int t1=vv[i].first();
-        int t2=vv[i].second();
-        a[t1][t2]=2;
-        int temp=min_search(depths-1,0);
-        if(temp>best){
-            best=temp;
+void AImax_search(int& xxx, int& yyy, int depths) {
+    std::vector <std::pair<std::pair <int, int>,int> >  vv;
+    genarator_point(vv, 2);
+    int best = INT_MIN;
+    int Length = vv.size();
+    std::vector <std::pair<std::pair <int, int>,int> > vv2;
+    for (int i = 0; i < Length; i++) {
+        int t1 = vv[i].first.first;
+        int t2 = vv[i].first.second;
+        chess_board[t1][t2] = 2;
+        int temp = min_search(depths - 1, best);
+        if (temp > best) {
+            best = temp;
             vv2.clear();
-            vv2.push_back(vv1);
-        }else{
-            if(temp==best){
-                vv2.push_back(vv1);
+            vv2.push_back(vv[i]);
+        }
+        else {
+            if (temp == best) {
+                vv2.push_back(vv[i]);
             }
         }
-        a[t1][t2]=0;
+        chess_board[t1][t2] = 0;
     }
-    int Length2=vv2.size();
-    int choose=(int)(rand()%Length2);
-    xxx=v2[choose].first();
-    yyy=v2[choose].second();
+    int Length2 = vv2.size();
+    int choose = (int)(rand() % Length2);
+    xxx = vv2[choose].first.first;
+    yyy = vv2[choose].first.second;
 }
 
-#endif // MIN_MAX_H
+
+#endif 
