@@ -11,24 +11,22 @@
 #include <easyx.h>
 
 class Checkerboard {
-public:
-	int board[15][15];
-	Checkerboard();
-	~Checkerboard() = default;
+   public:
+    int board[15][15];
+    Checkerboard();
+    ~Checkerboard() = default;
 
-	void init();
-	bool set_chess(int x, int y, int c);
-	bool judge(int x, int y, int c);
-	static int count(const int* x);
-	int* get_line(int x, int y, int front);
-	static bool inside(int x, int y);
-	void print_init();
-	void print_board();
-	void print_chess();
-	void print_win();
-
+    void init();
+    bool set_chess(int x, int y, int c);
+    bool judge(int x, int y, int c);
+    static int count(const int* x);
+    int* get_line(int x, int y, int front);
+    static bool inside(int x, int y);
+    void print_init();
+    void print_board();
+    void print_chess();
+    void print_win();
+    Checkerboard reverse();  //反转棋子，用于AI去搜索黑子的最佳落子
 };
 
-
-#endif //GOMOKU_CHECKERBOARD_H
-
+#endif  // GOMOKU_CHECKERBOARD_H
