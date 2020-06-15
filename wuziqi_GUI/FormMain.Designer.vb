@@ -30,37 +30,40 @@ Partial Class FormMain
         Me.BtnStopEVE = New System.Windows.Forms.Button()
         Me.BtnPause = New System.Windows.Forms.Button()
         Me.GroupGlobalSetting = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.RdiModeEVE = New System.Windows.Forms.RadioButton()
         Me.RdiModePVE = New System.Windows.Forms.RadioButton()
         Me.RdiModePVP = New System.Windows.Forms.RadioButton()
         Me.GpBoxEVESet = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RdiEVEBlackB = New System.Windows.Forms.RadioButton()
+        Me.RdiEVEBlackA = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtRobotNameB = New System.Windows.Forms.TextBox()
         Me.TxtRobotNameA = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TxtRobotLevelA = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TxtRobotLevelB = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.PanelChessBoard = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.LblIsBExist = New System.Windows.Forms.Label()
+        Me.LblIsAExist = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.GpBoxPVESet = New System.Windows.Forms.GroupBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.RadioButton9 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton8 = New System.Windows.Forms.RadioButton()
+        Me.RdiPVEBlackRobot = New System.Windows.Forms.RadioButton()
+        Me.RdiPVEBlackPlayer = New System.Windows.Forms.RadioButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RdiPVERobotB = New System.Windows.Forms.RadioButton()
+        Me.RdiPVERobotA = New System.Windows.Forms.RadioButton()
         Me.GpBoxPVPSet = New System.Windows.Forms.GroupBox()
         Me.BtnPVPExchangeColor = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -82,18 +85,20 @@ Partial Class FormMain
         'BtnUndo
         '
         Me.BtnUndo.Enabled = False
-        Me.BtnUndo.Location = New System.Drawing.Point(15, 64)
+        Me.BtnUndo.Location = New System.Drawing.Point(17, 91)
+        Me.BtnUndo.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnUndo.Name = "BtnUndo"
-        Me.BtnUndo.Size = New System.Drawing.Size(78, 28)
+        Me.BtnUndo.Size = New System.Drawing.Size(91, 40)
         Me.BtnUndo.TabIndex = 1
         Me.BtnUndo.Text = "悔棋"
         Me.BtnUndo.UseVisualStyleBackColor = True
         '
         'BtnStart
         '
-        Me.BtnStart.Location = New System.Drawing.Point(99, 64)
+        Me.BtnStart.Location = New System.Drawing.Point(115, 91)
+        Me.BtnStart.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnStart.Name = "BtnStart"
-        Me.BtnStart.Size = New System.Drawing.Size(76, 28)
+        Me.BtnStart.Size = New System.Drawing.Size(89, 40)
         Me.BtnStart.TabIndex = 1
         Me.BtnStart.Text = "开始"
         Me.BtnStart.UseVisualStyleBackColor = True
@@ -101,9 +106,10 @@ Partial Class FormMain
         'BtnGiveUp
         '
         Me.BtnGiveUp.Enabled = False
-        Me.BtnGiveUp.Location = New System.Drawing.Point(15, 30)
+        Me.BtnGiveUp.Location = New System.Drawing.Point(17, 42)
+        Me.BtnGiveUp.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnGiveUp.Name = "BtnGiveUp"
-        Me.BtnGiveUp.Size = New System.Drawing.Size(78, 28)
+        Me.BtnGiveUp.Size = New System.Drawing.Size(91, 40)
         Me.BtnGiveUp.TabIndex = 1
         Me.BtnGiveUp.Text = "认输"
         Me.BtnGiveUp.UseVisualStyleBackColor = True
@@ -111,9 +117,10 @@ Partial Class FormMain
         'BtnTip
         '
         Me.BtnTip.Enabled = False
-        Me.BtnTip.Location = New System.Drawing.Point(99, 30)
+        Me.BtnTip.Location = New System.Drawing.Point(115, 42)
+        Me.BtnTip.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnTip.Name = "BtnTip"
-        Me.BtnTip.Size = New System.Drawing.Size(76, 28)
+        Me.BtnTip.Size = New System.Drawing.Size(89, 40)
         Me.BtnTip.TabIndex = 1
         Me.BtnTip.Text = "提示"
         Me.BtnTip.UseVisualStyleBackColor = True
@@ -126,9 +133,11 @@ Partial Class FormMain
         Me.GroupBox1.Controls.Add(Me.BtnTip)
         Me.GroupBox1.Controls.Add(Me.BtnGiveUp)
         Me.GroupBox1.Controls.Add(Me.BtnUndo)
-        Me.GroupBox1.Location = New System.Drawing.Point(769, 613)
+        Me.GroupBox1.Location = New System.Drawing.Point(755, 573)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(269, 111)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(314, 157)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "玩家操作区"
@@ -136,9 +145,10 @@ Partial Class FormMain
         'BtnStopEVE
         '
         Me.BtnStopEVE.Enabled = False
-        Me.BtnStopEVE.Location = New System.Drawing.Point(181, 64)
+        Me.BtnStopEVE.Location = New System.Drawing.Point(211, 91)
+        Me.BtnStopEVE.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnStopEVE.Name = "BtnStopEVE"
-        Me.BtnStopEVE.Size = New System.Drawing.Size(76, 28)
+        Me.BtnStopEVE.Size = New System.Drawing.Size(89, 40)
         Me.BtnStopEVE.TabIndex = 1
         Me.BtnStopEVE.Text = "停止EVE"
         Me.BtnStopEVE.UseVisualStyleBackColor = True
@@ -146,51 +156,44 @@ Partial Class FormMain
         'BtnPause
         '
         Me.BtnPause.Enabled = False
-        Me.BtnPause.Location = New System.Drawing.Point(181, 30)
+        Me.BtnPause.Location = New System.Drawing.Point(211, 42)
+        Me.BtnPause.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnPause.Name = "BtnPause"
-        Me.BtnPause.Size = New System.Drawing.Size(76, 28)
+        Me.BtnPause.Size = New System.Drawing.Size(89, 40)
         Me.BtnPause.TabIndex = 1
         Me.BtnPause.Text = "暂停"
         Me.BtnPause.UseVisualStyleBackColor = True
         '
         'GroupGlobalSetting
         '
-        Me.GroupGlobalSetting.Controls.Add(Me.CheckBox1)
         Me.GroupGlobalSetting.Controls.Add(Me.Panel3)
-        Me.GroupGlobalSetting.Location = New System.Drawing.Point(1066, 565)
+        Me.GroupGlobalSetting.Location = New System.Drawing.Point(1101, 596)
+        Me.GroupGlobalSetting.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupGlobalSetting.Name = "GroupGlobalSetting"
-        Me.GroupGlobalSetting.Size = New System.Drawing.Size(225, 159)
+        Me.GroupGlobalSetting.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupGlobalSetting.Size = New System.Drawing.Size(262, 134)
         Me.GroupGlobalSetting.TabIndex = 3
         Me.GroupGlobalSetting.TabStop = False
         Me.GroupGlobalSetting.Text = "全局设置"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Enabled = False
-        Me.CheckBox1.Location = New System.Drawing.Point(26, 131)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(96, 16)
-        Me.CheckBox1.TabIndex = 3
-        Me.CheckBox1.Text = "启用禁手规则"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.RdiModeEVE)
         Me.Panel3.Controls.Add(Me.RdiModePVE)
         Me.Panel3.Controls.Add(Me.RdiModePVP)
-        Me.Panel3.Location = New System.Drawing.Point(26, 20)
+        Me.Panel3.Location = New System.Drawing.Point(30, 28)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(158, 97)
+        Me.Panel3.Size = New System.Drawing.Size(184, 90)
         Me.Panel3.TabIndex = 1
         '
         'RdiModeEVE
         '
         Me.RdiModeEVE.AutoSize = True
-        Me.RdiModeEVE.Location = New System.Drawing.Point(10, 70)
+        Me.RdiModeEVE.Location = New System.Drawing.Point(12, 69)
+        Me.RdiModeEVE.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModeEVE.Name = "RdiModeEVE"
-        Me.RdiModeEVE.Size = New System.Drawing.Size(143, 16)
+        Me.RdiModeEVE.Size = New System.Drawing.Size(149, 21)
         Me.RdiModeEVE.TabIndex = 0
         Me.RdiModeEVE.TabStop = True
         Me.RdiModeEVE.Text = "EVE（机器人-机器人）"
@@ -199,9 +202,10 @@ Partial Class FormMain
         'RdiModePVE
         '
         Me.RdiModePVE.AutoSize = True
-        Me.RdiModePVE.Location = New System.Drawing.Point(10, 39)
+        Me.RdiModePVE.Location = New System.Drawing.Point(12, 40)
+        Me.RdiModePVE.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModePVE.Name = "RdiModePVE"
-        Me.RdiModePVE.Size = New System.Drawing.Size(131, 16)
+        Me.RdiModePVE.Size = New System.Drawing.Size(137, 21)
         Me.RdiModePVE.TabIndex = 0
         Me.RdiModePVE.TabStop = True
         Me.RdiModePVE.Text = "PVE（玩家-机器人）"
@@ -211,9 +215,10 @@ Partial Class FormMain
         '
         Me.RdiModePVP.AutoSize = True
         Me.RdiModePVP.Checked = True
-        Me.RdiModePVP.Location = New System.Drawing.Point(10, 8)
+        Me.RdiModePVP.Location = New System.Drawing.Point(12, 11)
+        Me.RdiModePVP.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModePVP.Name = "RdiModePVP"
-        Me.RdiModePVP.Size = New System.Drawing.Size(119, 16)
+        Me.RdiModePVP.Size = New System.Drawing.Size(125, 21)
         Me.RdiModePVP.TabIndex = 0
         Me.RdiModePVP.TabStop = True
         Me.RdiModePVP.Text = "PVP（玩家-玩家）"
@@ -222,12 +227,14 @@ Partial Class FormMain
         'GpBoxEVESet
         '
         Me.GpBoxEVESet.Controls.Add(Me.Label8)
-        Me.GpBoxEVESet.Controls.Add(Me.RadioButton5)
-        Me.GpBoxEVESet.Controls.Add(Me.RadioButton4)
+        Me.GpBoxEVESet.Controls.Add(Me.RdiEVEBlackB)
+        Me.GpBoxEVESet.Controls.Add(Me.RdiEVEBlackA)
         Me.GpBoxEVESet.Enabled = False
-        Me.GpBoxEVESet.Location = New System.Drawing.Point(1066, 490)
+        Me.GpBoxEVESet.Location = New System.Drawing.Point(1101, 537)
+        Me.GpBoxEVESet.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GpBoxEVESet.Name = "GpBoxEVESet"
-        Me.GpBoxEVESet.Size = New System.Drawing.Size(225, 69)
+        Me.GpBoxEVESet.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GpBoxEVESet.Size = New System.Drawing.Size(262, 51)
         Me.GpBoxEVESet.TabIndex = 4
         Me.GpBoxEVESet.TabStop = False
         Me.GpBoxEVESet.Text = "EVE设置"
@@ -235,108 +242,114 @@ Partial Class FormMain
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 33)
+        Me.Label8.Location = New System.Drawing.Point(13, 20)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(41, 12)
+        Me.Label8.Size = New System.Drawing.Size(44, 17)
         Me.Label8.TabIndex = 5
         Me.Label8.Text = "执棋："
         '
-        'RadioButton5
+        'RdiEVEBlackB
         '
-        Me.RadioButton5.AutoSize = True
-        Me.RadioButton5.Location = New System.Drawing.Point(153, 33)
-        Me.RadioButton5.Name = "RadioButton5"
-        Me.RadioButton5.Size = New System.Drawing.Size(53, 16)
-        Me.RadioButton5.TabIndex = 2
-        Me.RadioButton5.Text = "B执黑"
-        Me.RadioButton5.UseVisualStyleBackColor = True
+        Me.RdiEVEBlackB.AutoSize = True
+        Me.RdiEVEBlackB.Location = New System.Drawing.Point(156, 18)
+        Me.RdiEVEBlackB.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiEVEBlackB.Name = "RdiEVEBlackB"
+        Me.RdiEVEBlackB.Size = New System.Drawing.Size(58, 21)
+        Me.RdiEVEBlackB.TabIndex = 2
+        Me.RdiEVEBlackB.Text = "B执黑"
+        Me.RdiEVEBlackB.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'RdiEVEBlackA
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Checked = True
-        Me.RadioButton4.Location = New System.Drawing.Point(73, 33)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(53, 16)
-        Me.RadioButton4.TabIndex = 2
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "A执黑"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.RdiEVEBlackA.AutoSize = True
+        Me.RdiEVEBlackA.Checked = True
+        Me.RdiEVEBlackA.Location = New System.Drawing.Point(71, 18)
+        Me.RdiEVEBlackA.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiEVEBlackA.Name = "RdiEVEBlackA"
+        Me.RdiEVEBlackA.Size = New System.Drawing.Size(58, 21)
+        Me.RdiEVEBlackA.TabIndex = 2
+        Me.RdiEVEBlackA.TabStop = True
+        Me.RdiEVEBlackA.Text = "A执黑"
+        Me.RdiEVEBlackA.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 30)
+        Me.Label1.Location = New System.Drawing.Point(13, 31)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(71, 12)
+        Me.Label1.Size = New System.Drawing.Size(76, 17)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "机器人A名称"
         '
         'TxtRobotNameB
         '
-        Me.TxtRobotNameB.Location = New System.Drawing.Point(88, 67)
+        Me.TxtRobotNameB.Location = New System.Drawing.Point(103, 58)
+        Me.TxtRobotNameB.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtRobotNameB.Name = "TxtRobotNameB"
-        Me.TxtRobotNameB.Size = New System.Drawing.Size(127, 21)
+        Me.TxtRobotNameB.Size = New System.Drawing.Size(147, 23)
         Me.TxtRobotNameB.TabIndex = 0
-        Me.TxtRobotNameB.Text = "RobotB"
+        Me.TxtRobotNameB.Text = "红桃邓艾"
         '
         'TxtRobotNameA
         '
-        Me.TxtRobotNameA.Location = New System.Drawing.Point(88, 27)
+        Me.TxtRobotNameA.Location = New System.Drawing.Point(103, 27)
+        Me.TxtRobotNameA.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtRobotNameA.Name = "TxtRobotNameA"
-        Me.TxtRobotNameA.Size = New System.Drawing.Size(127, 21)
+        Me.TxtRobotNameA.Size = New System.Drawing.Size(147, 23)
         Me.TxtRobotNameA.TabIndex = 0
-        Me.TxtRobotNameA.Text = "RobotA"
+        Me.TxtRobotNameA.Text = "洛神八卦"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 70)
+        Me.Label2.Location = New System.Drawing.Point(13, 61)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 12)
+        Me.Label2.Size = New System.Drawing.Size(76, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "机器人B名称"
         '
-        'TextBox3
+        'TxtRobotLevelA
         '
-        Me.TextBox3.Location = New System.Drawing.Point(74, 110)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(51, 21)
-        Me.TextBox3.TabIndex = 0
-        Me.TextBox3.Text = "0"
+        Me.TxtRobotLevelA.Location = New System.Drawing.Point(86, 87)
+        Me.TxtRobotLevelA.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtRobotLevelA.Name = "TxtRobotLevelA"
+        Me.TxtRobotLevelA.Size = New System.Drawing.Size(59, 23)
+        Me.TxtRobotLevelA.TabIndex = 0
+        Me.TxtRobotLevelA.Text = "0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 113)
+        Me.Label3.Location = New System.Drawing.Point(13, 91)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(29, 12)
+        Me.Label3.Size = New System.Drawing.Size(32, 17)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "难度"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(49, 113)
+        Me.Label5.Location = New System.Drawing.Point(57, 91)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(23, 12)
+        Me.Label5.Size = New System.Drawing.Size(28, 17)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "A："
         '
-        'TextBox5
+        'TxtRobotLevelB
         '
-        Me.TextBox5.Location = New System.Drawing.Point(163, 110)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(51, 21)
-        Me.TextBox5.TabIndex = 0
-        Me.TextBox5.Text = "0"
+        Me.TxtRobotLevelB.Location = New System.Drawing.Point(191, 88)
+        Me.TxtRobotLevelB.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtRobotLevelB.Name = "TxtRobotLevelB"
+        Me.TxtRobotLevelB.Size = New System.Drawing.Size(59, 23)
+        Me.TxtRobotLevelB.TabIndex = 0
+        Me.TxtRobotLevelB.Text = "0"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(131, 113)
+        Me.Label6.Location = New System.Drawing.Point(153, 91)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(23, 12)
+        Me.Label6.Size = New System.Drawing.Size(28, 17)
         Me.Label6.TabIndex = 1
         Me.Label6.Text = "B："
         '
@@ -345,28 +358,69 @@ Partial Class FormMain
         Me.PanelChessBoard.BackgroundImage = Global.wuziqi_GUI.My.Resources.chessboard.board
         Me.PanelChessBoard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PanelChessBoard.Enabled = False
-        Me.PanelChessBoard.Location = New System.Drawing.Point(49, 47)
+        Me.PanelChessBoard.Location = New System.Drawing.Point(50, 50)
+        Me.PanelChessBoard.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.PanelChessBoard.Name = "PanelChessBoard"
-        Me.PanelChessBoard.Size = New System.Drawing.Size(687, 679)
+        Me.PanelChessBoard.Size = New System.Drawing.Size(680, 680)
         Me.PanelChessBoard.TabIndex = 0
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.LblIsBExist)
+        Me.GroupBox4.Controls.Add(Me.LblIsAExist)
         Me.GroupBox4.Controls.Add(Me.Label2)
+        Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.Label6)
+        Me.GroupBox4.Controls.Add(Me.Label12)
         Me.GroupBox4.Controls.Add(Me.TxtRobotNameA)
         Me.GroupBox4.Controls.Add(Me.Label5)
         Me.GroupBox4.Controls.Add(Me.TxtRobotNameB)
         Me.GroupBox4.Controls.Add(Me.Label3)
-        Me.GroupBox4.Controls.Add(Me.TextBox3)
+        Me.GroupBox4.Controls.Add(Me.TxtRobotLevelA)
         Me.GroupBox4.Controls.Add(Me.Label1)
-        Me.GroupBox4.Controls.Add(Me.TextBox5)
-        Me.GroupBox4.Location = New System.Drawing.Point(1066, 38)
+        Me.GroupBox4.Controls.Add(Me.TxtRobotLevelB)
+        Me.GroupBox4.Location = New System.Drawing.Point(1101, 50)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(225, 150)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GroupBox4.Size = New System.Drawing.Size(262, 183)
         Me.GroupBox4.TabIndex = 5
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "机器人设置"
+        '
+        'LblIsBExist
+        '
+        Me.LblIsBExist.AutoSize = True
+        Me.LblIsBExist.Location = New System.Drawing.Point(128, 151)
+        Me.LblIsBExist.Name = "LblIsBExist"
+        Me.LblIsBExist.Size = New System.Drawing.Size(0, 17)
+        Me.LblIsBExist.TabIndex = 10
+        '
+        'LblIsAExist
+        '
+        Me.LblIsAExist.AutoSize = True
+        Me.LblIsAExist.Location = New System.Drawing.Point(128, 121)
+        Me.LblIsAExist.Name = "LblIsAExist"
+        Me.LblIsAExist.Size = New System.Drawing.Size(0, 17)
+        Me.LblIsAExist.TabIndex = 10
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(13, 151)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(109, 17)
+        Me.Label13.TabIndex = 9
+        Me.Label13.Text = "RobotB.dll 状态："
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(13, 121)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(109, 17)
+        Me.Label12.TabIndex = 9
+        Me.Label12.Text = "RobotA.dll 状态："
         '
         'GpBoxPVESet
         '
@@ -377,9 +431,11 @@ Partial Class FormMain
         Me.GpBoxPVESet.Controls.Add(Me.Panel2)
         Me.GpBoxPVESet.Controls.Add(Me.Panel1)
         Me.GpBoxPVESet.Enabled = False
-        Me.GpBoxPVESet.Location = New System.Drawing.Point(1066, 330)
+        Me.GpBoxPVESet.Location = New System.Drawing.Point(1101, 392)
+        Me.GpBoxPVESet.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GpBoxPVESet.Name = "GpBoxPVESet"
-        Me.GpBoxPVESet.Size = New System.Drawing.Size(225, 154)
+        Me.GpBoxPVESet.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GpBoxPVESet.Size = New System.Drawing.Size(262, 137)
         Me.GpBoxPVESet.TabIndex = 6
         Me.GpBoxPVESet.TabStop = False
         Me.GpBoxPVESet.Text = "PVE设置"
@@ -387,99 +443,106 @@ Partial Class FormMain
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(11, 26)
+        Me.Label11.Location = New System.Drawing.Point(13, 37)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(53, 12)
+        Me.Label11.Size = New System.Drawing.Size(56, 17)
         Me.Label11.TabIndex = 7
         Me.Label11.Text = "玩家姓名"
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(70, 23)
+        Me.TextBox1.Location = New System.Drawing.Point(82, 33)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(145, 21)
+        Me.TextBox1.Size = New System.Drawing.Size(168, 23)
         Me.TextBox1.TabIndex = 6
         Me.TextBox1.Text = "张三"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(11, 107)
+        Me.Label7.Location = New System.Drawing.Point(12, 103)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 12)
+        Me.Label7.Size = New System.Drawing.Size(44, 17)
         Me.Label7.TabIndex = 5
         Me.Label7.Text = "执棋："
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(11, 65)
+        Me.Label4.Location = New System.Drawing.Point(12, 68)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(41, 12)
+        Me.Label4.Size = New System.Drawing.Size(44, 17)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "对手："
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.RadioButton9)
-        Me.Panel2.Controls.Add(Me.RadioButton8)
-        Me.Panel2.Location = New System.Drawing.Point(46, 93)
+        Me.Panel2.Controls.Add(Me.RdiPVEBlackRobot)
+        Me.Panel2.Controls.Add(Me.RdiPVEBlackPlayer)
+        Me.Panel2.Location = New System.Drawing.Point(54, 97)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(173, 36)
+        Me.Panel2.Size = New System.Drawing.Size(202, 28)
         Me.Panel2.TabIndex = 4
         '
-        'RadioButton9
+        'RdiPVEBlackRobot
         '
-        Me.RadioButton9.AutoSize = True
-        Me.RadioButton9.Location = New System.Drawing.Point(89, 12)
-        Me.RadioButton9.Name = "RadioButton9"
-        Me.RadioButton9.Size = New System.Drawing.Size(83, 16)
-        Me.RadioButton9.TabIndex = 2
-        Me.RadioButton9.Text = "机器人执黑"
-        Me.RadioButton9.UseVisualStyleBackColor = True
+        Me.RdiPVEBlackRobot.AutoSize = True
+        Me.RdiPVEBlackRobot.Location = New System.Drawing.Point(104, 4)
+        Me.RdiPVEBlackRobot.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiPVEBlackRobot.Name = "RdiPVEBlackRobot"
+        Me.RdiPVEBlackRobot.Size = New System.Drawing.Size(86, 21)
+        Me.RdiPVEBlackRobot.TabIndex = 2
+        Me.RdiPVEBlackRobot.Text = "机器人执黑"
+        Me.RdiPVEBlackRobot.UseVisualStyleBackColor = True
         '
-        'RadioButton8
+        'RdiPVEBlackPlayer
         '
-        Me.RadioButton8.AutoSize = True
-        Me.RadioButton8.Checked = True
-        Me.RadioButton8.Location = New System.Drawing.Point(15, 12)
-        Me.RadioButton8.Name = "RadioButton8"
-        Me.RadioButton8.Size = New System.Drawing.Size(71, 16)
-        Me.RadioButton8.TabIndex = 2
-        Me.RadioButton8.TabStop = True
-        Me.RadioButton8.Text = "玩家执黑"
-        Me.RadioButton8.UseVisualStyleBackColor = True
+        Me.RdiPVEBlackPlayer.AutoSize = True
+        Me.RdiPVEBlackPlayer.Checked = True
+        Me.RdiPVEBlackPlayer.Location = New System.Drawing.Point(17, 4)
+        Me.RdiPVEBlackPlayer.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiPVEBlackPlayer.Name = "RdiPVEBlackPlayer"
+        Me.RdiPVEBlackPlayer.Size = New System.Drawing.Size(74, 21)
+        Me.RdiPVEBlackPlayer.TabIndex = 2
+        Me.RdiPVEBlackPlayer.TabStop = True
+        Me.RdiPVEBlackPlayer.Text = "玩家执黑"
+        Me.RdiPVEBlackPlayer.UseVisualStyleBackColor = True
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.RadioButton7)
-        Me.Panel1.Controls.Add(Me.RadioButton6)
-        Me.Panel1.Location = New System.Drawing.Point(46, 54)
+        Me.Panel1.Controls.Add(Me.RdiPVERobotB)
+        Me.Panel1.Controls.Add(Me.RdiPVERobotA)
+        Me.Panel1.Location = New System.Drawing.Point(54, 62)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(163, 33)
+        Me.Panel1.Size = New System.Drawing.Size(190, 33)
         Me.Panel1.TabIndex = 3
         '
-        'RadioButton7
+        'RdiPVERobotB
         '
-        Me.RadioButton7.AutoSize = True
-        Me.RadioButton7.Location = New System.Drawing.Point(89, 9)
-        Me.RadioButton7.Name = "RadioButton7"
-        Me.RadioButton7.Size = New System.Drawing.Size(65, 16)
-        Me.RadioButton7.TabIndex = 2
-        Me.RadioButton7.Text = "机器人B"
-        Me.RadioButton7.UseVisualStyleBackColor = True
+        Me.RdiPVERobotB.AutoSize = True
+        Me.RdiPVERobotB.Location = New System.Drawing.Point(104, 4)
+        Me.RdiPVERobotB.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiPVERobotB.Name = "RdiPVERobotB"
+        Me.RdiPVERobotB.Size = New System.Drawing.Size(70, 21)
+        Me.RdiPVERobotB.TabIndex = 2
+        Me.RdiPVERobotB.Text = "机器人B"
+        Me.RdiPVERobotB.UseVisualStyleBackColor = True
         '
-        'RadioButton6
+        'RdiPVERobotA
         '
-        Me.RadioButton6.AutoSize = True
-        Me.RadioButton6.Checked = True
-        Me.RadioButton6.Location = New System.Drawing.Point(15, 9)
-        Me.RadioButton6.Name = "RadioButton6"
-        Me.RadioButton6.Size = New System.Drawing.Size(65, 16)
-        Me.RadioButton6.TabIndex = 2
-        Me.RadioButton6.TabStop = True
-        Me.RadioButton6.Text = "机器人A"
-        Me.RadioButton6.UseVisualStyleBackColor = True
+        Me.RdiPVERobotA.AutoSize = True
+        Me.RdiPVERobotA.Checked = True
+        Me.RdiPVERobotA.Location = New System.Drawing.Point(17, 4)
+        Me.RdiPVERobotA.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RdiPVERobotA.Name = "RdiPVERobotA"
+        Me.RdiPVERobotA.Size = New System.Drawing.Size(70, 21)
+        Me.RdiPVERobotA.TabIndex = 2
+        Me.RdiPVERobotA.TabStop = True
+        Me.RdiPVERobotA.Text = "机器人A"
+        Me.RdiPVERobotA.UseVisualStyleBackColor = True
         '
         'GpBoxPVPSet
         '
@@ -488,18 +551,21 @@ Partial Class FormMain
         Me.GpBoxPVPSet.Controls.Add(Me.TxtPVPWhiteName)
         Me.GpBoxPVPSet.Controls.Add(Me.Label9)
         Me.GpBoxPVPSet.Controls.Add(Me.TxtPVPBlackName)
-        Me.GpBoxPVPSet.Location = New System.Drawing.Point(1066, 194)
+        Me.GpBoxPVPSet.Location = New System.Drawing.Point(1101, 252)
+        Me.GpBoxPVPSet.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GpBoxPVPSet.Name = "GpBoxPVPSet"
-        Me.GpBoxPVPSet.Size = New System.Drawing.Size(225, 130)
+        Me.GpBoxPVPSet.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.GpBoxPVPSet.Size = New System.Drawing.Size(262, 132)
         Me.GpBoxPVPSet.TabIndex = 7
         Me.GpBoxPVPSet.TabStop = False
         Me.GpBoxPVPSet.Text = "PVP设置"
         '
         'BtnPVPExchangeColor
         '
-        Me.BtnPVPExchangeColor.Location = New System.Drawing.Point(78, 91)
+        Me.BtnPVPExchangeColor.Location = New System.Drawing.Point(77, 97)
+        Me.BtnPVPExchangeColor.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.BtnPVPExchangeColor.Name = "BtnPVPExchangeColor"
-        Me.BtnPVPExchangeColor.Size = New System.Drawing.Size(77, 23)
+        Me.BtnPVPExchangeColor.Size = New System.Drawing.Size(90, 24)
         Me.BtnPVPExchangeColor.TabIndex = 2
         Me.BtnPVPExchangeColor.Text = "交换颜色"
         Me.BtnPVPExchangeColor.UseVisualStyleBackColor = True
@@ -507,67 +573,71 @@ Partial Class FormMain
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(11, 61)
+        Me.Label10.Location = New System.Drawing.Point(13, 70)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(77, 12)
+        Me.Label10.Size = New System.Drawing.Size(92, 17)
         Me.Label10.TabIndex = 1
-        Me.Label10.Text = "白棋玩家姓名"
+        Me.Label10.Text = "白棋玩家姓名："
         '
         'TxtPVPWhiteName
         '
-        Me.TxtPVPWhiteName.Location = New System.Drawing.Point(94, 58)
+        Me.TxtPVPWhiteName.Location = New System.Drawing.Point(110, 66)
+        Me.TxtPVPWhiteName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtPVPWhiteName.Name = "TxtPVPWhiteName"
-        Me.TxtPVPWhiteName.Size = New System.Drawing.Size(121, 21)
+        Me.TxtPVPWhiteName.Size = New System.Drawing.Size(140, 23)
         Me.TxtPVPWhiteName.TabIndex = 0
         Me.TxtPVPWhiteName.Text = "罗老师"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(11, 25)
+        Me.Label9.Location = New System.Drawing.Point(13, 35)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(77, 12)
+        Me.Label9.Size = New System.Drawing.Size(92, 17)
         Me.Label9.TabIndex = 1
-        Me.Label9.Text = "黑棋玩家姓名"
+        Me.Label9.Text = "黑棋玩家姓名："
         '
         'TxtPVPBlackName
         '
-        Me.TxtPVPBlackName.Location = New System.Drawing.Point(94, 22)
+        Me.TxtPVPBlackName.Location = New System.Drawing.Point(110, 31)
+        Me.TxtPVPBlackName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtPVPBlackName.Name = "TxtPVPBlackName"
-        Me.TxtPVPBlackName.Size = New System.Drawing.Size(121, 21)
+        Me.TxtPVPBlackName.Size = New System.Drawing.Size(140, 23)
         Me.TxtPVPBlackName.TabIndex = 0
         Me.TxtPVPBlackName.Text = "张三"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(889, 250)
+        Me.Button1.Location = New System.Drawing.Point(950, 982)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(87, 44)
+        Me.Button1.Size = New System.Drawing.Size(189, 34)
         Me.Button1.TabIndex = 8
-        Me.Button1.Text = "Button1"
+        Me.Button1.Text = "单元测试"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'FormMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1318, 776)
+        Me.ClientSize = New System.Drawing.Size(1424, 781)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GpBoxPVPSet)
         Me.Controls.Add(Me.GpBoxPVESet)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GpBoxEVESet)
         Me.Controls.Add(Me.GroupGlobalSetting)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.PanelChessBoard)
+        Me.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.Name = "FormMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "五子棋"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupGlobalSetting.ResumeLayout(False)
-        Me.GroupGlobalSetting.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.GpBoxEVESet.ResumeLayout(False)
@@ -600,23 +670,22 @@ Partial Class FormMain
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtRobotNameB As TextBox
     Friend WithEvents TxtRobotNameA As TextBox
-    Friend WithEvents RadioButton5 As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RdiEVEBlackB As RadioButton
+    Friend WithEvents RdiEVEBlackA As RadioButton
     Friend WithEvents Label2 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents TxtRobotLevelB As TextBox
+    Friend WithEvents TxtRobotLevelA As TextBox
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents GpBoxPVESet As GroupBox
     Friend WithEvents BtnStopEVE As Button
     Friend WithEvents BtnPause As Button
-    Friend WithEvents RadioButton9 As RadioButton
-    Friend WithEvents RadioButton8 As RadioButton
-    Friend WithEvents RadioButton7 As RadioButton
-    Friend WithEvents RadioButton6 As RadioButton
+    Friend WithEvents RdiPVEBlackRobot As RadioButton
+    Friend WithEvents RdiPVEBlackPlayer As RadioButton
+    Friend WithEvents RdiPVERobotB As RadioButton
+    Friend WithEvents RdiPVERobotA As RadioButton
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
@@ -632,4 +701,8 @@ Partial Class FormMain
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents LblIsBExist As Label
+    Friend WithEvents LblIsAExist As Label
 End Class

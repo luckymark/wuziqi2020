@@ -1,20 +1,16 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
-#pragma once
-
 #include "pch.h"
 #include "GameEngine.h"
+#include "MaxMinSearch.h"
 #include "UnitTest.h"
 
 //global
 GameEngine globalEngine;
-int globalPlayerColor, globalBlackBanned;
 
 //prototype (also interface)
 int _stdcall GetNextMove(int map[225], int move);
 void _stdcall Reset();
 void _stdcall SetColor(int color);
-void _stdcall SetIsBlackBanned(int state);
-int _stdcall IsBlackBannedSupported();
 int _stdcall UnitTest();
 
 
@@ -37,8 +33,12 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 //function
 int _stdcall GetNextMove(int map[225], int move)
 {
-    
-    return 0;
+    int i, j,result;
+    for (i = 0; i < 15; i++)
+        for (j = 0; j < 15; j++)
+            globalEngine.squareMap.map[i][j] = map[15 * i + j];
+    result = getBestMove_MaxMinSearch(globalEngine);
+    return result;
 }
 
 void _stdcall Reset()
@@ -49,18 +49,6 @@ void _stdcall Reset()
 void _stdcall SetColor(int color)
 {
     globalEngine.playerColor = color;
-    globalPlayerColor = color;
-}
-
-void _stdcall SetIsBlackBanned(int state)
-{
-    globalEngine.blackBanned = state;
-    globalBlackBanned = state;
-}
-
-int _stdcall IsBlackBannedSupported()
-{
-    return 0;
 }
 
 int _stdcall UnitTest()
