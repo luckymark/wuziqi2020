@@ -5,7 +5,7 @@
 #ifndef GOBANG_STATE_H
 #define GOBANG_STATE_H
 
-#include "Main.h"
+#include "main.h"
 #include "pawn_score.h"
 
 typedef struct Dir{

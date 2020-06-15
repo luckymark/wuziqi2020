@@ -14,7 +14,7 @@
 #define d2 100
 
 
-#include "Main.h"
+#include "main.h"
 int win5(const int*left,const int*right,int length,int color);
 int alive4(const int*left,const int*right,int length,int color);
 int alive3(const int *left,const int *right,int length,int color);
