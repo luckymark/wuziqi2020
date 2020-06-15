@@ -2,8 +2,6 @@
 #include "GameEngine.h"
 #include "TupleFive.h"
 
-
-
 //const
 TupleScorePoint nextStep[4] = {
 	{0,1,0},
@@ -18,26 +16,26 @@ int scoreEnemyColor[5] = {0,15,400,1800,100000};
 TupleScore getScoreFiveTuple(GameEngine engine)
 {
 	//init
-	TupleScore result;
-	memset(&result, 0, sizeof(TupleScore));
-	TupleScorePoint tmpPoint;
+	TupleScore result = {0};
+	int i, j,x,y,direction;
+	TupleScorePoint tmpPoint = {0,0,0};
 	int tmpScore = 0;
 
 	//calculate score
-	for(int direction = 0;direction < 4;direction++)
-		for(int x = 0;x < 15; x++)
-			for (int y = 0; y < 15; y++)
+	for(direction = 0;direction < 4;direction++)
+		for(x = 0;x < 15; x++)
+			for (y = 0; y < 15; y++)
 			{
 				tmpPoint = (TupleScorePoint){ x,y,direction };
-				if (isOutOfTupleStartRange(tmpPoint))
+				if (1 == isOutOfTupleStartRange(tmpPoint))
 					continue;
 				tmpScore = getTmpTupleScore(engine, tmpPoint);
 				flushTmpTupleScore(&result, tmpPoint, tmpScore);
 			}
 
-	//mark occupied place as -1
-	for (int i = 0; i < 15; i++)
-		for (int j = 0; j < 15; j++)
+	//if placed with chess, set score to -1
+	for (i = 0; i < 15; i++)
+		for (j = 0; j < 15; j++)
 			if (CHESS_EMPTY != engine.squareMap.map[i][j])
 				result.map[i][j] = -1;
 
@@ -75,10 +73,11 @@ int getTmpTupleScore(GameEngine engine, TupleScorePoint point)
 
 void flushTmpTupleScore(TupleScore* score, TupleScorePoint point, int tmpScore)
 {
+	TupleScorePoint tmp = point;
 	for (int i = 1; i <= 5; i++)
 	{
-		score->map[point.x][point.y] += tmpScore;
-		point = pointPlus(point, nextStep[point.direction]);
+		score->map[tmp.x][tmp.y] += tmpScore;
+		tmp = pointPlus(tmp, nextStep[point.direction]);
 	}
 }
 
@@ -89,11 +88,11 @@ int isOutOfTupleStartRange(TupleScorePoint point)
 	switch (point.direction)
 	{
 	case 0:   //horizontal
-		if (point.x > 10)
+		if (point.y > 10)
 			return 1;
 		break;
 	case 1:   //vertical
-		if (point.y > 10)
+		if (point.x > 10)
 			return 1;
 		break;
 	case 2:   //oblique 00 to nn
@@ -101,7 +100,7 @@ int isOutOfTupleStartRange(TupleScorePoint point)
 			return 1;
 		break;
 	case 3:   //oblique 0n to n0
-		if (point.x < 4 || point.y > 10)
+		if (point.x > 10 || point.y < 4)
 			return 1;
 		break;
 	default:

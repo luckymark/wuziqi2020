@@ -9,9 +9,9 @@ int testTupleFive()
 	//isOutOfTupleStartRange
 	if (0 == isOutOfTupleStartRange((TupleScorePoint) { -1, -1, 0 }))
 		return 1;
-	if (0 == isOutOfTupleStartRange((TupleScorePoint) { 11, 1, 0 }))
+	if (0 == isOutOfTupleStartRange((TupleScorePoint) { 1, 11, 0 }))
 		return 1;
-	if (0 == isOutOfTupleStartRange((TupleScorePoint) { 1, 11, 1 }))
+	if (0 == isOutOfTupleStartRange((TupleScorePoint) { 11, 1, 1 }))
 		return 1;
 	if (0 == isOutOfTupleStartRange((TupleScorePoint) { 12, 1, 2 }))
 		return 1;
@@ -46,17 +46,17 @@ int testTupleFive()
 	for (i = 0; i < 5; i++)
 		score.map[i][i] += i;
 	TuplePriorScore prScore = convertToPriorTupleScore(score);
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 4; i++)
 	{
-		if (16 * i != prScore.list[i])
-			return 10*i+4;
+		if (16 * (4 - i) != prScore.list[i])
+			return 4;
 	}
 
-	//getScore_FiveTuple
-	engine.squareMap.map[5][5] = CHESS_EMPTY;
+	//getScoreFiveTuple
+	engine.squareMap.map[4][4] = CHESS_EMPTY;
 	score = getScoreFiveTuple(engine);
 	prScore = convertToPriorTupleScore(score);
-	if (64 != prScore.list[i])
+	if (64 != prScore.list[0])
 		return 5;
 
 	return 0;
