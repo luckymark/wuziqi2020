@@ -1,7 +1,9 @@
-#include"gobang.h"
+#include"gobangAI.h"
+#include"view.h"
 
 APoint IP={ CbInt,CbInt };
 
+//初始化棋盘
 void drawCb() {
 	static APoint IP = { CbInt,CbInt };  //初始点
 	initgraph(WinLen, WinLen);	// 创建绘图窗口
@@ -36,6 +38,7 @@ void drawCb() {
 	}
 }
 
+//画棋子
 void drawPiece(int y,int x,int key) {
 	if (key==1)
 	{
@@ -47,6 +50,7 @@ void drawPiece(int y,int x,int key) {
 	solidcircle((x+1)* CbInt, (y + 1) * CbInt, CbInt * 0.4);
 }
 
+//画棋盘
 void PrintBoard(int Board[][CbIntNum]) {
 	for (int i = 0; i < CbIntNum; i++)
 	{
@@ -59,6 +63,7 @@ void PrintBoard(int Board[][CbIntNum]) {
 	}
 }
 
+//判断鼠标位置是否是空
 int IsBLANK(MOUSEMSG mouse,int y,int x) {
 	if (mouse.x > IP.x + (x - 0.5) * CbInt && mouse.x<IP.x + (x + 0.5) * CbInt//判断x坐标
 		&& mouse.y>IP.y + (y - 0.5) * CbInt && mouse.y < IP.y + (y + 0.5) * CbInt//判断y坐标
