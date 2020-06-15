@@ -67,6 +67,7 @@ Partial Class FormMain
         Me.TxtPVPWhiteName = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtPVPBlackName = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupGlobalSetting.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -537,12 +538,22 @@ Partial Class FormMain
         Me.TxtPVPBlackName.TabIndex = 0
         Me.TxtPVPBlackName.Text = "张三"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(889, 250)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(87, 44)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1318, 776)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GpBoxPVPSet)
         Me.Controls.Add(Me.GpBoxPVESet)
         Me.Controls.Add(Me.GroupBox4)
@@ -620,4 +631,5 @@ Partial Class FormMain
     Friend WithEvents TxtPVPBlackName As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button1 As Button
 End Class

@@ -53,11 +53,17 @@
     <ClCompile Include="GlobalEvaluation.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GEInt15Data_Black.h">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTest.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GEInt15Data_Black.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="Source.def">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

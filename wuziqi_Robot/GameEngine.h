@@ -1,16 +1,15 @@
 #pragma once
-#include <string.h>
-#include <stdlib.h>
+
 enum PlayerColor
 {
     PLAYER_BLACK = 0,
-    PLAYER_WHITE
+    PLAYER_WHITE = 1
 };
 enum ChessColor
 {
     CHESS_EMPTY = 0,
-    CHESS_BLACK,
-    CHESS_WHITE
+    CHESS_BLACK = 1,
+    CHESS_WHITE = 2
 };
 typedef struct {
     int map[15][15];
@@ -20,7 +19,7 @@ typedef struct {
     int list[225];
 }ListMap;
 typedef ListMap TuplePriorScore;
-typedef struct {
+typedef struct GameEngine {
     SquareMap squareMap;
     int playerColor;
     int blackBanned;

@@ -1,0 +1,6 @@
+#ifndef WUZIQI_ROBOT_CLION_LIBRARY_H
+#define WUZIQI_ROBOT_CLION_LIBRARY_H
+
+void hello(void);
+
+#endif //WUZIQI_ROBOT_CLION_LIBRARY_H

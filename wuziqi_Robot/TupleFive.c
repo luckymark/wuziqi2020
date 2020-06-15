@@ -1,17 +1,18 @@
-#include "TupleFive.h"
 #include "pch.h"
+#include "GameEngine.h"
+#include "TupleFive.h"
 
 
 
 //const
-const TupleScorePoint nextStep[4] = {
+TupleScorePoint nextStep[4] = {
 	{0,1,0},
 	{1,0,0},
 	{1,1,0},
 	{1,-1,0}
 };
-const int scoreMyColor[5] = {0,35,800,15000,800000};
-const int scoreEnemyColor[5] = {0,15,400,1800,100000};
+int scoreMyColor[5] = {0,35,800,15000,800000};
+int scoreEnemyColor[5] = {0,15,400,1800,100000};
 
 //function
 TupleScore getScoreFiveTuple(GameEngine engine)
@@ -68,9 +69,8 @@ int getTmpTupleScore(GameEngine engine, TupleScorePoint point)
 
 	if (PLAYER_BLACK == engine.playerColor)
 		return (scoreMyColor[b] > scoreEnemyColor[w] ? scoreMyColor[b] : scoreEnemyColor[w]);
-
-	if (PLAYER_WHITE == engine.playerColor)
-		return (scoreMyColor[b] > scoreEnemyColor[w] ? scoreMyColor[b] : scoreEnemyColor[w]);
+	else
+		return (scoreMyColor[w] > scoreEnemyColor[b] ? scoreMyColor[w] : scoreEnemyColor[b]);
 }
 
 void flushTmpTupleScore(TupleScore* score, TupleScorePoint point, int tmpScore)

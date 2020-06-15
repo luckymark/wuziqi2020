@@ -1,11 +1,12 @@
-#include "GlobalEvaluation.h"
-#include "GEInt15Data_Black.h"
 #include "pch.h"
+#include "GlobalEvaluation.h"
+
+extern short GEInt15_Data_Black[14348907];
 
 int getGlobalEvaluation(GameEngine engine)
 {
 	//init
-	int i, j, direction,line[15], result = 0;
+	int result = 0;
 
 	result += getHorizontalGE(engine);
 	result += getVerticalGE(engine);

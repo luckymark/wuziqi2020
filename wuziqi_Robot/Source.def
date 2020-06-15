@@ -1,0 +1,8 @@
+LIBRARY
+EXPORTS
+	GetNextMove = _GetNextMove@8
+	Reset = _Reset@0
+	SetColor = _SetColor@4
+	SetIsBlackBanned = _SetIsBlackBanned@4
+	IsBlackBannedSupported = _IsBlackBannedSupported@0
+	UnitTest = _UnitTest@0

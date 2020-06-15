@@ -1,23 +1,21 @@
 ﻿// dllmain.cpp : 定义 DLL 应用程序的入口点。
 #pragma once
-#include <string.h>
-#include <stdio.h>
+
 #include "pch.h"
 #include "GameEngine.h"
 #include "UnitTest.h"
-#define DllExport   __declspec( dllexport )
 
 //global
 GameEngine globalEngine;
 int globalPlayerColor, globalBlackBanned;
 
 //prototype (also interface)
-DllExport int _stdcall GetNextMove(int map[225], int move);
-DllExport void _stdcall Reset();
-DllExport void _stdcall SetColor(int color);
-DllExport void _stdcall SetIsBlackBanned(int state);
-DllExport int _stdcall IsBlackBannedSupported();
-DllExport int _stdcall UnitTest();
+int _stdcall GetNextMove(int map[225], int move);
+void _stdcall Reset();
+void _stdcall SetColor(int color);
+void _stdcall SetIsBlackBanned(int state);
+int _stdcall IsBlackBannedSupported();
+int _stdcall UnitTest();
 
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -37,35 +35,35 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 //function
-DllExport int _stdcall GetNextMove(int map[225], int move)
+int _stdcall GetNextMove(int map[225], int move)
 {
     
     return 0;
 }
 
-DllExport void _stdcall Reset()
+void _stdcall Reset()
 {
     memset(&globalEngine, 0, sizeof(GameEngine));
 }
 
-DllExport void _stdcall SetColor(int color)
+void _stdcall SetColor(int color)
 {
     globalEngine.playerColor = color;
     globalPlayerColor = color;
 }
 
-DllExport void _stdcall SetIsBlackBanned(int state)
+void _stdcall SetIsBlackBanned(int state)
 {
     globalEngine.blackBanned = state;
     globalBlackBanned = state;
 }
 
-DllExport int _stdcall IsBlackBannedSupported()
+int _stdcall IsBlackBannedSupported()
 {
     return 0;
 }
 
-DllExport int _stdcall UnitTest()
+int _stdcall UnitTest()
 {
     int counter = 1, tmpErrCode = 0;
     tmpErrCode = testTupleFive();

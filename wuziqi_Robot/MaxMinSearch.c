@@ -1,18 +1,28 @@
-#include "MaxMinSearch.h"
 #include "pch.h"
+#include "TupleFive.h"
+#include "GameEngine.h"
+#include "GlobalEvaluation.h"
+#include "MaxMinSearch.h"
 
+//const
 #define MAXMIN_DEPTH 6
 #define PRIOR_COUNT 10
 #define INF 99999999
 
 
+
 /*	return the optimized linear 15*15 Gomoku position */
+
 int getBestMove_MaxMinSearch(GameEngine engine)
 {
 	//init
 	TuplePriorScore priorScore = convertToPriorTupleScore(getScoreFiveTuple(engine));
 	Node_MaxMinSearch startNode = {.alpha = -INF,.beta = INF,.step = 0,.value = 0};
-	int i,x,y,result = priorScore.list[0],maxEvaluation = 0,tmpEvaluation;
+	int i, x;
+	int y;
+	int result = priorScore.list[0];
+	int maxEvaluation = 0;
+	int tmpEvaluation;
 
 	for (i = 0; i < PRIOR_COUNT; i++)
 	{

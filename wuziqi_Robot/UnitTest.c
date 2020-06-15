@@ -1,7 +1,8 @@
-#include "GameEngine.h"
-#include "UnitTest.h"
-#include "TupleFive.h"
 #include "pch.h"
+#include "GameEngine.h"
+#include "TupleFive.h"
+#include "MaxMinSearch.h"
+#include "GlobalEvaluation.h"
 
 int testTupleFive()
 {
@@ -37,7 +38,7 @@ int testTupleFive()
 	}
 	if (800000 != getTmpTupleScore(engine, (TupleScorePoint) { 0, 0, 2 }))
 		return 3;
-	engine.squareMap.map[5][5] = CHESS_WHITE;
+	engine.squareMap.map[4][4] = CHESS_WHITE;
 	if (0 != getTmpTupleScore(engine, (TupleScorePoint) { 0, 0, 2 }))
 		return 3;
 
@@ -48,7 +49,7 @@ int testTupleFive()
 	for (i = 0; i < 5; i++)
 	{
 		if (16 * i != prScore.list[i])
-			return 4;
+			return 10*i+4;
 	}
 
 	//getScore_FiveTuple

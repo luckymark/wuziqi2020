@@ -3,7 +3,7 @@
     Const BOARD_BLOCK_SIZE As Integer = 40
     Const BOARD_INNER_MARGIN As Integer = 0
     Const BOARD_OUTER_MARGIN As Integer = 40
-    Private Property Opt As ChessColor = ChessColor.Black
+    Private Property currentPlayerColor As PlayerColor = PlayerColor.Black
     Private Property Last_i As Integer = -1
     Private Property MoveCounter As Integer = 1
     Private currentBoard(224) As Integer
@@ -11,15 +11,19 @@
     Private imgChessWhite As Bitmap = My.Resources.chessboard.white
     Private imgChessEmpty As Bitmap = My.Resources.chessboard.empty
 
+    Enum PlayerColor
+        Black = 1
+        White = 2
+    End Enum
     Enum ChessColor
-        White = 1
-        Black = 2
+        Empty = 0
+        Black = 1
+        White = 2
     End Enum
 
-    'out library
+    'function of Robot
     Public Declare Function getCounter Lib "Dll_Test.dll" () As Integer
-
-
+    Public Declare Function UnitTest Lib "wuziqi_Robot.dll" () As Integer
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'lock window
@@ -28,6 +32,12 @@
 
         'initialize chessboard
         InitializeChessboard()
+
+        'check if robot exist
+
+        'check if robot support black ban
+
+
 
     End Sub
 
@@ -62,30 +72,26 @@
         If BtnChessBoard(i).Text <> "" Then
             Exit Sub
         End If
-        currentBoard(i) = Opt
+        currentBoard(i) = currentPlayerColor
         UpdateBtnBoard(i)
         MoveCounter += 1
     End Sub
 
     Private Sub UpdateBtnBoard(i As Integer)
-        If Last_i <> -1 Then
-            BtnChessBoard(Last_i).FlatAppearance.BorderColor = BtnChessBoard(i).BackColor
-        End If
         Last_i = i
 
-        If Opt = ChessColor.Black Then
+        If currentPlayerColor = PlayerColor.Black Then
             'black chess 
             BtnChessBoard(i).ForeColor = Color.White
             BtnChessBoard(i).BackgroundImage = imgChessBlack
-            Opt = ChessColor.White
+            currentPlayerColor = PlayerColor.White
         Else
             'white chess
             BtnChessBoard(i).ForeColor = Color.Black
             BtnChessBoard(i).BackgroundImage = imgChessWhite
-            Opt = ChessColor.Black
+            currentPlayerColor = PlayerColor.Black
         End If
         BtnChessBoard(i).Text = MoveCounter.ToString()
-        BtnChessBoard(i).FlatAppearance.BorderColor = Color.Blue
     End Sub
 
     Friend BtnChessBoard(224) As MyButton
@@ -101,6 +107,8 @@
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         'init UI
+        ClearBoard()
+
         PanelChessBoard.Enabled = True
         If RdiModePVP.Checked Or RdiModePVE.Checked Then
             BtnGiveUp.Enabled = True
@@ -115,6 +123,13 @@
         GroupGlobalSetting.Enabled = False
 
         'set robot
+        If RdiModePVE.Checked Then
+
+        ElseIf RdiModeEVE.Checked Then
+
+        End If
+
+
 
 
     End Sub
@@ -192,8 +207,17 @@
             s.Text = ""
             s.FlatAppearance.BorderColor = Color.LightGray
         Next
-        Opt = ChessColor.Black
+        currentPlayerColor = PlayerColor.Black
         Last_i = -1
         MoveCounter = 1
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            Dim a As Integer = UnitTest()
+            MessageBox.Show(a.ToString)
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Sub
 End Class

@@ -1,8 +1,5 @@
 #pragma once
 
-#include "GameEngine.h"
-#include "TupleFive.h"
-
 //struct
 typedef struct {
 	int alpha, beta, step,value;
