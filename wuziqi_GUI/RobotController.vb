@@ -7,8 +7,6 @@
     Public Declare Sub ResetB Lib "RobotB.dll" Alias "Reset" ()
     Public Declare Sub SetColorB Lib "RobotB.dll" Alias "SetPlayerColor" (ByVal playerColor As Integer)
 
-
-
     Public Property Mode As GameMode = GameMode.PVE
     Public Property CurrentBoard As Integer()
     Public Property CurrentMove As Integer
@@ -16,25 +14,39 @@
     Sub New()
 
     End Sub
-    Sub Reset()
-
+    Sub Reset(robotIndex As Robot)
+        Select Case robotIndex
+            Case Robot.A
+                ResetA()
+            Case Robot.B
+                ResetB()
+        End Select
     End Sub
 
-    Private Sub RobotControler_OnMove(robotIndex As Integer) Handles Me.OnMove
+    Sub SetColor(robotIndex As Robot, color As PlayerColor)
+        Select Case robotIndex
+            Case Robot.A
+                SetColorA(color)
+            Case Robot.B
+                SetColorB(color)
+        End Select
+    End Sub
+
+    Private Sub RobotControler_OnMove(robotIndex As Robot) Handles Me.OnMove
         Dim index As Integer
         Select Case robotIndex
-            Case 0
-                index = NextMoveA(CurrentBoard(0), 0)
-            Case 1
-                index = NextMoveB(CurrentBoard(0), Nothing)
+            Case Robot.A
+                index = NextMoveA(CurrentBoard(0), CurrentMove)
+            Case Robot.B
+                index = NextMoveB(CurrentBoard(0), CurrentMove)
         End Select
 
         FormMain.BtnChessBoard(index).PerformClick()
     End Sub
 
-    Sub PerformMove(robotIndex As Integer)
+    Sub PerformMove(robotIndex As Robot)
         RaiseEvent OnMove(robotIndex)
     End Sub
 
-    Event OnMove(robotIndex As Integer)
+    Event OnMove(robotIndex As Robot)
 End Class

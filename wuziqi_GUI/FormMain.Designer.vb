@@ -181,16 +181,16 @@ Partial Class FormMain
         Me.Panel3.Controls.Add(Me.RdiModeEVE)
         Me.Panel3.Controls.Add(Me.RdiModePVE)
         Me.Panel3.Controls.Add(Me.RdiModePVP)
-        Me.Panel3.Location = New System.Drawing.Point(30, 28)
+        Me.Panel3.Location = New System.Drawing.Point(30, 18)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(184, 90)
+        Me.Panel3.Size = New System.Drawing.Size(184, 108)
         Me.Panel3.TabIndex = 1
         '
         'RdiModeEVE
         '
         Me.RdiModeEVE.AutoSize = True
-        Me.RdiModeEVE.Location = New System.Drawing.Point(12, 69)
+        Me.RdiModeEVE.Location = New System.Drawing.Point(12, 82)
         Me.RdiModeEVE.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModeEVE.Name = "RdiModeEVE"
         Me.RdiModeEVE.Size = New System.Drawing.Size(149, 21)
@@ -202,7 +202,7 @@ Partial Class FormMain
         'RdiModePVE
         '
         Me.RdiModePVE.AutoSize = True
-        Me.RdiModePVE.Location = New System.Drawing.Point(12, 40)
+        Me.RdiModePVE.Location = New System.Drawing.Point(12, 45)
         Me.RdiModePVE.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModePVE.Name = "RdiModePVE"
         Me.RdiModePVE.Size = New System.Drawing.Size(137, 21)
@@ -215,7 +215,7 @@ Partial Class FormMain
         '
         Me.RdiModePVP.AutoSize = True
         Me.RdiModePVP.Checked = True
-        Me.RdiModePVP.Location = New System.Drawing.Point(12, 11)
+        Me.RdiModePVP.Location = New System.Drawing.Point(12, 8)
         Me.RdiModePVP.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RdiModePVP.Name = "RdiModePVP"
         Me.RdiModePVP.Size = New System.Drawing.Size(125, 21)

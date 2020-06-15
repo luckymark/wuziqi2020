@@ -60,6 +60,7 @@
         Else
             MyRobotController.CurrentBoard(i) = ChessColor.White
         End If
+        MyRobotController.CurrentMove = i
         UpdateBtnBoard(i)
         MoveCounter += 1
 
@@ -126,53 +127,44 @@
 
     End Sub
 
-    Sub UpdateRobotState()
-        Dim A_Exist, B_Exist As Boolean
-        A_Exist = IO.File.Exists("RobotA.dll")
-        B_Exist = IO.File.Exists("RobotB.dll")
-        SetRobotRelevantUI(0, A_Exist)
-        SetRobotRelevantUI(1, B_Exist)
-        SetRobotRelevantUI(2, A_Exist Or B_Exist)
-        SetRobotRelevantUI(3, A_Exist And B_Exist)
+    Function UpdateRobotState() As Boolean
+        Dim A_Exist As Boolean = IO.File.Exists("RobotA.dll")
+        Dim B_Exist As Boolean = IO.File.Exists("RobotB.dll")
+        SetRobotRelevantUI(Robot.A, A_Exist)
+        SetRobotRelevantUI(Robot.B, B_Exist)
 
-        If A_Exist Then
-            LblIsAExist.Text = "就绪"
-        Else
-            LblIsAExist.Text = "缺失"
-        End If
-        If B_Exist Then
-            LblIsBExist.Text = "就绪"
-        Else
-            LblIsBExist.Text = "缺失"
-        End If
+        RdiModePVE.Enabled = A_Exist Or B_Exist
+        RdiModeEVE.Enabled = A_Exist And B_Exist
 
-        If (Not A_Exist) And B_Exist Then
-            RdiPVERobotB.Checked = True
-        End If
+        If (Not A_Exist) And B_Exist Then RdiPVERobotB.Checked = True
 
-    End Sub
+        Return Not (RdiModePVE.Checked And LblIsAExist.Text = "缺失" And LblIsBExist.Text = "缺失") Or RdiModeEVE.Checked And (LblIsAExist.Text = "缺失" Or LblIsBExist.Text = "缺失")
 
-    Sub SetRobotRelevantUI(index As Integer, state As Boolean)
+    End Function
+
+    Private Sub SetRobotRelevantUI(index As Robot, state As Boolean)
         Select Case index
             Case 0  'Robot A
-                TxtRobotNameA.Enabled = state
-                TxtRobotLevelA.Enabled = state
-                RdiPVERobotA.Enabled = state
+                TxtRobotNameA.Enabled = state : TxtRobotLevelA.Enabled = state : RdiPVERobotA.Enabled = state
+                If state Then
+                    LblIsAExist.Text = "就绪"
+                Else
+                    LblIsAExist.Text = "缺失"
+                End If
             Case 1   'Robot B
-                TxtRobotNameB.Enabled = state
-                TxtRobotLevelB.Enabled = state
-                RdiPVERobotB.Enabled = state
-            Case 2   'Either A or B relevant
-                RdiModePVE.Enabled = state
-            Case 3   'Both A and B exists
-                RdiModeEVE.Enabled = state
+                TxtRobotNameB.Enabled = state : TxtRobotLevelB.Enabled = state : RdiPVERobotB.Enabled = state
+                If state Then
+                    LblIsBExist.Text = "就绪"
+                Else
+                    LblIsBExist.Text = "缺失"
+                End If
         End Select
     End Sub
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
         'check robot
-        UpdateRobotState()
-        If (RdiModePVE.Checked And LblIsAExist.Text = "缺失" And LblIsBExist.Text = "缺失") Or RdiModeEVE.Checked And (LblIsAExist.Text = "缺失" Or LblIsBExist.Text = "缺失") Then
+        Dim IsRobotAvaliable As Boolean = UpdateRobotState()
+        If Not IsRobotAvaliable Then
             MessageBox.Show("没有可用的robot")
             Exit Sub
         End If
@@ -181,36 +173,53 @@
         ClearBoard()
         PanelChessBoard.Enabled = True
         If RdiModePVP.Checked Or RdiModePVE.Checked Then
-            BtnGiveUp.Enabled = True
-            BtnUndo.Enabled = True
-            BtnTip.Enabled = True
+            BtnGiveUp.Enabled = True : BtnUndo.Enabled = True : BtnTip.Enabled = True
         ElseIf RdiModeEVE.Checked Then
-            BtnStopEVE.Enabled = True
-            BtnPause.Enabled = True
+            BtnStopEVE.Enabled = True : BtnPause.Enabled = True
         Else
             Throw New Exception("没有选中游戏模式")
         End If
 
         'set robot
         If RdiModePVE.Checked Then
-            MyRobotController.Reset()
-            If RdiPVEBlackRobot.Checked Then
-                Dim robotIndex As Integer
-                If RdiPVERobotA.Checked Then
-                    robotIndex = 0
-                Else
-                    robotIndex = 1
-                End If
-                MyRobotController.PerformMove(robotIndex)
-            End If
+            Dim robotIndex As Robot = GetPVERobotIndex()
+            Dim robotColor As PlayerColor = GetPVERobotColor()
+            MyRobotController.Reset(robotIndex)
+            MyRobotController.SetColor(robotIndex, robotColor)
+            If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(robotIndex)
         ElseIf RdiModeEVE.Checked Then
-            MyRobotController.Reset()
-            MyRobotController.PerformMove(0)
+            MyRobotController.Reset(Robot.A)
+            MyRobotController.Reset(Robot.B)
+            MyRobotController.PerformMove(Robot.A)
         End If
 
         BtnStart.Enabled = False
         GroupGlobalSetting.Enabled = False
     End Sub
+
+    Private Function GetPVERobotIndex() As PlayerColor
+        Dim robotIndex As Robot
+
+        If RdiPVERobotA.Checked Then
+            robotIndex = Robot.A
+        Else
+            robotIndex = Robot.B
+        End If
+
+        Return robotIndex
+    End Function
+
+    Private Function GetPVERobotColor() As PlayerColor
+        Dim robotColor As PlayerColor
+
+        If RdiPVEBlackPlayer.Checked Then
+            robotColor = PlayerColor.White
+        Else
+            robotColor = PlayerColor.Black
+        End If
+
+        Return robotColor
+    End Function
 
     Private Sub RdiModePVP_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModePVP.CheckedChanged
         If RdiModePVP.Checked Then
@@ -312,4 +321,8 @@ Enum ChessColor
     White = 2
 End Enum
 
+Enum Robot
+    A = 0
+    B = 1
+End Enum
 
