@@ -169,6 +169,9 @@
             Exit Sub
         End If
 
+        Dim robotIndex As Robot = GetPVERobotIndex()
+        Dim robotColor As PlayerColor = GetPVERobotColor()
+
         'init UI
         ClearBoard()
         PanelChessBoard.Enabled = True
@@ -178,19 +181,48 @@
             BtnStopEVE.Enabled = True : BtnPause.Enabled = True
         Else
             Throw New Exception("没有选中游戏模式")
+            Exit Sub
+        End If
+
+        'show two players
+        'TODO 将Robot相关变量抽象为类
+        If RdiModePVP.Checked Then
+            LblPlayBlack.Text = TxtPVPBlackName.Text
+            LblPlayWhite.Text = TxtPVPWhiteName.Text
+        ElseIf RdiModePVE.Checked Then
+            If RdiPVEBlackPlayer.Checked Then
+                LblPlayBlack.Text = TxtPVPBlackName.Text
+                If robotIndex = Robot.A Then
+                    LblPlayWhite.Text = TxtRobotNameA.Text
+                Else
+                    LblPlayWhite.Text = TxtRobotNameB.Text
+                End If
+            Else
+                LblPlayWhite.Text = TxtPVPWhiteName.Text
+                If robotIndex = Robot.A Then
+                    LblPlayBlack.Text = TxtRobotNameA.Text
+                Else
+                    LblPlayBlack.Text = TxtRobotNameB.Text
+                End If
+            End If
+        ElseIf RdiModeEVE.Checked Then
+            LblPlayBlack.Text = TxtRobotNameA.Text
+            LblPlayWhite.Text = TxtRobotNameB.Text
         End If
 
         'set robot
         If RdiModePVE.Checked Then
-            Dim robotIndex As Robot = GetPVERobotIndex()
-            Dim robotColor As PlayerColor = GetPVERobotColor()
+            MyRobotController.Mode = GameMode.PVE
             MyRobotController.Reset(robotIndex)
             MyRobotController.SetColor(robotIndex, robotColor)
             If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(robotIndex)
         ElseIf RdiModeEVE.Checked Then
+            MyRobotController.Mode = GameMode.EVE
             MyRobotController.Reset(Robot.A)
             MyRobotController.Reset(Robot.B)
             MyRobotController.PerformMove(Robot.A)
+        Else
+            MyRobotController.Mode = GameMode.PVP
         End If
 
         BtnStart.Enabled = False
@@ -264,6 +296,8 @@
     End Sub
 
     Private Sub BtnPause_Click(sender As Object, e As EventArgs) Handles BtnPause.Click
+        MessageBox.Show("功能暂未开放，敬请期待！")
+        Exit Sub
         If BtnPause.Text = "暂停" Then
 
 
@@ -289,7 +323,8 @@
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles BtnUndo.Click
-
+        MessageBox.Show("功能暂未开放，敬请期待！")
+        Exit Sub
     End Sub
 
 #End Region
@@ -303,7 +338,10 @@
         End Try
     End Sub
 
-
+    Private Sub BtnTip_Click(sender As Object, e As EventArgs) Handles BtnTip.Click
+        MessageBox.Show("功能暂未开放，敬请期待！")
+        Exit Sub
+    End Sub
 End Class
 Enum GameMode
     PVP

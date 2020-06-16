@@ -11,6 +11,7 @@ GameEngine globalEngine;
 int _stdcall GetNextMove(int map[225], int move);
 void _stdcall Reset();
 void _stdcall SetColor(int color);
+void _stdcall SetLevel(int level);
 int _stdcall UnitTest();
 
 
@@ -49,6 +50,11 @@ void _stdcall Reset()
 void _stdcall SetColor(int color)
 {
     globalEngine.playerColor = color;
+}
+
+void _stdcall SetLevel(int level)
+{
+
 }
 
 int _stdcall UnitTest()

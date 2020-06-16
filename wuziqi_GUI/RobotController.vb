@@ -3,16 +3,20 @@
     Public Declare Function NextMoveA Lib "RobotA.dll" Alias "GetNextMove" (ByRef map As Integer, ByVal move As Integer) As Integer
     Public Declare Sub ResetA Lib "RobotA.dll" Alias "Reset" ()
     Public Declare Sub SetColorA Lib "RobotA.dll" Alias "SetPlayerColor" (ByVal playerColor As Integer)
+    Public Declare Sub SetLevelA Lib "RobotA.dll" Alias "SetLevel" (ByVal level As Integer)
+
     Public Declare Function NextMoveB Lib "RobotB.dll" Alias "GetNextMove" (ByRef map As Integer, ByVal move As Integer) As Integer
     Public Declare Sub ResetB Lib "RobotB.dll" Alias "Reset" ()
     Public Declare Sub SetColorB Lib "RobotB.dll" Alias "SetPlayerColor" (ByVal playerColor As Integer)
+    Public Declare Sub SetLevelB Lib "RobotB.dll" Alias "SetLevel" (ByVal level As Integer)
+
 
     Public Property Mode As GameMode = GameMode.PVE
     Public Property CurrentBoard As Integer()
     Public Property CurrentMove As Integer
 
     Sub New()
-
+        ReDim CurrentBoard(224)
     End Sub
     Sub Reset(robotIndex As Robot)
         Select Case robotIndex

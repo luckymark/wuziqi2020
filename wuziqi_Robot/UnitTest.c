@@ -61,3 +61,20 @@ int testTupleFive()
 
 	return 0;
 }
+
+int testGlobalEvaluation()
+{
+	//getOneLine_GE_Score
+	int line[15] = {0};
+
+
+	//getHorizontalGE
+
+	//getVerticalGE
+
+	//getObliqueGE_A
+
+	//getObliqueGE_B
+
+	//getGlobalEvaluation
+}
