@@ -11,8 +11,8 @@ typedef struct {
     int w[4][MAXN * 2];
     int points[MAXN * MAXN][3];
     int number;
-    int b3, b4;
-    int w3, w4;
+    int b3, b4;         // 统计黑子活三和冲四的个数
+    int w3, w4;         // 统计白子活三和冲四的个数
 } Lines;
 
 typedef struct {

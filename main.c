@@ -1,3 +1,4 @@
+#define TEST 0 // 0=off 1=on
 #include "board.h"
 #include "brain.h"
 
@@ -5,27 +6,10 @@ HANDLE hOUT, hIN;
 Board board;
 Lines lines;
 
+void test();
 void init();
 void gameover(chess winner);
 DWORD click(COORD *position);
-
-void test() {
-    int chesses[][3] = {
-        //{5,5,1},
-        {6,3,1},{6,6,1},{6,7,1},
-        {7,4,2},{7,6,2},//{7,7,1},
-        {8,4,1},{8,5,2},{8,6,1},{8,7,1},{8,8,1},
-        {9,4,2},{9,5,1},{9,6,2},{9,7,2},//{9,9,1},
-        {10,3,1},{10,4,2},{10,6,1},{10,7,2},//{10,10,2},
-        {11,2,2},{11,7,2},{11,8,1},
-        {12,3,2},
-        //{13,4,2}
-    };
-    for (int k = 0; k < 22; k++) {
-        putchess(hOUT, &board, chesses[k][0], chesses[k][1], chesses[k][2]);
-        putchess_lines(&lines, chesses[k][0], chesses[k][1], chesses[k][2]);
-    }
-}
 
 int main() {
     init();
@@ -57,6 +41,18 @@ int main() {
     return 0;
 }
 
+void test() {
+    int chesses[][3] = {
+        {8,6,1},{10,4,2},{7,6,1},{9,6,2},{8,7,1},
+        {7,7,1},{7,4,2},{10,7,1},{9,7,2},{9,8,1},{6,5,2},
+        {10,9,1},{11,10,2},{7,8,1},{7,5,2},{9,5,1},{8,4,2}
+    };
+    for (int k = 0; k < 17; k++) {
+        putchess(hOUT, &board, chesses[k][0], chesses[k][1], chesses[k][2]);
+        putchess_lines(&lines, chesses[k][0], chesses[k][1], chesses[k][2]);
+    }
+}
+
 void init() {
     hOUT = GetStdHandle(STD_OUTPUT_HANDLE);
     hIN  = GetStdHandle(STD_INPUT_HANDLE);
@@ -64,7 +60,8 @@ void init() {
     SetConsoleTitle("等等！偷看棋谱中……");
     preprocess();
     ////////////////////
-    //test();
+    if (TEST)
+        test();
     ////////////////////
     SetConsoleTitle("右键属性取消快速编辑");
 }
@@ -81,7 +78,8 @@ void gameover(chess winner) {
     setboard(hOUT, &board);
     init_lines(&lines);
     ////////////////////
-    //test();
+    if (TEST)
+        test();
     ////////////////////
     SetConsoleTitle("黑子先手，你先来，请");
 }

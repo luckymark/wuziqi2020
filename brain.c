@@ -6,22 +6,22 @@ static int basic[POW3_7][2];    // [][0]:棋形长度 [][1]:棋形分数
 static int score[POW3];         // 预处理一列十五个位置放置棋子的所有情况对应的分数
 static int pow3 [MAXN];         // 记录三的零到十四次方 3^0, 3^1, 3^2, 3^3, 3^4, ...
 static int rpt2 [MAXN];         // 记录三进制下的重复2 ()3, (2)3, (22)3, (222)3, ...
-static int b33, b34, b44, w33, w34, w44;
+static int b33, b34, b44, w33, w34, w44; // 标记黑白两方是否已有双活三、双冲四、活三+冲四
 
 #define ls                      (*lines)
 #define ABS(x)                  ((x) >  0  ? (x) :-(x))
 #define MAX(x, y)               ((x) > (y) ? (x) : (y))
 #define MIN(x, y)               ((x) < (y) ? (x) : (y))
-#define GET(a, x, y)            (a[0][x] / pow3[y] % 3)    // 取出棋盘上(x,y)处的值
-#define GETPART(i, j, k)        (i / pow3[j] % pow3[k])    // 取i从第j位开始的k个数
-#define ISFREE(p, x, y)         (!GET((*p).b, x, y) && !GET((*p).w, x, y))
-#define PUT(n, x, c)            do { n += c * pow3[x]; } while (0)
+#define GET(a, x, y)            (a[0][x] / pow3[y] % 3)                     // 取出棋盘上(x,y)处的值
+#define GETPART(i, j, k)        (i / pow3[j] % pow3[k])                     // 取三进制数i从第j位开始的k位
+#define ISFREE(p, x, y)         (!GET((*p).b, x, y) && !GET((*p).w, x, y))  // 判断棋盘的(x,y)位置处是否空闲
+#define PUT(n, x, c)            do { n += c * pow3[x]; } while (0)          // 将三进制数n的第x位的数字直接加上c
 #define SCORE(a, b, x, y, k)    (\
     (((k)&(1<<0))>>0) * (score[ a[0][x         ] + 2 * b[0][x         ]]) +\
     (((k)&(1<<1))>>1) * (score[ a[1][y         ] + 2 * b[1][y         ]]) +\
     (((k)&(1<<2))>>2) * (score[(a[2][x+y       ] + 2 * b[2][x+y       ]) * pow3[ABS(MAXN-x-y-1)] + rpt2[ABS(MAXN-x-y-1)]]) +\
     (((k)&(1<<3))>>3) * (score[(a[3][y-x+MAXN-1] + 2 * b[3][y-x+MAXN-1]) * pow3[ABS(y-x       )] + rpt2[ABS(y-x       )]])  \
-)   // a为己方数组 b为敌方数组 计算以(x,y)为中心点辐射开的四条轴线上己方棋子的分数
+)   // a为己方数组 b为敌方数组 计算以(x,y)为中心点辐射开的四条轴线上己方棋子的分数 通过二进制数k取出某些轴的分数和
 
 static void count_34(int dscore, int *three, int *four);
 static void putchess_color(Lines *lines, int color[][MAXN * 2], int x, int y, int delta);
@@ -67,12 +67,10 @@ static void count_34(int dscore, int *three, int *four) {
 
 void putchess_lines(Lines *lines, int x, int y, int c) {
     if (ISFREE(lines, x, y)) {
-        if (c == 1) {   // Black
+        if (c == 1)     // Black
             putchess_color(lines, ls.b, x, y, 1);
-        }
-        if (c == 2) {   // White
+        if (c == 2)     // White
             putchess_color(lines, ls.w, x, y, 1);
-        }
     }
 }
 
@@ -107,7 +105,7 @@ static void generate(Lines *lines) {
             }
         }
     }
-    ls.number = k - 1;
+    ls.number = k;
     ls.b3 = b3, ls.b4 = b4, ls.w3 = w3, ls.w4 = w4;
     qsort(ls.points, k, sizeof(ls.points[0]), cmp);
 }
@@ -125,13 +123,13 @@ static void bonus(Lines *lines, int scoreHum, int scoreCom, int *scrDelta, int d
         *scrDelta -= 2e7 * ddepth, b44 = 1;
     if (ls.w4 >= 2 && !w44)
         *scrDelta += 2e7 * ddepth, w44 = 1;
-    if (ls.b3 && ls.b4 && !b34)
+    if (ls.b3 && ls.b4 && !b34 && !b33)
         *scrDelta -= 2e5 * ddepth, b34 = 1;
-    if (ls.w3 && ls.w4 && !w34)
+    if (ls.w3 && ls.w4 && !w34 && !w33)
         *scrDelta += 2e5 * ddepth, w34 = 1;
-    if (ls.b3 >= 2 && !b33)
+    if (ls.b3 >= 2 && !b33 && !b34)
         *scrDelta -= 2e5 * ddepth, b33 = 1;
-    if (ls.w3 >= 2 && !w33)
+    if (ls.w3 >= 2 && !w33 && !w34)
         *scrDelta += 2e5 * ddepth, w33 = 1;
 }
 
@@ -146,7 +144,7 @@ MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha
     info.alpha = alpha, info.beta = beta;
     info.x = ls.points[0][1], info.y = ls.points[0][2];
     const int b3 = ls.b3, b4 = ls.b4, w3 = ls.w3, w4 = ls.w4;
-    for (int k = 0; k != MIN(POINTS, ls.number); k++) {
+    for (int k = 0; k < MIN(POINTS, ls.number); k++) {
         const int i = ls.points[k][1];
         const int j = ls.points[k][2];
         if (ISFREE(lines, i, j)) {
@@ -168,9 +166,9 @@ MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha
                 
                 bonus(lines, scoreHum, scoreCom, &scrDelta, DEPTH - depth + 1);
                 scoreFin += scrDelta;
-                if (depth == DEPTH/* || scoreCom > 1e8 || scoreHum > 1e8*/) {
-                    info.alpha = MAX(info.alpha, scoreFin);
-                    info.beta  = MIN(info.beta , scoreFin);
+                
+                if (depth == DEPTH) {
+                    info.beta = MIN(info.beta, scoreFin);
                 }
                 else {
                     MinimaxInfo son_info = minimax(lines, depth + 1, scoreFin, info.alpha, info.beta);
@@ -213,9 +211,6 @@ static void loadbasic(char threes[], int score) {
 static void loaddata() {
     loadbasic("11111"  , 1e9); // 连五
     loadbasic("011110" , 1e7); // 活四
-    //                 , 1e7); // 双四
-    //                 , 1e5); // 三四
-    //                 , 1e5); // 双三
     loadbasic("011112" , 1e4); // 冲四
     loadbasic("10111"  , 1e4); //
     loadbasic("11011"  , 1e4); //
