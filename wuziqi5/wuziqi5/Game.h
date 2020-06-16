@@ -8,6 +8,8 @@ void gaming(ChessBoard * board);
 bool judgeWin(Chess c, ChessBoard * board);
 void showMessage(TCHAR * s);
 Chess judgePos(int color, ChessBoard * board);
+void showColor(int human_color);
+Chess minmax_search(int color, int depth, ChessBoard * board);
 // void showMessage(int i);
 
 
@@ -19,19 +21,18 @@ void initGame(ChessBoard * board) {
 
 	hwnd = board->drawBoard();
 
-	setfillcolor(BLACK);
-	fillrectangle(550, 20, 575, 45);
-
-	setfillcolor(WHITE);
-	fillrectangle(550, 60, 575, 85);
+	showColor(ChessBoard::black);
 
 }
 
 
 void gaming(ChessBoard * board) {
+
 	int human_c = ChessBoard::black, robot_c = ChessBoard::white;
 
-	int now = ChessBoard::black;
+	int now = ChessBoard::black, win = 0;
+
+	showMessage(_T("RIGHT_BUTTON to Change"));
 
 	MOUSEMSG m;
 	while (1) {
@@ -39,21 +40,50 @@ void gaming(ChessBoard * board) {
 		switch (m.uMsg) {
 
 		case WM_LBUTTONDOWN:
+			if (win)	break;
 			Chess c;
 			c = calcPoint(m.x, m.y, now);
 			if (board->writeBoard(c)) {
-				if (judgeWin(c, board))
+				if (judgeWin(c, board)) {
 					showMessage(_T("You Win!!!"));
+					win = now;
+					continue;
+				}
 				now = board->changeColor(now);
 
-				c = judgePos(robot_c, board);
+//				c = judgePos(robot_c, board);
+				c = minmax_search(now, 4, board);
+
 				if (board->writeBoard(c)) {
-					if (judgeWin(c, board))
+					if (judgeWin(c, board)) {
 						showMessage(_T("Robot Win"));
+						win = now;
+						continue;
+					}
 				}
 				now = board->changeColor(now);
 			};
 			break;
+
+		case WM_RBUTTONDOWN:
+			if (win)	break;
+			human_c = board->changeColor(human_c);
+			robot_c = board->changeColor(robot_c);
+			showColor(human_c);
+
+//			c = judgePos(robot_c, board);
+			c = minmax_search(robot_c, 3, board);
+
+			if (board->writeBoard(c)) {
+				if (judgeWin(c, board)) {
+					showMessage(_T("Robot Win"));
+					win = now;
+					continue;
+				}
+			}
+			now = board->changeColor(now);
+			break;
+
 		default:
 			break;
 		}
@@ -143,7 +173,35 @@ void showMessage(TCHAR * s) {
 }
 
 
-Chess judgePos(int color, ChessBoard * board) {
+void showColor(int human_color) {
+
+	setlinecolor(0xF3F8F1);		// ±ß¿òÑÕÉ«
+
+	setfillcolor(BLACK);
+	fillrectangle(550, 20, 575, 45);
+
+	setfillcolor(WHITE);
+	fillrectangle(550, 60, 575, 85);
+
+	RECT r1 = { 580, 20, 630, 45 }, r2 = { 580, 60, 630, 85 };
+	setfillcolor(0xF3F8F1);
+	
+	fillrectangle(580, 20, 630, 45);
+	fillrectangle(580, 60, 630, 85);
+
+	if (human_color == ChessBoard::black) {
+		RECT t = r1;
+		r1 = r2;
+		r2 = t;
+	}
+	
+	DrawText(GetDC(hwnd), _T("Human"), -1, &r2, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+	DrawText(GetDC(hwnd), _T("Robot"), -1, &r1, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+}
+
+
+Chess judgePos(int color, ChessBoard * board) {		// judge best chess
 	
 
 	Chess c = { 0,0,0 }; int nowVal = -23333333;
@@ -164,4 +222,48 @@ Chess judgePos(int color, ChessBoard * board) {
 		}
 
 	return c;
+}
+
+
+Chess minmax_search(int color, int depth, ChessBoard * board) {
+	Chess ans = { 0,0,0 };
+	int now_color = color, max_val = -23333333;
+	for(int i = 1; i <= maxn; i++)
+		for (int j = 1; j <= maxn; j++) {
+
+			if (board->getType(i, j) == ChessBoard::blank) {
+				Chess c[10];
+				c[1] = { i ,j, color };
+				board->changeType(i, j, color);
+
+
+				int t = 1;
+				if (depth >= 2) {
+					for (t = 2; t <= depth; t++) {	// ×î¶à9²ã
+						now_color = board->changeColor(now_color);
+						c[t] = judgePos(now_color, board);
+						board->changeType(c[t].x, c[t].y, now_color);
+						if (judgeWin(c[t], board)) {
+							t++;
+							break;
+						}
+					}
+				}
+
+				int val = board->evaluate(color);
+				if (val > max_val) {
+					ans = c[1];
+					max_val = val;
+				}
+
+				for (t-- ; t >= 2; t--) {
+					board->changeType(c[t].x, c[t].y, ChessBoard::blank);
+					now_color = board->changeColor(now_color);
+				}
+
+
+				board->changeType(i, j, ChessBoard::blank);
+			}
+		}
+	return ans;
 }

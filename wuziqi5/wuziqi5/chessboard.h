@@ -26,7 +26,7 @@ public:
 	int getType(int x, int y);
 	void changeType(int x, int y, int type);
 	int evaluate(int color);
-	int analyseNode(int x, int y);
+	int analyseNode(int x, int y, bool range_searched[maxn + max_add][maxn + max_add]);
 	bool isIn(int x, int y);
 };
 

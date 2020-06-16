@@ -165,8 +165,7 @@
     <ResourceCompile Include="wuziqi5.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Desktop\chessboard2.jpg" />
-    <Image Include="..\..\..\..\..\Desktop\chessborad.jpg" />
+    <Image Include="pic\chessboard2.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

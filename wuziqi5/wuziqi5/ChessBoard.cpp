@@ -17,7 +17,7 @@ ChessBoard::ChessBoard()
 /*	type = { {0,0,0,0,0,0}, {0,1,1,1,1,1}, {0,1,1,1,1,0},{0,1,1,1,1,2},{0,1,1,0,1,1}, {0,1,1,1,0,1},
 			 {0,1,1,1,0,0,}, {0,1,0,1,1,0}, {} };*/
 
-	value[1] = 300000, value[2] = 30000, value[3] = 2500, value[4] = 3000, value[5] = 3300, value[6] = 500,
+	value[1] = 300000, value[2] = 30000, value[3] = 3500, value[4] = 3000, value[5] = 3300, value[6] = 500,
 		value[7] = 800, value[8] = 600, value[9] = 200, value[10] = 2600;
 
 }
@@ -91,29 +91,29 @@ int ChessBoard::evaluate(int color) {
 
 	int ans = 0, oppnent = changeColor(color);
 
-	int range_searched[maxn + max_add][maxn + max_add];
+	bool range_searched[maxn + max_add][maxn + max_add];
 	memset(range_searched, 0, sizeof(range_searched));
 	
 	for(int i = 1; i <= maxn; i++)
 		for (int j = 1; j <= maxn; j++) {
 			if (board[i][j] == color)
-				ans += analyseNode(i, j);
+				ans += analyseNode(i, j, range_searched);
 			else if (board[i][j] == oppnent)
-				ans -= analyseNode(i, j);
+				ans -= analyseNode(i, j, range_searched);
 		}
 
 	return ans;
 }
 
 
-int ChessBoard::analyseNode(int x, int y) {
+int ChessBoard::analyseNode(int x, int y, bool range_searched[maxn + max_add][maxn + max_add]) {
 
-	int dx[8] = { 1,0,-1, 0, 1,-1, 1, -1 }, dy[8] = { 0, 1, 0, -1, 1, -1, -1, 1 };
+	int dx[8] = { 1,-1,0, 0, 1,-1, 1, -1 }, dy[8] = { 0, 0, 1, -1, 1, -1, -1, 1 };
 	int ans = 0, color = board[x][y], oppnent = changeColor(color);
 
-	for (int i = 1; i <= 8; i++) {
+	for (int i = 0; i < 8; i++) {
 		int mine = 0, op = 0, bl = 0, n[5] = {0}, nx = x, ny = y;
-
+		
 		for (int j = 1; j <= 4; j++) {
 
 			nx += dx[i];  ny += dy[i];
@@ -147,7 +147,7 @@ int ChessBoard::analyseNode(int x, int y) {
 		}
 
 
-		bool back_blank = isIn(x - dx[i], y - dx[i]) && board[x - dx[i]][y - dx[i]] == blank;
+		bool back_blank = isIn(x - dx[i], y - dy[i]) && board[x - dx[i]][y - dy[i]] == blank;
 
 
 		if (n[1] == 1 && n[2] == 1 && n[3] == 1) {	//连四
@@ -194,7 +194,7 @@ int ChessBoard::analyseNode(int x, int y) {
 		}
 
 		if (n[1] == 1) {
-			if (bl == 3 && blank) {		// 活二
+			if (bl == 3 && back_blank) {		// 活二
 				ans += value[8];
 				continue;
 			}
@@ -204,7 +204,6 @@ int ChessBoard::analyseNode(int x, int y) {
 				continue;
 			}
 		}
-
 		
 	}
 

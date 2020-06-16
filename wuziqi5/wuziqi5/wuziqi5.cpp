@@ -11,7 +11,6 @@ int main()
 	initGame(board);
 	gaming(board);
 
-	getchar();
 	delete board;
 	closegraph();
 
