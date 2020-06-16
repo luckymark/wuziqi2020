@@ -332,7 +332,7 @@ enum {
 	SLEEP3 = 150,
 	SLEEP2 = 40,
 	DEAD1 = -1,
-	SLEEP1 = 0,
+	SLEEP1 = 5,
 	NONE = 0,
 	DEAD2 = -2,
 	DEAD4 = -10,
