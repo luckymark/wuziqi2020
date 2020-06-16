@@ -1,7 +1,7 @@
 ﻿  AI.cpp
-  GameManagement.cpp
   draw.cpp
+  GameManagement.cpp
   gamerun.cpp
   main.cpp
   正在生成代码...
-  五子棋.vcxproj -> E:\人机对战\五子棋\Debug\五子棋.exe
+  五子棋.vcxproj -> C:\GitHub_test\wuziqi2020\五子棋实验\五子棋\Debug\五子棋.exe
