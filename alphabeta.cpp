@@ -63,35 +63,23 @@ boardStatus evaluateBoard(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)//
     bool flag = false;
     if(mp.count(zobrist) !=0 ) return mp[zobrist];
     cot++;
-
-
     for(int i = 1;i <= R;i++)
     {
         int x = q[i].x(), y = q[i].y();
-//        int white_live_4,white_dead_4,white_live_3;
-//        int black_live_4,black_dead_4,black_live_3;
-//        black_live_4 = black_dead_4 = black_live_3 = 0;
-//        white_live_4 = white_dead_4 = white_live_3 = 0;
         for(int k = 0;k < 4;k++)
         {
-//            bool white_judge_live_3 = false;
-//            auto black_judge_live_3 = false;
             ll type_score = 0;
             for(int t = 0; t <= 5; t++)
             {
                 int min_x = x - dir[k][0] * t,min_y = y - dir[k][1] * t;
                 int max_x = x - dir[k][0] * (t - 5), max_y = y - dir[k][1] * (t - 5);
-//                ll pre;
                 if((!judgePoints(min_x,min_y)) || (!judgePoints(max_x,max_y))) continue;
-                type_score = chess_6_type[board[x - dir[k][0] * t][y - dir[k][1] * t]][board[x - dir[k][0] * (t - 1)][y - dir[k][1] * (t - 1)]][board[x - dir[k][0] * (t - 2)][y - dir[k][1] * (t - 2)]][board[x - dir[k][0] * (t - 3)][y - dir[k][1] * (t - 3)]][board[x - dir[k][0] * (t - 4)][y - dir[k][1] * (t - 4)]][board[x - dir[k][0] * (t - 5)][y - dir[k][1] * (t - 5)]];
-//                if(i % 2 == 0)
-//                {
-//                    type_score = std::min(pre,type_score);
-//                }
-//                else
-//                {
-//                    type_score = std::max(pre,type_score);
-//                }
+                type_score = chess_6_type[board[x - dir[k][0] * t][y - dir[k][1] * t]]
+                        [board[x - dir[k][0] * (t - 1)][y - dir[k][1] * (t - 1)]]
+                        [board[x - dir[k][0] * (t - 2)][y - dir[k][1] * (t - 2)]]
+                        [board[x - dir[k][0] * (t - 3)][y - dir[k][1] * (t - 3)]]
+                        [board[x - dir[k][0] * (t - 4)][y - dir[k][1] * (t - 4)]]
+                        [board[x - dir[k][0] * (t - 5)][y - dir[k][1] * (t - 5)]];
                 score += type_score;
                 if(type_score == WIN)
                 {
@@ -111,49 +99,11 @@ boardStatus evaluateBoard(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)//
                     mp[zobrist] = evaluation;
                     return evaluation;
                 }
-//                if(type_score == WHITE_LIVE_3)
-//                {
-//                    white_judge_live_3 = true;
-//                }
-//                if(type_score == WHITE_LIVE_4)
-//                {
-//                    white_live_4 = 1;
-//                }
-//                if(type_score == WHITE_SLEEP_4)
-//                {
-//                    white_dead_4 = 1;
-//                }
-//                if(type_score == BLACK_LIVE_3)
-//                {
-//                    black_judge_live_3 = true;
-//                }
-//                if(type_score == WHITE_LIVE_4)
-//                {
-//                    black_live_4 = 1;
-//                }
-//                if(type_score == WHITE_SLEEP_4)
-//                {
-//                    black_dead_4 = 1;
-//                }
+
             }
-//            if(white_judge_live_3)
-//            {
-//                white_live_3++;
-//            }
-//            if(black_judge_live_3)
-//            {
-//                black_live_3++;
-//            }
+
 
         }
-//        if(white_live_4 || (white_live_3 + white_dead_4 >= 2))
-//        {
-//            score += WIN;
-//        }
-//        if(black_live_4 || (black_dead_4 + black_live_3 >= 2))
-//        {
-//            score += LOSE;
-//        }
     }
 
     evaluation.score = score;
@@ -212,7 +162,6 @@ decision findPoints(int (&board)[CHESS_HEIGHT][CHESS_LENGTH],ll zobrist)
         Points pos;
         pos.x = i;
         pos.y = j;
-//        q[++R] = pos;
         q[++R] = QPoint(pos.x,pos.y);
         value_queue[t] = evaluateBoard(board,zobrist ^ zob[i][j][C_WHITE - 1]).score;
         board[i][j] = C_NONE;
@@ -286,17 +235,9 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
                 AIStep = P.pos[i];
             }
             sameBoard[P.pos[i].x][P.pos[i].y] = C_WHITE;
-//            q[++R] = P.pos[i];
             q[++R] = QPoint(P.pos[i].x,P.pos[i].y);
             ll score;
-//            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
-//            {
-//                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
-//            }
-//            else
-            {
-                score = alphaBetaSearch(sameBoard, depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]);
-            }
+            score = alphaBetaSearch(sameBoard, depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]);
             sameBoard[P.pos[i].x][P.pos[i].y] = C_NONE;
             R--;
             if(score > alpha)
@@ -309,7 +250,6 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
             }
             if(alpha >= beta) break;
         }
-//        vis[zobrist] = alpha;
         return alpha;
     }
     else
@@ -325,17 +265,9 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
         {
             if(!judgePoints(P.pos[i].x,P.pos[i].y)) continue;
             sameBoard[P.pos[i].x][P.pos[i].y] = C_BLACK;
-//            q[++R] = P.pos[i];
             q[++R] = QPoint(P.pos[i].x,P.pos[i].y);
             ll score;
-//            if(vis.count(zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]) != 0)
-//            {
-//                score = vis[zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_WHITE - 1]];
-//            }
-//            else
-            {
-                score = alphaBetaSearch(sameBoard,depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_BLACK - 1]);
-            }
+            score = alphaBetaSearch(sameBoard,depth - 1,alpha,beta,zobrist ^ zob[P.pos[i].x][P.pos[i].y][C_BLACK - 1]);
             sameBoard[P.pos[i].x][P.pos[i].y] = C_NONE;
             R--;
             if(score < beta)
@@ -344,7 +276,6 @@ ll alphaBetaSearch(int (&board)[CHESS_HEIGHT][CHESS_LENGTH], int depth, ll alpha
             }
             if(alpha >= beta) break;
         }
-//        vis[zobrist] = beta;
         return beta;
     }
 }
