@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 C:/Users/Dai/wuziqi/wuziqi2020/game.cpp
-cstdio
--
 game.h
 C:/Users/Dai/wuziqi/wuziqi2020/game.h
 ctime
@@ -18,9 +16,21 @@ C:/Users/Dai/wuziqi/wuziqi2020/game.h
 initWindow.h
 C:/Users/Dai/wuziqi/wuziqi2020/initWindow.h
 
+C:/Users/Dai/wuziqi/wuziqi2020/game_algorithm.cpp
+game.h
+C:/Users/Dai/wuziqi/wuziqi2020/game.h
+memory.h
+-
+
 C:/Users/Dai/wuziqi/wuziqi2020/initWindow.h
 cstdio
 -
 graphics.h
 -
+
+C:/Users/Dai/wuziqi/wuziqi2020/wuziqi.cpp
+initWindow.h
+C:/Users/Dai/wuziqi/wuziqi2020/initWindow.h
+game.h
+C:/Users/Dai/wuziqi/wuziqi2020/game.h
 
