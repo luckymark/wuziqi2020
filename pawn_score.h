@@ -5,13 +5,13 @@
 #ifndef GOBANG_PAWN_SCORE_H
 #define GOBANG_PAWN_SCORE_H
 
-#define w5 10000
-#define a4 1000
-#define d4 550
-#define a3 500
-#define d3 250
-#define a2 200
-#define d2 100
+const int w5=10000;
+const int a4=1000;
+const int d4=550;
+const int a3=500;
+const int d3=250;
+const int a2=200;
+const int d2=100;
 
 
 #include "main.h"

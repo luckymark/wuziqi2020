@@ -5,6 +5,7 @@
 
 extern int board[row][col];
 extern int is_empty[row][col];
+extern int player;
 
 dir da={1,0};
 dir db={0,1};
@@ -29,6 +30,45 @@ dir next_point(dir p,dir d,int des){
     p_.y=p.y+des*d.y;
     return p_;
 }
+
+int is_end(int x,int y,int color){
+    int l;
+    dir Dir,point,point_;
+    point.x=x;point.y=y;
+    Dir.x=Dir.y=0;
+    for(int d=1;d<=4;d++) {
+        l = 1;
+        switch (d) {
+            case 1:
+                Dir = da;
+                break;
+            case 2:
+                Dir = db;
+                break;
+            case 3:
+                Dir = dc;
+                break;
+            case 4:
+                Dir = dd;
+                break;
+            default:
+                break;
+        }
+        point_ = next_point(point, Dir, 1);
+        while (is_in_board(point_.x, point_.y) && board[point_.x][point_.y] == color) {
+            l++;
+            point_ = next_point(point_, Dir, 1);
+        }
+        point_ = next_point(point, Dir, -1);
+        while (is_in_board(point_.x, point_.y) && board[point_.x][point_.y] == color) {
+            l++;
+            point_ = next_point(point_, Dir, -1);
+        }
+        if(l==5) return 1;
+    }
+    return 0;
+}
+
 int state_score(int x,int y,int color){
     int left[5]={0};int right[5]={0};int d,cnt,l,color_,score;
     color_=get_color_(color);

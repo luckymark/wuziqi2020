@@ -7,21 +7,6 @@ extern int board[col][row];
 extern int player;
 extern point best;
 
-int exam(){
-    int EXAM=0;
-    point exam[square];
-    point pe[square];
-    exam[0].x=1;
-    stack s;
-    init(&s);
-    exam[0]=top(&s);
-    if(exam[0].x!=0&&exam[0].y!=0&&exam[0].score!=0) return 0;
-    int pawn_score=100;
-    exam[1].score=20;
-    pop_stack(1,s,pawn_score,exam,black);
-    return is_empty(&s);
-}
-
 int Max(int x, int y){
     if(x>y){return x;}
     else return y;
@@ -54,6 +39,7 @@ int find_point(point*p){
 }
 
 int max_min(int deep,int color) {
+    int alpha=min,beta=max;
     point p[square];
     stack best_nodes;
     init(&best_nodes);
@@ -66,13 +52,21 @@ int max_min(int deep,int color) {
     else {pawn_score=max;}
     for (int i = 0; i < length; i++) {
         board[p[i].x][p[i].y] = color;
-        if(deep==1){
-            if(color!=player){
-                score=state_score(p[i].x,p[i].y,color);
-            }else{
-                score=-state_score(p[i].x,p[i].y,color);
+        if(color!=player){
+            if(deep==1){score=state_score(p[i].x,p[i].y,color);}
+            else score=max_min(deep-1,color_);
+            if(score>beta) {
+                board[p[i].x][p[i].y] = empty;
+                return max;
             }
-        }else {score = max_min(deep - 1, color_);}
+        }else{
+            if(deep==1){score=-state_score(p[i].x,p[i].y,color);}
+            else score=max_min(deep-1,color_);
+            if(score<alpha) {
+                board[p[i].x][p[i].y] = empty;
+                return min;
+            }
+        }
         p[i].score = score;
         pop_stack(i, best_nodes, pawn_score, p, color);
         board[p[i].x][p[i].y] = empty;
@@ -81,8 +75,10 @@ int max_min(int deep,int color) {
             point pr;
             pr = top(&best_nodes);
             best = pr;
+            if(color==player){alpha=pr.score;}
+            else{beta=pr.score;}
             return pr.score;
-        } else assert(0);
+        }
         if (deep == 4) { best = top(&best_nodes); }
         return pawn_score;
 }
