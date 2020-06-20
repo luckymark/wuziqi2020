@@ -64,12 +64,12 @@ int testTupleFive()
 
 int testGlobalEvaluation()
 {
-	//getGE_Int15
+	//getGE_IntX
 	int line_A[15] = {0};
-	if (0 != getGE_Int15(line_A, PLAYER_BLACK))
+	if (0 != getGE_IntX(line_A,15, PLAYER_BLACK))
 		return 1;
 	int line_B[15] = { 0,0,0,1,0,0,0,1,0,1,1,1,1,0,0 };
-	if (6830 != getGE_Int15(line_B, PLAYER_BLACK))
+	if (6830 != getGE_IntX(line_B,15, PLAYER_BLACK))
 		return 1;
 
 	//getHorizontalGE
@@ -91,13 +91,13 @@ int testGlobalEvaluation()
 		return 3;
 
 	//getObliqueGE_A
-	getObliqueGE_A(engine);
+	//return getObliqueGE_A(engine) - 20;
 
 	//getObliqueGE_B
-	getObliqueGE_B(engine);
+	//return getObliqueGE_B(engine) - 20;
 
 	//getGlobalEvaluation
-	getGlobalEvaluation(engine);
+	//return getGlobalEvaluation(engine) - 20;
 
 	return 0;
 }

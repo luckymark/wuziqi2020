@@ -13,14 +13,19 @@ Module Module1
     Sub Main()
         Dim x As Integer
         Try
-            Console.Write("请输入x（5~15之间的整数）：")
-            x = Console.ReadLine()
-            If Not (5 <= x <= 15) Then
-                Console.WriteLine("输入错误")
-                Console.Read()
-                End
-            End If
-            FigureAllGEIntXAndSaveToFile(x)
+            Do
+                Console.Clear()
+                Console.Write("请输入x（5~15之间的整数）：")
+                x = Console.ReadLine()
+                If Not (5 <= x <= 15) Then
+                    Console.WriteLine("输入错误")
+                    Console.Read()
+                    End
+                End If
+                FigureAllGEIntXAndSaveToFile(x)
+                Console.WriteLine("完成！继续请输入y，退出请按任意键")
+            Loop While Console.ReadLine() = "y"
+
         Catch ex As Exception
             Console.WriteLine(ex.ToString)
             Console.Read()
@@ -36,13 +41,22 @@ Module Module1
         Dim i, tmpScore As Integer
         Dim startNum As Integer, endNum As Integer
         Dim progress As Double
-        Dim MyFileStream As New IO.FileStream("GE_Int" & x.ToString & "_Data.txt", IO.FileMode.CreateNew)
+        Dim MyFileStream As New IO.FileStream("GEInt" & x.ToString & "Data_Black.c", IO.FileMode.CreateNew)
         Dim MyStreamWriter As New IO.StreamWriter(MyFileStream)
         Dim myDelegateGetGE As DelegateGetGE = GetDelegateGetGE(x)
+
+        'write title
+        MyStreamWriter.Write("#include ")
+        MyStreamWriter.Write(Chr(34))
+        MyStreamWriter.Write("pch.h")
+        MyStreamWriter.WriteLine(Chr(34))
+        MyStreamWriter.Write("short GEInt{0}_Data_Black[{1}] = ", x, 3 ^ x)
+        MyStreamWriter.WriteLine("{")
 
         startNum = 0
         endNum = 3 ^ x - 1
         For i = startNum To endNum
+            If i Mod 20 = 0 And i <> 0 Then MyStreamWriter.WriteLine()
             progress = (i - startNum) / (endNum - startNum) * 100
             Console.Title = String.Format("progress: {0:n3}%", progress)
 
@@ -52,12 +66,14 @@ Module Module1
             Console.Write(" : ")
             Console.WriteLine(tmpScore)
 
-            MyStreamWriter.Write(tmpScore & ",")
-            If i Mod 20 = 0 Then MyStreamWriter.WriteLine()
+            MyStreamWriter.Write(tmpScore)
+            If i < endNum Then MyStreamWriter.Write(",")
             If i Mod 10000 = 0 Then MyStreamWriter.Flush()
         Next
 
         MyStreamWriter.Flush()
+        MyStreamWriter.Write("};")
+
         MyStreamWriter.Dispose()
         MyFileStream.Dispose()
 
@@ -200,47 +216,5 @@ Module Module1
         Return result
     End Function
 
-    Function GetGE_Int6_Black(chessInt6 As Integer()) As Integer
-        'init
-        Dim chessString As String = GetChessString(chessInt6)
-        Dim result As Integer = 0
-
-        'win 5
-        If chessString.Contains("11111") Then
-            Return 10000
-        End If
-        If chessString.Contains("22222") Then
-            Return -10000
-        End If
-
-        'live 4
-        If chessString = "011110" Then
-            result += 5000
-        End If
-        If chessString = "022220" Then
-            result -= 5000
-        End If
-
-        'sleep 4
-        If chessString.Contains("011112") Or chessString.Contains("211110") Or chessString.Contains("11101") Or chessString.Contains("10111") Or chessString.Contains("11011") Then
-            result += 1800
-        End If
-        If chessString.Contains("022221") Or chessString.Contains("122220") Or chessString.Contains("22202") Or chessString.Contains("20222") Or chessString.Contains("22022") Then
-            result -= 1800
-        End If
-
-        'live 3
-        If chessString.Contains("01110") Then
-            result += 1000
-        End If
-        If chessString.Contains("02220") Then
-            result -= 1000
-        End If
-
-
-
-
-        Return result
-    End Function
 
 End Module

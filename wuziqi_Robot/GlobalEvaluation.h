@@ -3,7 +3,7 @@
 
 //prototype
 int getGlobalEvaluation(GameEngine engine);
-int getGE_Int15(int line[15], int playerColor);
+int getGE_IntX(int line[15],int x,int playerColor);
 int getHorizontalGE(GameEngine engine);
 int getVerticalGE(GameEngine engine);
 int getObliqueGE_A(GameEngine engine);

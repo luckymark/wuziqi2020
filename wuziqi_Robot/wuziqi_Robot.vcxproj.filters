@@ -56,8 +56,38 @@
     <ClCompile Include="UnitTest.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="GEInt15Data_Black.c">
-      <Filter>源文件</Filter>
+    <ClCompile Include="GEIntData\GEInt5Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt6Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt7Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt8Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt9Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt10Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt11Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt12Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt13Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt14Data_Black.c">
+      <Filter>资源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GEIntData\GEInt15Data_Black.c">
+      <Filter>资源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
