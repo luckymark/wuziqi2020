@@ -27,6 +27,15 @@
         End Select
     End Sub
 
+    Sub SetLevel(robotIndex As Robot, level As Integer)
+        Select Case robotIndex
+            Case Robot.A
+                SetLevelA(level)
+            Case Robot.B
+                SetLevelB(level)
+        End Select
+    End Sub
+
     Sub SetColor(robotIndex As Robot, color As PlayerColor)
         Select Case robotIndex
             Case Robot.A

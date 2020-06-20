@@ -11,17 +11,12 @@
     Private ReadOnly imgChessWhite As Bitmap = My.Resources.chessboard.white
     Private ReadOnly imgChessEmpty As Bitmap = My.Resources.chessboard.empty
 
-#Region "机器人接口"
-
-
-
     'unit test
     Public Declare Function UnitTest Lib "wuziqi_Robot.dll" () As Integer
 
     'function of Robot
 
     WithEvents MyRobotController As RobotController
-#End Region
 
 #Region "棋盘UI"
     Sub InitializeChessboard()

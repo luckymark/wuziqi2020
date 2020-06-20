@@ -2,3 +2,4 @@
 
 int testTupleFive();
 int testGlobalEvaluation();
+int testMaxMinSearch();

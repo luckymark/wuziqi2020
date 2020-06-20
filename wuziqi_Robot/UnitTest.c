@@ -64,17 +64,45 @@ int testTupleFive()
 
 int testGlobalEvaluation()
 {
-	//getOneLine_GE_Score
-	int line[15] = {0};
-
+	//getGE_Int15
+	int line_A[15] = {0};
+	if (0 != getGE_Int15(line_A, PLAYER_BLACK))
+		return 1;
+	int line_B[15] = { 0,0,0,1,0,0,0,1,0,1,1,1,1,0,0 };
+	if (6830 != getGE_Int15(line_B, PLAYER_BLACK))
+		return 1;
 
 	//getHorizontalGE
+	GameEngine engine;
+	memset(&engine, 0, sizeof(engine));
+	engine.playerColor = PLAYER_BLACK;
+	int i, j;
+	for (i = 0; i < 15; i++)
+		for (j = 0; j < 15; j++)
+			engine.squareMap.map[i][j] = line_B[j];
+	if (6830 * 15 != getHorizontalGE(engine))
+		return 2;
 
 	//getVerticalGE
+	for (j = 0; j < 15; j++)
+		for (i = 0; i < 15; i++)
+			engine.squareMap.map[i][j] = line_B[i];
+	if (60000 != getHorizontalGE(engine))
+		return 3;
 
 	//getObliqueGE_A
+	getObliqueGE_A(engine);
 
 	//getObliqueGE_B
+	getObliqueGE_B(engine);
 
 	//getGlobalEvaluation
+	getGlobalEvaluation(engine);
+
+	return 0;
+}
+
+int testMaxMinSearch()
+{
+	return 0;
 }

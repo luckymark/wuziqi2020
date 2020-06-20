@@ -60,9 +60,17 @@ void _stdcall SetLevel(int level)
 int _stdcall UnitTest()
 {
     int counter = 1, tmpErrCode = 0;
+
     tmpErrCode = testTupleFive();
     if (0 != tmpErrCode)
     { 
+        return 10 * counter + tmpErrCode;
+    }
+    counter++;
+
+    tmpErrCode = testGlobalEvaluation();
+    if (0 != tmpErrCode)
+    {
         return 10 * counter + tmpErrCode;
     }
     counter++;

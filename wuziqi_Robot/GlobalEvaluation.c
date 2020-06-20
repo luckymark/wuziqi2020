@@ -26,7 +26,7 @@ int getHorizontalGE(GameEngine engine)
 		{
 			line[j] = engine.squareMap.map[i][j];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 	}
 	return result;
 }
@@ -41,7 +41,7 @@ int getVerticalGE(GameEngine engine)
 		{
 			line[i] = engine.squareMap.map[i][j];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 	}
 	return result;
 }
@@ -56,19 +56,19 @@ int getObliqueGE_A(GameEngine engine)
 		{
 			line[p] = engine.squareMap.map[p][start + p];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 		for (p = 0; p < step; p++)
 		{
 			line[p] = engine.squareMap.map[start + p][p];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 		step++;
 	}
 	for (p = 0; p < 15; p++)
 	{
 		line[p] = engine.squareMap.map[p][p];
 	}
-	result += getOneLine_GE_Score(line,engine.playerColor);
+	result += getGE_Int15(line,engine.playerColor);
 
 	return result;
 }
@@ -83,24 +83,24 @@ int getObliqueGE_B(GameEngine engine)
 		{
 			line[p] = engine.squareMap.map[p][start - p];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 		for (p = 0; p < step; p++)
 		{
 			line[p] = engine.squareMap.map[start - p][p];
 		}
-		result += getOneLine_GE_Score(line, engine.playerColor);
+		result += getGE_Int15(line, engine.playerColor);
 		step++;
 	}
 	for (p = 0; p < 15; p++)
 	{
 		line[p] = engine.squareMap.map[p][14-p];
 	}
-	result += getOneLine_GE_Score(line,engine.playerColor);
+	result += getGE_Int15(line,engine.playerColor);
 
 	return result;
 }
 
-int getOneLine_GE_Score(int line[15], int playerColor)
+int getGE_Int15(int line[15], int playerColor)
 {
 	int i,j = 1,index = 0,result;
 	

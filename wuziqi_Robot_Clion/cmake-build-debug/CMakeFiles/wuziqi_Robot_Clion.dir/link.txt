@@ -1,3 +1,0 @@
-"D:\Program Files\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\wuziqi_Robot_Clion.dir/objects.a
-C:\PROGRA~1\MinGw\mingw64\bin\ar.exe cr CMakeFiles\wuziqi_Robot_Clion.dir/objects.a @CMakeFiles\wuziqi_Robot_Clion.dir\objects1.rsp
-C:\PROGRA~1\MinGw\mingw64\bin\gcc.exe  -g  -shared -o libwuziqi_Robot_Clion.dll -Wl,--out-implib,libwuziqi_Robot_Clion.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\wuziqi_Robot_Clion.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\wuziqi_Robot_Clion.dir\linklibs.rsp
