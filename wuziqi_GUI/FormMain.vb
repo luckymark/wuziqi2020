@@ -45,9 +45,9 @@
 
     End Sub
 
-    Private Sub ChessBoard_Click(sender As Object, e As EventArgs)
+    Private Async Sub ChessBoard_Click(sender As Object, e As EventArgs)
         Dim i As Integer = sender.Index
-
+        Dim robotIndex As Robot
 
         'already has a chess on it
         If BtnChessBoard(i).Text <> "" Then
@@ -70,12 +70,16 @@
 
             Case GameMode.PVE
                 If RdiPVEBlackPlayer.Checked Xor CurrentPlayerColor = PlayerColor.Black Then
-
-                    MyRobotController.PerformMove(RdiPVERobotB.Checked)
+                    If RdiPVERobotB.Checked Then
+                        robotIndex = Robot.B
+                    Else
+                        robotIndex = Robot.A
+                    End If
+                    Await MyRobotController.PerformMove(robotIndex)
 
                 End If
             Case GameMode.EVE
-                MyRobotController.PerformMove(i)
+                Await MyRobotController.PerformMove(1 - MoveCounter Mod 2)
         End Select
 
     End Sub
@@ -165,6 +169,12 @@
     End Sub
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        'short circuit
+        If RdiModeEVE.Checked Then
+            MessageBox.Show("十分抱歉，功能异常，正在修复中，敬请期待")
+            Exit Sub
+        End If
+
         'check robot
         Dim IsRobotAvaliable As Boolean = UpdateRobotState()
         If Not IsRobotAvaliable Then

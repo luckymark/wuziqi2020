@@ -62,11 +62,14 @@
         End Select
 
         FormMain.BtnChessBoard(index).PerformClick()
+
     End Sub
 
-    Sub PerformMove(robotIndex As Robot)
+    Function PerformMove(robotIndex As Robot) As Task
         RaiseEvent OnMove(robotIndex)
-    End Sub
+        Return Nothing
+    End Function
 
     Event OnMove(robotIndex As Robot)
+
 End Class
