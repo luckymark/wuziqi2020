@@ -47,9 +47,14 @@
 
     Private Sub ChessBoard_Click(sender As Object, e As EventArgs)
         Dim i As Integer = sender.Index
+
+
+        'already has a chess on it
         If BtnChessBoard(i).Text <> "" Then
             Exit Sub
         End If
+
+        'update robot controller
         If CurrentPlayerColor = PlayerColor.Black Then
             MyRobotController.CurrentBoard(i) = ChessColor.Black
         Else
@@ -59,12 +64,15 @@
         UpdateBtnBoard(i)
         MoveCounter += 1
 
+
         Select Case MyRobotController.Mode
             Case GameMode.PVP
 
             Case GameMode.PVE
                 If RdiPVEBlackPlayer.Checked Xor CurrentPlayerColor = PlayerColor.Black Then
+
                     MyRobotController.PerformMove(RdiPVERobotB.Checked)
+
                 End If
             Case GameMode.EVE
                 MyRobotController.PerformMove(i)

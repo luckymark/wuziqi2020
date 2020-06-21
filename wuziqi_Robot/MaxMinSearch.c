@@ -9,8 +9,6 @@
 #define PRIOR_COUNT 10
 #define INF 99999999
 
-
-
 /*	return the optimized linear 15*15 Gomoku position */
 
 int getBestMove_MaxMinSearch(GameEngine engine)

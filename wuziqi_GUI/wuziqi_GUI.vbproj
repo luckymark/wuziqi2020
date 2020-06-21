@@ -78,7 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>chessboard.resx</DependentUpon>
     </Compile>
-    <Compile Include="ChessBoard.vb" />
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>

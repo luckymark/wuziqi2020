@@ -75,6 +75,7 @@ Partial Class FormMain
         Me.Label15 = New System.Windows.Forms.Label()
         Me.LblPlayBlack = New System.Windows.Forms.Label()
         Me.LblPlayWhite = New System.Windows.Forms.Label()
+        Me.LblResponseTime = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupGlobalSetting.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -654,12 +655,22 @@ Partial Class FormMain
         Me.LblPlayWhite.Size = New System.Drawing.Size(0, 17)
         Me.LblPlayWhite.TabIndex = 9
         '
+        'LblResponseTime
+        '
+        Me.LblResponseTime.AutoSize = True
+        Me.LblResponseTime.Location = New System.Drawing.Point(773, 201)
+        Me.LblResponseTime.Name = "LblResponseTime"
+        Me.LblResponseTime.Size = New System.Drawing.Size(68, 17)
+        Me.LblResponseTime.TabIndex = 10
+        Me.LblResponseTime.Text = "响应时间："
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1424, 781)
+        Me.Controls.Add(Me.LblResponseTime)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.LblPlayWhite)
         Me.Controls.Add(Me.LblPlayBlack)
@@ -752,4 +763,5 @@ Partial Class FormMain
     Friend WithEvents Label15 As Label
     Friend WithEvents LblPlayBlack As Label
     Friend WithEvents LblPlayWhite As Label
+    Friend WithEvents LblResponseTime As Label
 End Class
