@@ -112,25 +112,25 @@ static void generate(Lines *lines) {
 
 static void bonus(Lines *lines, int scoreHum, int scoreCom, int *scrDelta, int ddepth) {
     if (scoreHum  > 1e8)
-        *scrDelta -= 9e9 * ddepth;
+        *scrDelta -= (long long) 9e9 * ddepth;
     if (scoreCom  > 1e8)
-        *scrDelta += 9e9 * ddepth;
+        *scrDelta += (long long) 9e9 * ddepth;
     if (scoreHum  > 1e6 && scoreHum < 1e8)
-        *scrDelta -= 2e7 * ddepth;
+        *scrDelta -= (long long) 2e7 * ddepth;
     if (scoreCom  > 1e6 && scoreCom < 1e8)
-        *scrDelta += 2e7 * ddepth;
+        *scrDelta += (long long) 2e7 * ddepth;
     if (ls.b4 >= 2 && !b44)
-        *scrDelta -= 2e7 * ddepth, b44 = 1;
+        *scrDelta -= (long long) 2e7 * ddepth, b44 = 1;
     if (ls.w4 >= 2 && !w44)
-        *scrDelta += 2e7 * ddepth, w44 = 1;
+        *scrDelta += (long long) 2e7 * ddepth, w44 = 1;
     if (ls.b3 && ls.b4 && !b34 && !b33)
-        *scrDelta -= 2e5 * ddepth, b34 = 1;
+        *scrDelta -= (long long) 2e5 * ddepth, b34 = 1;
     if (ls.w3 && ls.w4 && !w34 && !w33)
-        *scrDelta += 2e5 * ddepth, w34 = 1;
+        *scrDelta += (long long) 2e5 * ddepth, w34 = 1;
     if (ls.b3 >= 2 && !b33 && !b34)
-        *scrDelta -= 2e5 * ddepth, b33 = 1;
+        *scrDelta -= (long long) 2e5 * ddepth, b33 = 1;
     if (ls.w3 >= 2 && !w33 && !w34)
-        *scrDelta += 2e5 * ddepth, w33 = 1;
+        *scrDelta += (long long) 2e5 * ddepth, w33 = 1;
 }
 
 MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha, long long beta) {
@@ -155,8 +155,8 @@ MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha
             scoreHum += SCORE(ls.b, ls.w, i, j, 15);
             scoreFin += scoreCom - scoreHum;
             int scrDelta = 0;
-            
-            if (depth == 1 && scoreCom > 1e8) {                             // 向下搜索
+
+            if (depth == 1 && scoreCom > 1e8) {
                 info.x = i, info.y = j;
                 return info;
             }

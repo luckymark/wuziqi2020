@@ -27,11 +27,15 @@
 
 #define COMPARE(board, x, y, c) (0 <= x && x < MAX_X && 0 <= y && y < MAX_Y && (*board).a[x][y] == c)
 
+static int prevC;
 static int tryX, tryY;
-static const WORD colors[3] = {
+static int prevX, prevY;
+static const WORD colors[5] = {
     FOREGROUND_INTENSITY|BG_RGB,
     BG_RGB,
-    FOREGROUND_INTENSITY|FG_RGB|BG_RGB
+    FOREGROUND_INTENSITY|FG_RGB|BG_RGB,
+    BACKGROUND_INTENSITY,
+    FOREGROUND_INTENSITY|FG_RGB|BACKGROUND_INTENSITY,
 };
 
 static void dprint(HANDLE h, char dchar[]);
@@ -98,13 +102,21 @@ status putchess(HANDLE h, Board *board, int x, int y, chess c) {
         }
     }
     if (COMPARE(board, x, y, NONE)) {
+        SetConsoleTextAttribute(h, colors[c + (c == NONE ? 0 : 2)]);
         GO(h, y * 2 + 2, x + 1);
-        SetConsoleTextAttribute(h, colors[c]);
         dprint(h, "●");
         if (c == NONE) {
             tryX = x, tryY = y;
         }
         else {
+            if (prevC) {
+                SetConsoleTextAttribute(h, colors[prevC]);
+                GO(h, prevY * 2 + 2, prevX + 1);
+                dprint(h, "●");
+            }
+            prevX = x;
+            prevY = y;
+            prevC = c;
             if (LOG) {
                 FILE *fp = fopen(FILENAME, "a");
                 fprintf(fp, "{%d,%d,%d},", x, y, c);
