@@ -7,9 +7,11 @@
 #define BG_RGB BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_BLUE
 
 #define PRINTLINE(L, M, R) do {\
-    if (j == 0)              dprint(h, L);\
-    else if (j == MAX_Y - 1) dprint(h, R);\
-    else                     dprint(h, M);\
+    switch (j + 1) {\
+        case 1    : dprint(h, L); break;\
+        default   : dprint(h, M); break;\
+        case MAX_Y: dprint(h, R); break;\
+    }\
 } while (0)
 
 #define CLEARCHESS(L, M, R) do {\
@@ -25,9 +27,11 @@
     SetConsoleCursorPosition(h, position);\
 } while (0)
 
+#define GOTO(h, x, y) GO(h, (y) * 2 + 2, (x) + 1)
+
 #define COMPARE(board, x, y, c) (0 <= x && x < MAX_X && 0 <= y && y < MAX_Y && (*board).a[x][y] == c)
 
-static int prevC;
+static chess prevC;
 static int tryX, tryY;
 static int prevX, prevY;
 static const WORD colors[5] = {
@@ -63,9 +67,11 @@ static void paintbox(HANDLE h) {
     for (int i = 0; i < MAX_X; i++) {
         printf("\n  ");
         for (int j = 0; j < MAX_Y; j++) {
-            if (i == 0)              PRINTLINE("┏", "┯", "┓");
-            else if (i == MAX_X - 1) PRINTLINE("┗", "┷", "┛");
-            else                     PRINTLINE("┠", "┼", "┨");
+            switch (i + 1) {
+                case 1    : PRINTLINE("┏", "┯", "┓"); break;
+                default   : PRINTLINE("┠", "┼", "┨"); break;
+                case MAX_X: PRINTLINE("┗", "┷", "┛"); break;
+            }
         }
     }
 }
@@ -81,6 +87,7 @@ void setboard(HANDLE h, Board *board) {
     SetConsoleTextAttribute(h, colors[NONE]);                   // 设置颜色
     clearscreen(h);                                             // 清空屏幕
     paintbox(h);                                                // 绘制棋盘
+    prevC = NONE;
     if (LOG) {
         struct tm* tblock;
         time_t timer = time(NULL);
@@ -93,8 +100,8 @@ void setboard(HANDLE h, Board *board) {
 status putchess(HANDLE h, Board *board, int x, int y, chess c) {
     if ((*board).a[tryX][tryY] == NONE) {
         SetConsoleTextAttribute(h, colors[NONE]);
-        GO(h, tryY * 2 + 2, tryX + 1); printf("  ");
-        GO(h, tryY * 2 + 2, tryX + 1);
+        GOTO(h, tryX, tryY); printf("  ");
+        GOTO(h, tryX, tryY);
         switch (tryX + 1) {
             case     1: CLEARCHESS("┏", "┯", "┓"); break;
             default   : CLEARCHESS("┠", "┼", "┨"); break;
@@ -103,7 +110,7 @@ status putchess(HANDLE h, Board *board, int x, int y, chess c) {
     }
     if (COMPARE(board, x, y, NONE)) {
         SetConsoleTextAttribute(h, colors[c + (c == NONE ? 0 : 2)]);
-        GO(h, y * 2 + 2, x + 1);
+        GOTO(h, x, y);
         dprint(h, "●");
         if (c == NONE) {
             tryX = x, tryY = y;
@@ -111,12 +118,10 @@ status putchess(HANDLE h, Board *board, int x, int y, chess c) {
         else {
             if (prevC) {
                 SetConsoleTextAttribute(h, colors[prevC]);
-                GO(h, prevY * 2 + 2, prevX + 1);
+                GOTO(h, prevX, prevY);
                 dprint(h, "●");
             }
-            prevX = x;
-            prevY = y;
-            prevC = c;
+            prevX = x, prevY = y, prevC = c;
             if (LOG) {
                 FILE *fp = fopen(FILENAME, "a");
                 fprintf(fp, "{%d,%d,%d},", x, y, c);

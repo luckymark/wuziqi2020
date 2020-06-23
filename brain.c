@@ -134,13 +134,17 @@ static void bonus(Lines *lines, int scoreHum, int scoreCom, int *scrDelta, int d
 }
 
 MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha, long long beta) {
+    MinimaxInfo info;
     if (depth == 1) {
         b33 = w33 = b34 = w34 = b44 = w44 = 0;
         generate(lines);
+        if (!ls.number) {
+            info.x = info.y = -1;
+            return info;
+        }
         alpha *= oo;
         beta  *= oo;
     }
-    MinimaxInfo info;
     info.alpha = alpha, info.beta = beta;
     info.x = ls.points[0][1], info.y = ls.points[0][2];
     const int b3 = ls.b3, b4 = ls.b4, w3 = ls.w3, w4 = ls.w4;
@@ -172,15 +176,15 @@ MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha
                 }
                 else {
                     MinimaxInfo son_info = minimax(lines, depth + 1, scoreFin, info.alpha, info.beta);
-                    if (depth % 2 == 0) {
-                        if (son_info.alpha < info.beta) {
-                            info.beta = son_info.alpha;
+                    if (depth % 2 == 1) {
+                        if (son_info.beta > info.alpha) {
+                            info.alpha = son_info.beta; 
                             info.x = i, info.y = j;
                         }
                     }
                     else {
-                        if (son_info.beta > info.alpha) {
-                            info.alpha = son_info.beta; 
+                        if (son_info.alpha < info.beta) {
+                            info.beta = son_info.alpha;
                             info.x = i, info.y = j;
                         }
                     }
@@ -189,7 +193,7 @@ MinimaxInfo minimax(Lines *lines, int depth, long long scoreFin, long long alpha
                 w33 = w33_, w34 = w34_, w44 = w44_;
             }
             scoreFin -= scoreCom - scoreHum + scrDelta;                     // 还原现场
-            putchess_color(lines, depth % 2 == 0 ? ls.b : ls.w, i, j, -1);
+            putchess_color(lines, depth % 2 == 1 ? ls.w : ls.b, i, j, -1);
             ls.b3 = b3, ls.b4 = b4, ls.w3 = w3, ls.w4 = w4;
             if (info.alpha >= info.beta) return info;
         }

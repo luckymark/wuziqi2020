@@ -17,21 +17,25 @@ int main() {
         COORD position;
         if (click(&position) == FROM_LEFT_1ST_BUTTON_PRESSED) {
             switch (putchess(hOUT, &board, position.X, position.Y, BLACK)) {
-                case AVAILABLE:
-                    putchess_lines(&lines, position.X, position.Y, BLACK);
+            case AVAILABLE:
+                putchess_lines(&lines, position.X, position.Y, BLACK);
 
-                    SetConsoleTitle("轮到我白子，你等会儿");
-                    MinimaxInfo info = minimax(&lines, 1, 0, -oo, +oo);
+                SetConsoleTitle("轮到我白子，你等会儿");
+                MinimaxInfo info = minimax(&lines, 1, 0, -oo, +oo);
+                if (info.x == -1)
+                    gameover(NONE);
+                else {
                     putchess_lines(&lines, info.x, info.y, WHITE);
                     if (putchess(hOUT, &board, info.x, info.y, WHITE) == GAMEOVER)
                         gameover(WHITE);
                     else
                         SetConsoleTitle("现在轮到你的黑子下了");
-                    break;
-                case GAMEOVER:
-                    gameover(BLACK);
-                    break;
-                default: break;
+                }
+                break;
+            case GAMEOVER:
+                gameover(BLACK);
+                break;
+            default: break;
             }
         }
         else {
@@ -70,6 +74,8 @@ void init() {
 }
 
 void gameover(chess winner) {
+    if (winner == NONE)
+        SetConsoleTitle("啊，这……，右键重开");
     if (winner == BLACK)
         SetConsoleTitle("赢，黑子胜，右键重开");
     if (winner == WHITE)
