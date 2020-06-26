@@ -11,12 +11,6 @@
     Private ReadOnly imgChessWhite As Bitmap = My.Resources.chessboard.white
     Private ReadOnly imgChessEmpty As Bitmap = My.Resources.chessboard.empty
 
-    'unit test
-    Public Declare Function UnitTest Lib "wuziqi_Robot.dll" () As Integer
-
-
-    'function of Robot
-
     WithEvents MyRobotController As RobotController
 
 #Region "棋盘UI"
@@ -384,14 +378,7 @@
     Private Event GameOver(state As JudgeState)
 
 
-    Private Sub ButtonUnitTest_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Try
-            Dim a As Integer = UnitTest()
-            MessageBox.Show(a.ToString)
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-        End Try
-    End Sub
+
 
     Private Sub BtnTip_Click(sender As Object, e As EventArgs) Handles BtnTip.Click
         MessageBox.Show("功能暂未开放，敬请期待！")

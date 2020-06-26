@@ -70,7 +70,6 @@ Partial Class FormMain
         Me.TxtPVPWhiteName = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtPVPBlackName = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LblResponseTime = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -613,16 +612,6 @@ Partial Class FormMain
         Me.TxtPVPBlackName.TabIndex = 0
         Me.TxtPVPBlackName.Text = "张三"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(807, 511)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(189, 34)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "单元测试"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.LblResponseTime)
@@ -688,7 +677,6 @@ Partial Class FormMain
         Me.ClientSize = New System.Drawing.Size(1424, 781)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GpBoxPVPSet)
         Me.Controls.Add(Me.GpBoxPVESet)
         Me.Controls.Add(Me.GroupBox4)
@@ -767,7 +755,6 @@ Partial Class FormMain
     Friend WithEvents TxtPVPBlackName As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents LblIsBExist As Label
