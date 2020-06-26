@@ -16,10 +16,28 @@
     Public Property CurrentBoard As Integer()
     Public Property CurrentMove As Integer
 
+    Public Property CurrentRobot As Robot
+
     Sub New()
         ReDim CurrentBoard(224)
+        If IO.File.Exists("RobotA.dll") Then
+            CurrentRobot = Robot.A
+        Else
+            CurrentRobot = Robot.B
+        End If
     End Sub
-    Sub Reset(robotIndex As Robot)
+
+    Sub New(robotIndex As Robot)
+        ReDim CurrentBoard(224)
+        CurrentRobot = robotIndex
+    End Sub
+
+    Overloads Sub Reset()
+        ResetA()
+        ResetB()
+    End Sub
+
+    Overloads Sub Reset(robotIndex As Robot)
         Select Case robotIndex
             Case Robot.A
                 ResetA()
@@ -28,7 +46,7 @@
         End Select
     End Sub
 
-    Sub SetLevel(robotIndex As Robot, level As Integer)
+    Overloads Sub SetLevel(robotIndex As Robot, level As Integer)
         Select Case robotIndex
             Case Robot.A
                 SetLevelA(level)
@@ -37,7 +55,21 @@
         End Select
     End Sub
 
-    Sub SetColor(robotIndex As Robot, color As PlayerColor)
+    Overloads Sub SetLevel(levelA As Integer, levelB As Integer)
+        SetLevelA(levelA)
+        SetLevelB(levelB)
+    End Sub
+
+    Overloads Sub SetLevel(level As Integer)
+        Select Case CurrentRobot
+            Case Robot.A
+                SetLevelA(level)
+            Case Robot.B
+                SetLevelB(level)
+        End Select
+    End Sub
+
+    Overloads Sub SetColor(robotIndex As Robot, color As PlayerColor)
         Select Case robotIndex
             Case Robot.A
                 SetColorA(color)
@@ -45,6 +77,16 @@
                 SetColorB(color)
         End Select
     End Sub
+
+    Overloads Sub SetColor(color As PlayerColor)
+        Select Case CurrentRobot
+            Case Robot.A
+                SetColorA(color)
+            Case Robot.B
+                SetColorB(color)
+        End Select
+    End Sub
+
 
     Private Sub RobotControler_OnMove(robotIndex As Robot) Handles Me.OnMove
         Dim index As Integer
@@ -60,21 +102,37 @@
         End Select
         t2 = Now
         dt = t2 - t1
-        FormMain.LblResponseTime.Text = "响应时间：" & dt.TotalSeconds & "s"
+        FormMain.LblResponseTime.Text = String.Format("响应时间：{0:n2}s", dt.TotalSeconds)
+
+        If Mode = GameMode.EVE Then ExchangeRobot()
 
         FormMain.BtnChessBoard(index).PerformClick()
 
     End Sub
 
+    Sub ExchangeRobot()
+        If CurrentRobot = Robot.A Then
+            CurrentRobot = Robot.B
+        Else
+            CurrentRobot = Robot.A
+        End If
+    End Sub
+
+    Sub ClearBoard()
+        ReDim CurrentBoard(224)
+    End Sub
+
     Function GetJudgeState() As JudgeState
-        Dim state As JudgeState = Judge(CurrentBoard(0))
-        Return state
+        Return Judge(CurrentBoard(0))
     End Function
 
-    Function PerformMove(robotIndex As Robot) As Task
+    Overloads Sub PerformMove(robotIndex As Robot)
         RaiseEvent OnMove(robotIndex)
-        Return Nothing
-    End Function
+    End Sub
+
+    Overloads Sub PerformMove()
+        RaiseEvent OnMove(CurrentRobot)
+    End Sub
 
     Event OnMove(robotIndex As Robot)
 

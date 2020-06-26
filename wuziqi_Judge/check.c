@@ -29,7 +29,7 @@ int checkVertical(int map[225])
 	{
 		for (i = 0; i < 15; i++)
 		{
-			line[j] = map[15 * i + j];
+			line[i] = map[15 * i + j];
 		}
 		result = checkLine(line);
 		if (result)
@@ -76,7 +76,7 @@ int checkObliqueB(int map[225])
 {
 	int start = 10, step = 5, p, line[15], result = 0;
 	memset(&line, 0, sizeof(int) * 15);
-	for (start = 5; start < 14; start++)
+	for (start = 4; start < 14; start++)
 	{
 		for (p = 0; p < step; p++)
 		{
@@ -87,7 +87,7 @@ int checkObliqueB(int map[225])
 			return result;
 		for (p = 0; p < step; p++)
 		{
-			line[p] = map[15 * (start - p) + p];
+			line[p] = map[15 * (14 - start + p) + 14 - p];
 		}
 		result = checkLine(line);
 		if (result)

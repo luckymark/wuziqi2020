@@ -30,9 +30,13 @@ Visual Basic .NET 编写的winform GUI，调用外置dll中的机器人
 
 C语言编写的dll项目，用于判断棋局状态为【没有结束】、【黑方胜】、【白方胜】或者【和棋】
 
-### GE_data_generator
+### wuziqi_GE_data_generator
 
 Visual Basic .NET 编写的控制台程序，用于硬编码评估函数
+
+### wuziqi_C_Debug
+
+用于从项目中复制C代码并调试的项目
 
 
 

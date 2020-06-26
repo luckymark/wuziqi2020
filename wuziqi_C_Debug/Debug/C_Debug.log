@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (C_Debug.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  C_Debug.c
+D:\LZT\Programming\wuziqi\wuziqi2020\C_Debug\C_Debug.c(20,15): warning C4013: “checkObliqueB”未定义；假设外部返回 int
+  C_Debug.vcxproj -> D:\LZT\Programming\wuziqi\wuziqi2020\Debug\wuziqi_C_Debug.exe

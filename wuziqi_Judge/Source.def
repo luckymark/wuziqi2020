@@ -1,2 +1,3 @@
 LIBRARY
-Judge = _Judge@4
+EXPORTS
+	Judge = _Judge@4

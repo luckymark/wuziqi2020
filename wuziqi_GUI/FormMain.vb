@@ -48,7 +48,6 @@
 
     Friend Sub ChessBoard_Click(sender As Object, e As EventArgs)
         Dim i As Integer = sender.Index
-        Dim robotIndex As Robot
 
         'already has a chess on it
         If BtnChessBoard(i).Text <> "" Then
@@ -71,30 +70,18 @@
 
             Case GameMode.PVE
                 If RdiPVEBlackPlayer.Checked Xor CurrentPlayerColor = PlayerColor.Black Then
-                    If RdiPVERobotB.Checked Then
-                        robotIndex = Robot.B
-                    Else
-                        robotIndex = Robot.A
-                    End If
-                    MyRobotController.PerformMove(robotIndex)
-
+                    MyRobotController.PerformMove()
                 End If
             Case GameMode.EVE
-                MyRobotController.PerformMove(1 - MoveCounter Mod 2)
+                MyRobotController.PerformMove()
         End Select
 
         'check judge state
-        Dim state As JudgeState = MyRobotController.GetJudgeState
-        Select Case state
-            Case JudgeState.NotEnd
+        Dim state As JudgeState = MyRobotController.GetJudgeState()
+        If Not state = JudgeState.NotEnd Then
+            RaiseEvent GameOver(state)
+        End If
 
-            Case JudgeState.BlackWin
-
-            Case JudgeState.WhiteWin
-
-            Case JudgeState.Draw
-
-        End Select
     End Sub
 
     Private Sub UpdateBtnBoard(i As Integer)
@@ -112,6 +99,31 @@
             CurrentPlayerColor = PlayerColor.Black
         End If
         BtnChessBoard(i).Text = MoveCounter.ToString()
+    End Sub
+
+    Private Sub GameOverHandler(state As JudgeState) Handles Me.GameOver
+        Select Case state
+            Case JudgeState.NotEnd
+                Exit Sub
+            Case JudgeState.BlackWin
+                MessageBox.Show("黑方胜")
+            Case JudgeState.WhiteWin
+                MessageBox.Show("白方胜")
+            Case JudgeState.Draw
+                MessageBox.Show("和棋")
+        End Select
+
+        ClearBoard()
+        PanelChessBoard.Enabled = False
+        GroupGlobalSetting.Enabled = True
+
+        BtnStart.Enabled = True
+        BtnGiveUp.Enabled = False
+        BtnTip.Enabled = False
+        BtnUndo.Enabled = False
+        BtnPause.Enabled = False
+        BtnStopEVE.Enabled = False
+
     End Sub
 
     Sub ClearBoard()
@@ -182,7 +194,7 @@
     End Sub
 
     Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        'short circuit
+        'TODO 修复机器人对战功能
         If RdiModeEVE.Checked Then
             MessageBox.Show("十分抱歉，功能异常，正在修复中，敬请期待")
             Exit Sub
@@ -195,11 +207,12 @@
             Exit Sub
         End If
 
-        Dim robotIndex As Robot = GetPVERobotIndex()
-        Dim robotColor As PlayerColor = GetPVERobotColor()
+        Dim PVERobotIndex As Robot = GetPVERobotIndex()
+        Dim PVERobotColor As PlayerColor = GetPVERobotColor()
 
         'init UI
         ClearBoard()
+        MyRobotController.ClearBoard()
         PanelChessBoard.Enabled = True
         If RdiModePVP.Checked Or RdiModePVE.Checked Then
             BtnGiveUp.Enabled = True : BtnUndo.Enabled = True : BtnTip.Enabled = True
@@ -210,38 +223,14 @@
             Exit Sub
         End If
 
-        'show two players
-        'TODO 将Robot相关变量抽象为类
-        If RdiModePVP.Checked Then
-            LblPlayBlack.Text = TxtPVPBlackName.Text
-            LblPlayWhite.Text = TxtPVPWhiteName.Text
-        ElseIf RdiModePVE.Checked Then
-            If RdiPVEBlackPlayer.Checked Then
-                LblPlayBlack.Text = TxtPVPBlackName.Text
-                If robotIndex = Robot.A Then
-                    LblPlayWhite.Text = TxtRobotNameA.Text
-                Else
-                    LblPlayWhite.Text = TxtRobotNameB.Text
-                End If
-            Else
-                LblPlayWhite.Text = TxtPVPWhiteName.Text
-                If robotIndex = Robot.A Then
-                    LblPlayBlack.Text = TxtRobotNameA.Text
-                Else
-                    LblPlayBlack.Text = TxtRobotNameB.Text
-                End If
-            End If
-        ElseIf RdiModeEVE.Checked Then
-            LblPlayBlack.Text = TxtRobotNameA.Text
-            LblPlayWhite.Text = TxtRobotNameB.Text
-        End If
+        ShowPlayerName()
 
         'set robot
         If RdiModePVE.Checked Then
             MyRobotController.Mode = GameMode.PVE
-            MyRobotController.Reset(robotIndex)
-            MyRobotController.SetColor(robotIndex, robotColor)
-            If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(robotIndex)
+            MyRobotController.Reset(PVERobotIndex)
+            MyRobotController.SetColor(PVERobotIndex, PVERobotColor)
+            If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(PVERobotIndex)
         ElseIf RdiModeEVE.Checked Then
             MyRobotController.Mode = GameMode.EVE
             MyRobotController.Reset(Robot.A)
@@ -253,6 +242,35 @@
 
         BtnStart.Enabled = False
         GroupGlobalSetting.Enabled = False
+    End Sub
+
+    Private Sub ShowPlayerName()
+        Dim PVERobotIndex As Robot = GetPVERobotIndex()
+        Dim PVERobotColor As PlayerColor = GetPVERobotColor()
+
+        If RdiModePVP.Checked Then
+            LblPlayBlack.Text = TxtPVPBlackName.Text
+            LblPlayWhite.Text = TxtPVPWhiteName.Text
+        ElseIf RdiModePVE.Checked Then
+            If RdiPVEBlackPlayer.Checked Then
+                LblPlayBlack.Text = TxtPVPBlackName.Text
+                If PVERobotIndex = Robot.A Then
+                    LblPlayWhite.Text = TxtRobotNameA.Text
+                Else
+                    LblPlayWhite.Text = TxtRobotNameB.Text
+                End If
+            Else
+                LblPlayWhite.Text = TxtPVPWhiteName.Text
+                If PVERobotIndex = Robot.A Then
+                    LblPlayBlack.Text = TxtRobotNameA.Text
+                Else
+                    LblPlayBlack.Text = TxtRobotNameB.Text
+                End If
+            End If
+        ElseIf RdiModeEVE.Checked Then
+            LblPlayBlack.Text = TxtRobotNameA.Text
+            LblPlayWhite.Text = TxtRobotNameB.Text
+        End If
     End Sub
 
     Private Function GetPVERobotIndex() As PlayerColor
@@ -310,15 +328,23 @@
     End Sub
 
     Private Sub BtnGiveUp_Click(sender As Object, e As EventArgs) Handles BtnGiveUp.Click
-        ClearBoard()
-        PanelChessBoard.Enabled = False
-        GroupGlobalSetting.Enabled = True
-
-        BtnStart.Enabled = True
-        BtnGiveUp.Enabled = False
-        BtnTip.Enabled = False
-        BtnUndo.Enabled = False
-
+        Dim state As JudgeState
+        If RdiModePVP.Checked Then
+            If MoveCounter Mod 2 = 1 Then
+                state = JudgeState.WhiteWin
+            Else
+                state = JudgeState.BlackWin
+            End If
+        ElseIf RdiModePVE.Checked Then
+            If RdiPVEBlackPlayer.Checked Then
+                state = JudgeState.WhiteWin
+            Else
+                state = JudgeState.BlackWin
+            End If
+        Else
+            Exit Sub
+        End If
+        RaiseEvent GameOver(state)
     End Sub
 
     Private Sub BtnPause_Click(sender As Object, e As EventArgs) Handles BtnPause.Click
@@ -355,6 +381,9 @@
 
 #End Region
 
+    Private Event GameOver(state As JudgeState)
+
+
     Private Sub ButtonUnitTest_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             Dim a As Integer = UnitTest()
@@ -368,6 +397,9 @@
         MessageBox.Show("功能暂未开放，敬请期待！")
         Exit Sub
     End Sub
+
+
+
 End Class
 Enum GameMode
     PVP
@@ -379,6 +411,7 @@ Enum PlayerColor
     Black = 1
     White = 2
 End Enum
+
 Enum ChessColor
     Empty = 0
     Black = 1

@@ -13,11 +13,15 @@ D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\bin\Debug\wuziqi_GUI.exe.config
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\bin\Debug\wuziqi_GUI.exe
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\bin\Debug\wuziqi_GUI.pdb
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\bin\Debug\wuziqi_GUI.xml
+D:\LZT\Programming\wuziqi\wuziqi2020\Debug\wuziqi_GUI.exe.config
+D:\LZT\Programming\wuziqi\wuziqi2020\Debug\wuziqi_GUI.exe
+D:\LZT\Programming\wuziqi\wuziqi2020\Debug\wuziqi_GUI.pdb
+D:\LZT\Programming\wuziqi\wuziqi2020\Debug\wuziqi_GUI.xml
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.vbprojAssemblyReference.cache
+D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.chessboard.resources
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.FormMain.resources
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.Resources.resources
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.vbproj.GenerateResource.cache
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.exe
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.xml
 D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.pdb
-D:\LZT\Programming\wuziqi\wuziqi2020\wuziqi_GUI\obj\Debug\wuziqi_GUI.chessboard.resources

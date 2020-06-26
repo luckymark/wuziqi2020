@@ -96,7 +96,7 @@ int getObliqueGE_B(GameEngine engine)
 		result += getGE_IntX(line, step, engine.playerColor);
 		for (p = 0; p < step; p++)
 		{
-			line[p] = engine.squareMap.map[start - p][p];
+			line[p] = engine.squareMap.map[14 - start + p][14 - p];
 		}
 		result += getGE_IntX(line, step, engine.playerColor);
 		step++;
