@@ -104,5 +104,14 @@ int testGlobalEvaluation()
 
 int testMaxMinSearch()
 {
+	//init
+
+	//create or open log file
+
+	//
+
+	//close log file
+
+
 	return 0;
 }

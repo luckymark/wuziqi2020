@@ -6,6 +6,7 @@
 
 //global
 GameEngine globalEngine;
+int MAXMIN_DEPTH = 4;
 
 //prototype (also interface)
 int _stdcall GetNextMove(int map[225], int move);
@@ -13,7 +14,6 @@ void _stdcall Reset();
 void _stdcall SetColor(int color);
 void _stdcall SetLevel(int level);
 int _stdcall UnitTest();
-
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -54,7 +54,13 @@ void _stdcall SetColor(int color)
 
 void _stdcall SetLevel(int level)
 {
-
+    if (level <= 0)
+        MAXMIN_DEPTH = 4;
+    else
+        if (1 == level)
+            MAXMIN_DEPTH = 6;
+        else
+            MAXMIN_DEPTH = 8;
 }
 
 int _stdcall UnitTest()

@@ -10,6 +10,7 @@
     Public Declare Sub SetColorB Lib "RobotB.dll" Alias "SetColor" (ByVal playerColor As Integer)
     Public Declare Sub SetLevelB Lib "RobotB.dll" Alias "SetLevel" (ByVal level As Integer)
 
+    Public Declare Function Judge Lib "wuziqi_Judge.dll" (ByRef map As Integer) As Integer
 
     Public Property Mode As GameMode = GameMode.PVE
     Public Property CurrentBoard As Integer()
@@ -50,20 +51,25 @@
         Dim t1, t2 As DateTime
         Dim dt As TimeSpan
 
+        t1 = Now
         Select Case robotIndex
             Case Robot.A
-                t1 = Now
                 index = NextMoveA(CurrentBoard(0), CurrentMove)
-                t2 = Now
-                dt = t2 - t1
-                FormMain.LblResponseTime.Text = "响应时间：" & dt.TotalSeconds & "s"
             Case Robot.B
                 index = NextMoveB(CurrentBoard(0), CurrentMove)
         End Select
+        t2 = Now
+        dt = t2 - t1
+        FormMain.LblResponseTime.Text = "响应时间：" & dt.TotalSeconds & "s"
 
         FormMain.BtnChessBoard(index).PerformClick()
 
     End Sub
+
+    Function GetJudgeState() As JudgeState
+        Dim state As JudgeState = Judge(CurrentBoard(0))
+        Return state
+    End Function
 
     Function PerformMove(robotIndex As Robot) As Task
         RaiseEvent OnMove(robotIndex)

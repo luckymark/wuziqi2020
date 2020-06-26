@@ -71,11 +71,12 @@ Partial Class FormMain
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TxtPVPBlackName = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.LblPlayBlack = New System.Windows.Forms.Label()
-        Me.LblPlayWhite = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LblResponseTime = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.LblPlayWhite = New System.Windows.Forms.Label()
+        Me.LblPlayBlack = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupGlobalSetting.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -85,6 +86,7 @@ Partial Class FormMain
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GpBoxPVPSet.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnUndo
@@ -621,48 +623,62 @@ Partial Class FormMain
         Me.Button1.Text = "单元测试"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Label14
+        'GroupBox2
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(777, 75)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(44, 17)
-        Me.Label14.TabIndex = 9
-        Me.Label14.Text = "黑棋："
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(777, 108)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(44, 17)
-        Me.Label15.TabIndex = 9
-        Me.Label15.Text = "白棋："
-        '
-        'LblPlayBlack
-        '
-        Me.LblPlayBlack.AutoSize = True
-        Me.LblPlayBlack.Location = New System.Drawing.Point(842, 75)
-        Me.LblPlayBlack.Name = "LblPlayBlack"
-        Me.LblPlayBlack.Size = New System.Drawing.Size(0, 17)
-        Me.LblPlayBlack.TabIndex = 9
-        '
-        'LblPlayWhite
-        '
-        Me.LblPlayWhite.AutoSize = True
-        Me.LblPlayWhite.Location = New System.Drawing.Point(842, 108)
-        Me.LblPlayWhite.Name = "LblPlayWhite"
-        Me.LblPlayWhite.Size = New System.Drawing.Size(0, 17)
-        Me.LblPlayWhite.TabIndex = 9
+        Me.GroupBox2.Controls.Add(Me.LblResponseTime)
+        Me.GroupBox2.Controls.Add(Me.Label15)
+        Me.GroupBox2.Controls.Add(Me.LblPlayWhite)
+        Me.GroupBox2.Controls.Add(Me.LblPlayBlack)
+        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Location = New System.Drawing.Point(755, 50)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(314, 138)
+        Me.GroupBox2.TabIndex = 2
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "状态栏："
         '
         'LblResponseTime
         '
         Me.LblResponseTime.AutoSize = True
-        Me.LblResponseTime.Location = New System.Drawing.Point(773, 201)
+        Me.LblResponseTime.Location = New System.Drawing.Point(28, 93)
         Me.LblResponseTime.Name = "LblResponseTime"
         Me.LblResponseTime.Size = New System.Drawing.Size(68, 17)
-        Me.LblResponseTime.TabIndex = 10
+        Me.LblResponseTime.TabIndex = 15
         Me.LblResponseTime.Text = "响应时间："
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(28, 59)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(44, 17)
+        Me.Label15.TabIndex = 11
+        Me.Label15.Text = "白棋："
+        '
+        'LblPlayWhite
+        '
+        Me.LblPlayWhite.AutoSize = True
+        Me.LblPlayWhite.Location = New System.Drawing.Point(93, 59)
+        Me.LblPlayWhite.Name = "LblPlayWhite"
+        Me.LblPlayWhite.Size = New System.Drawing.Size(0, 17)
+        Me.LblPlayWhite.TabIndex = 12
+        '
+        'LblPlayBlack
+        '
+        Me.LblPlayBlack.AutoSize = True
+        Me.LblPlayBlack.Location = New System.Drawing.Point(93, 26)
+        Me.LblPlayBlack.Name = "LblPlayBlack"
+        Me.LblPlayBlack.Size = New System.Drawing.Size(0, 17)
+        Me.LblPlayBlack.TabIndex = 13
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(28, 26)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(44, 17)
+        Me.Label14.TabIndex = 14
+        Me.Label14.Text = "黑棋："
         '
         'FormMain
         '
@@ -670,11 +686,7 @@ Partial Class FormMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(1424, 781)
-        Me.Controls.Add(Me.LblResponseTime)
-        Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.LblPlayWhite)
-        Me.Controls.Add(Me.LblPlayBlack)
-        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GpBoxPVPSet)
@@ -705,8 +717,9 @@ Partial Class FormMain
         Me.Panel1.PerformLayout()
         Me.GpBoxPVPSet.ResumeLayout(False)
         Me.GpBoxPVPSet.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -759,9 +772,10 @@ Partial Class FormMain
     Friend WithEvents Label13 As Label
     Friend WithEvents LblIsBExist As Label
     Friend WithEvents LblIsAExist As Label
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents LblPlayBlack As Label
-    Friend WithEvents LblPlayWhite As Label
+    Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents LblResponseTime As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents LblPlayWhite As Label
+    Friend WithEvents LblPlayBlack As Label
+    Friend WithEvents Label14 As Label
 End Class

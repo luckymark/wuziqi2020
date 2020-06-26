@@ -14,6 +14,7 @@
     'unit test
     Public Declare Function UnitTest Lib "wuziqi_Robot.dll" () As Integer
 
+
     'function of Robot
 
     WithEvents MyRobotController As RobotController
@@ -45,7 +46,7 @@
 
     End Sub
 
-    Private Async Sub ChessBoard_Click(sender As Object, e As EventArgs)
+    Friend Sub ChessBoard_Click(sender As Object, e As EventArgs)
         Dim i As Integer = sender.Index
         Dim robotIndex As Robot
 
@@ -64,7 +65,7 @@
         UpdateBtnBoard(i)
         MoveCounter += 1
 
-
+        'perform move
         Select Case MyRobotController.Mode
             Case GameMode.PVP
 
@@ -75,13 +76,25 @@
                     Else
                         robotIndex = Robot.A
                     End If
-                    Await MyRobotController.PerformMove(robotIndex)
+                    MyRobotController.PerformMove(robotIndex)
 
                 End If
             Case GameMode.EVE
-                Await MyRobotController.PerformMove(1 - MoveCounter Mod 2)
+                MyRobotController.PerformMove(1 - MoveCounter Mod 2)
         End Select
 
+        'check judge state
+        Dim state As JudgeState = MyRobotController.GetJudgeState
+        Select Case state
+            Case JudgeState.NotEnd
+
+            Case JudgeState.BlackWin
+
+            Case JudgeState.WhiteWin
+
+            Case JudgeState.Draw
+
+        End Select
     End Sub
 
     Private Sub UpdateBtnBoard(i As Integer)
@@ -375,5 +388,12 @@ End Enum
 Enum Robot
     A = 0
     B = 1
+End Enum
+
+Enum JudgeState
+    NotEnd = 0
+    BlackWin = 1
+    WhiteWin = 2
+    Draw = 3
 End Enum
 

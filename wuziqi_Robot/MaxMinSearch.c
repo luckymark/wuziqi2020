@@ -5,9 +5,10 @@
 #include "MaxMinSearch.h"
 
 //const
-#define MAXMIN_DEPTH 6
 #define PRIOR_COUNT 10
 #define INF 99999999
+
+extern int MAXMIN_DEPTH;
 
 /*	return the optimized linear 15*15 Gomoku position */
 
