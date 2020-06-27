@@ -102,11 +102,12 @@
         End Select
         t2 = Now
         dt = t2 - t1
-        FormMain.LblResponseTime.Text = String.Format("响应时间：{0:n2}s", dt.TotalSeconds)
 
+        FormMain.ShowResponseTime(dt.TotalSeconds)
         If Mode = GameMode.EVE Then ExchangeRobot()
+        FormMain.RobotClick(index)
 
-        FormMain.BtnChessBoard(index).PerformClick()
+
 
     End Sub
 

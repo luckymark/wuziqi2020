@@ -1,8 +1,8 @@
 ﻿Public Class FormMain
     'global and const
-    Const BOARD_BLOCK_SIZE As Integer = 40
-    Const BOARD_INNER_MARGIN As Integer = 0
-    Const BOARD_OUTER_MARGIN As Integer = 40
+    Private Const BOARD_BLOCK_SIZE As Integer = 40
+    Private Const BOARD_INNER_MARGIN As Integer = 0
+    Private Const BOARD_OUTER_MARGIN As Integer = 40
     Private Property CurrentPlayerColor As PlayerColor = PlayerColor.Black
     Private Property Last_i As Integer = -1
     Private Property MoveCounter As Integer = 1
@@ -11,10 +11,10 @@
     Private ReadOnly imgChessWhite As Bitmap = My.Resources.chessboard.white
     Private ReadOnly imgChessEmpty As Bitmap = My.Resources.chessboard.empty
 
-    WithEvents MyRobotController As RobotController
+    Private WithEvents MyRobotController As RobotController
 
-#Region "棋盘UI"
-    Sub InitializeChessboard()
+#Region "自定义private方法"
+    Private Sub InitializeChessboard()
         Dim tmp As MyButton
         PanelChessBoard.Height = 15 * BOARD_BLOCK_SIZE + 14 * BOARD_INNER_MARGIN + 2 * BOARD_OUTER_MARGIN
         PanelChessBoard.Width = PanelChessBoard.Height
@@ -33,14 +33,14 @@
                 .BackgroundImageLayout = ImageLayout.Stretch
             }
             tmp.FlatAppearance.BorderColor = Color.LightGray
-            AddHandler tmp.Click, AddressOf ChessBoard_Click
+            AddHandler tmp.Click, AddressOf BtnChessBoardClickHandler
             BtnChessBoard(i) = tmp
             PanelChessBoard.Controls.Add(tmp)
         Next
 
     End Sub
 
-    Friend Sub ChessBoard_Click(sender As Object, e As EventArgs)
+    Private Sub BtnChessBoardClickHandler(sender As Object, e As EventArgs)
         Dim i As Integer = sender.Index
 
         'already has a chess on it
@@ -108,19 +108,50 @@
         End Select
 
         ClearBoard()
-        PanelChessBoard.Enabled = False
-        GroupGlobalSetting.Enabled = True
-
-        BtnStart.Enabled = True
-        BtnGiveUp.Enabled = False
-        BtnTip.Enabled = False
-        BtnUndo.Enabled = False
-        BtnPause.Enabled = False
-        BtnStopEVE.Enabled = False
+        SetUIEnableState(gameStart:=False)
 
     End Sub
 
-    Sub ClearBoard()
+    Private Sub SetUIEnableState(gameStart As Boolean)
+        If gameStart Then
+            If Not (RdiModePVP.Checked Or RdiModePVE.Checked Or RdiModeEVE.Checked) Then
+                Throw New Exception("没有选中游戏模式")
+                Exit Sub
+            End If
+
+            PanelChessBoard.Enabled = True
+
+            GroupGlobalSetting.Enabled = False
+            GpBoxPVPSet.Enabled = False
+            GpBoxPVESet.Enabled = False
+            GpBoxEVESet.Enabled = False
+
+            BtnStart.Enabled = False
+            BtnGiveUp.Enabled = RdiModePVP.Checked Or RdiModePVE.Checked
+            BtnTip.Enabled = RdiModePVP.Checked Or RdiModePVE.Checked
+            BtnUndo.Enabled = RdiModePVP.Checked Or RdiModePVE.Checked
+            BtnPause.Enabled = RdiModeEVE.Checked
+            BtnStopEVE.Enabled = RdiModeEVE.Checked
+
+        Else
+            PanelChessBoard.Enabled = False
+
+            GroupGlobalSetting.Enabled = True
+            GpBoxPVPSet.Enabled = RdiModePVP.Checked
+            GpBoxPVESet.Enabled = RdiModePVE.Checked
+            GpBoxEVESet.Enabled = RdiModeEVE.Checked
+
+            BtnStart.Enabled = True
+            BtnGiveUp.Enabled = False
+            BtnTip.Enabled = False
+            BtnUndo.Enabled = False
+            BtnPause.Enabled = False
+            BtnStopEVE.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub ClearBoard()
         For Each s In BtnChessBoard
             s.BackgroundImage = imgChessEmpty
             s.Text = ""
@@ -131,29 +162,7 @@
         MoveCounter = 1
     End Sub
 
-    Friend BtnChessBoard(224) As MyButton
-    Class MyButton
-        Inherits Button
-        Property Index As Integer
-    End Class
-#End Region
-
-#Region "其他UI"
-    Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'lock window
-        Me.MaximumSize = Me.Size
-        Me.MinimumSize = Me.Size
-
-        'initialize chessboard
-        InitializeChessboard()
-
-        'init robot
-        UpdateRobotState()
-        MyRobotController = New RobotController
-
-    End Sub
-
-    Function UpdateRobotState() As Boolean
+    Private Function UpdateRobotState() As Boolean
         Dim A_Exist As Boolean = IO.File.Exists("RobotA.dll")
         Dim B_Exist As Boolean = IO.File.Exists("RobotB.dll")
         SetRobotRelevantUI(Robot.A, A_Exist)
@@ -187,39 +196,10 @@
         End Select
     End Sub
 
-    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
-        'TODO 修复机器人对战功能
-        If RdiModeEVE.Checked Then
-            MessageBox.Show("十分抱歉，功能异常，正在修复中，敬请期待")
-            Exit Sub
-        End If
-
-        'check robot
-        Dim IsRobotAvaliable As Boolean = UpdateRobotState()
-        If Not IsRobotAvaliable Then
-            MessageBox.Show("没有可用的robot")
-            Exit Sub
-        End If
-
+    Private Sub InitializeMyRobotController()
         Dim PVERobotIndex As Robot = GetPVERobotIndex()
         Dim PVERobotColor As PlayerColor = GetPVERobotColor()
 
-        'init UI
-        ClearBoard()
-        MyRobotController.ClearBoard()
-        PanelChessBoard.Enabled = True
-        If RdiModePVP.Checked Or RdiModePVE.Checked Then
-            BtnGiveUp.Enabled = True : BtnUndo.Enabled = True : BtnTip.Enabled = True
-        ElseIf RdiModeEVE.Checked Then
-            BtnStopEVE.Enabled = True : BtnPause.Enabled = True
-        Else
-            Throw New Exception("没有选中游戏模式")
-            Exit Sub
-        End If
-
-        ShowPlayerName()
-
-        'set robot
         If RdiModePVE.Checked Then
             MyRobotController.Mode = GameMode.PVE
             MyRobotController.Reset(PVERobotIndex)
@@ -229,13 +209,10 @@
             MyRobotController.Mode = GameMode.EVE
             MyRobotController.Reset(Robot.A)
             MyRobotController.Reset(Robot.B)
-            MyRobotController.PerformMove(Robot.A)
+
         Else
             MyRobotController.Mode = GameMode.PVP
         End If
-
-        BtnStart.Enabled = False
-        GroupGlobalSetting.Enabled = False
     End Sub
 
     Private Sub ShowPlayerName()
@@ -290,6 +267,58 @@
 
         Return robotColor
     End Function
+
+    Private ReadOnly BtnChessBoard(224) As MyButton
+    Private Class MyButton
+        Inherits Button
+        Property Index As Integer
+    End Class
+#End Region
+
+#Region "控件方法"
+    Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'lock window
+        Me.MaximumSize = Me.Size
+        Me.MinimumSize = Me.Size
+
+        'initialize chessboard
+        InitializeChessboard()
+
+        'init robot
+        UpdateRobotState()
+        MyRobotController = New RobotController
+
+    End Sub
+
+    Private Sub BtnStart_Click(sender As Object, e As EventArgs) Handles BtnStart.Click
+        'TODO 修复机器人对战功能
+        If RdiModeEVE.Checked Then
+            MessageBox.Show("十分抱歉，功能异常，正在修复中，敬请期待")
+            Exit Sub
+        End If
+
+        'check robot
+        Dim IsRobotAvaliable As Boolean = UpdateRobotState()
+        If Not IsRobotAvaliable Then
+            MessageBox.Show("没有可用的robot")
+            Exit Sub
+        End If
+
+        'init UI
+        ClearBoard()
+        MyRobotController.ClearBoard()
+        SetUIEnableState(gameStart:=True)
+        ShowPlayerName()
+
+        'set robot
+        InitializeMyRobotController()
+        If RdiModePVE.Checked Then
+            If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(GetPVERobotIndex())
+        ElseIf RdiModeEVE.Checked Then
+            MyRobotController.PerformMove(Robot.A)
+        End If
+
+    End Sub
 
     Private Sub RdiModePVP_CheckedChanged(sender As Object, e As EventArgs) Handles RdiModePVP.CheckedChanged
         If RdiModePVP.Checked Then
@@ -373,19 +402,21 @@
         Exit Sub
     End Sub
 
-#End Region
-
-    Private Event GameOver(state As JudgeState)
-
-
-
-
     Private Sub BtnTip_Click(sender As Object, e As EventArgs) Handles BtnTip.Click
         MessageBox.Show("功能暂未开放，敬请期待！")
         Exit Sub
     End Sub
+#End Region
 
+    Public Sub RobotClick(index As Integer)
+        BtnChessBoard(index).PerformClick()
+    End Sub
 
+    Public Sub ShowResponseTime(seconds As Double)
+        LblResponseTime.Text = String.Format("响应时间：{0:n2}s", seconds)
+    End Sub
+
+    Private Event GameOver(state As JudgeState)
 
 End Class
 Enum GameMode
