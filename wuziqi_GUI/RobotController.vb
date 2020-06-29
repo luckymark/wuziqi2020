@@ -55,11 +55,6 @@
         End Select
     End Sub
 
-    Overloads Sub SetLevel(levelA As Integer, levelB As Integer)
-        SetLevelA(levelA)
-        SetLevelB(levelB)
-    End Sub
-
     Overloads Sub SetLevel(level As Integer)
         Select Case CurrentRobot
             Case Robot.A

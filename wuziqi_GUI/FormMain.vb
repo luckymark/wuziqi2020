@@ -199,17 +199,34 @@
     Private Sub InitializeMyRobotController()
         Dim PVERobotIndex As Robot = GetPVERobotIndex()
         Dim PVERobotColor As PlayerColor = GetPVERobotColor()
+        Dim PVERobotLevel As Integer
 
         If RdiModePVE.Checked Then
+            If PVERobotIndex = Robot.A Then
+                PVERobotLevel = TxtRobotLevelA.Text
+            Else
+                PVERobotLevel = TxtRobotLevelB.Text
+            End If
+
             MyRobotController.Mode = GameMode.PVE
             MyRobotController.Reset(PVERobotIndex)
             MyRobotController.SetColor(PVERobotIndex, PVERobotColor)
+            MyRobotController.SetLevel(PVERobotIndex, PVERobotLevel)
             If RdiPVEBlackRobot.Checked Then MyRobotController.PerformMove(PVERobotIndex)
         ElseIf RdiModeEVE.Checked Then
             MyRobotController.Mode = GameMode.EVE
             MyRobotController.Reset(Robot.A)
             MyRobotController.Reset(Robot.B)
+            MyRobotController.SetLevel(Robot.A, TxtRobotLevelA.Text)
+            MyRobotController.SetLevel(Robot.B, TxtRobotLevelB.Text)
 
+            If RdiEVEBlackA.Checked Then
+                MyRobotController.SetColor(Robot.A, PlayerColor.Black)
+                MyRobotController.SetColor(Robot.B, PlayerColor.White)
+            ElseIf RdiEVEBlackB.Checked Then
+                MyRobotController.SetColor(Robot.B, PlayerColor.Black)
+                MyRobotController.SetColor(Robot.A, PlayerColor.White)
+            End If
         Else
             MyRobotController.Mode = GameMode.PVP
         End If

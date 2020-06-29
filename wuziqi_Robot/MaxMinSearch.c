@@ -5,7 +5,7 @@
 #include "MaxMinSearch.h"
 
 //const
-#define PRIOR_COUNT 10
+#define PRIOR_COUNT 5
 #define INF 99999999
 
 extern int MAXMIN_DEPTH;
