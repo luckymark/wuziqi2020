@@ -1,0 +1,2 @@
+C:\Users\微星\wuziqi2020\x64\Debug\five-in-a-row.exe
+C:\Users\微星\wuziqi2020\x64\Debug\five-in-a-row.pdb

@@ -1,0 +1,6 @@
+﻿  Draw.cpp
+  five-in-a-row.cpp
+  Gamerun.cpp
+  正在生成代码...
+C:\Users\微星\wuziqi2020\Draw.cpp(44): warning C4715: “ShowMessage”: 不是所有的控件路径都返回值
+  five-in-a-row.vcxproj -> C:\Users\微星\wuziqi2020\x64\Debug\five-in-a-row.exe
