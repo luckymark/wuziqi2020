@@ -391,13 +391,13 @@ void AI(const int status[15][15], /*nt olds[15][15],*/ int* set)
 {
 	int i, j, l;
 	int s[2];
-	//int V[17][17] = {3};
-	//for (i = 1; i <= 15; i++) {
-	//	for (j = 1; j <= 15; j++) { 
-	//		V[i][j] = status[i-1][j-1];
-	//	}
-	//}
 
+	//int V[17][17] = {3};
+//for (i = 1; i <= 15; i++) {
+//	for (j = 1; j <= 15; j++) { 
+//		V[i][j] = status[i-1][j-1];
+//	}
+//}
 	for (i = 0; i < 15; i++) {
 		for (j = 0; j < 15; j++) {
 			V[i][j] = status[i][j];
@@ -412,6 +412,9 @@ void AI(const int status[15][15], /*nt olds[15][15],*/ int* set)
 	set[1] = s[1];
 	//score(V, set);
 }
+
+
+
 
 
 
@@ -633,8 +636,6 @@ int simulate(int V[15][15], int len, /*int* set,*/record* p,int *s)
 
 
 								}
-
-
 
 								if (count != 0) {
 
